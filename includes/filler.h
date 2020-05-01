@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/04/29 14:09:10 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/01 14:26:25 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,23 @@
 
 # include "../libft/includes/libft.h"
 
-typedef struct  s_filler
+typedef struct  s_map
 {
-    int         i;
-}               t_filler;
+    int         psX;
+    int         psY;
+    int         mapH;
+    int         mapW;
+    int         esX;
+    int         esY;
+}               t_map;
 
-//int			readmap(int fd);
+typedef struct  s_piece
+{
+    int         pieceH;
+    int         pieceW;
+}               t_piece;
+
+int			readinput(t_map *map, t_piece *pc);
+int         printdebug(t_map *map, t_piece *pc);
 
 #endif

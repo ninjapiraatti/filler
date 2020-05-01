@@ -6,15 +6,17 @@
 #    By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/01 14:57:04 by tlouekar          #+#    #+#              #
-#    Updated: 2020/04/29 12:58:47 by tlouekar         ###   ########.fr        #
+#    Updated: 2020/05/01 12:12:02 by tlouekar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = resources/players/tlouekar.filler
 
-SRCS = 	srcs/main.c
+SRCS = 	srcs/main.c \
+		srcs/readinput.c \
 
-OBJS = 	main.o
+OBJS = 	main.o \
+		readinput.o \
 
 INCS = -I ./srcs -I ./libft/includes/
 
