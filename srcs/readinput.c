@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/03 23:35:12 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 00:06:57 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,23 @@ char    *writemap(t_map *map, char *line)
     int x;
     int y;
     int i;
-    int set;
 
-    set = 0;
     x = 0;
     y = ft_atoi(line);
     i = 4;
     while (x < map->mapW)
     {
         map->map[y][x] = line[i];
-        if ((line[i] == 'X' || line[i] == 'x') && set == 0)
+        if ((line[i] == 'X' || line[i] == 'x') && map->foundx == 0)
         {
+            /*ft_putstr_fd("Y and X of the first X found:\n", 2);
+            ft_putchar_fd('\n', 2);
+            ft_putnbr_fd(map->psY, 2);
+            ft_putnbr_fd(map->psX, 2);
+            ft_putchar_fd('\n', 2);*/
             map->psX = x;
             map->psY = y;
-            set = 1;
-            ft_putstr_fd("Found xX\n", 2);
+            map->foundx = 1;
         }
         x++;
         i++;
@@ -110,7 +112,6 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         if (i < map->mapH && i >= 0)
         {
             writemap(map, line);
-            ft_putnbr_fd(map->round, 2);
             i++;
         }
         /*
@@ -127,17 +128,23 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         }*/
         if (i == map->mapH)
         {
+            /*
+            ft_putstr_fd("Y and X before end of round:\n", 2);
+            ft_putchar_fd('\n', 2);
             ft_putnbr_fd(map->psY, 2);
             ft_putnbr_fd(map->psX, 2);
+            ft_putchar_fd('\n', 2);
+            */
             ft_putnbr(map->psY - 1);
             ft_putchar(' ');
-            ft_putnbr(map->psX);
+            ft_putnbr(map->psX - 1);
             ft_putchar('\n');
             //pc = NULL;
             //map->map = NULL;
             i = -1;
             j = -1;
             map->round++;
+            map->foundx = 0;
         }
     }
     //printdebug(map, pc);

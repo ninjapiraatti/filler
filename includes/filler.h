@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/03 19:45:55 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/03 23:59:59 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct  s_map
     char        **map;
     int         state;
     int         round;
+    int         foundx;
 }               t_map;
 
 typedef struct  s_piece

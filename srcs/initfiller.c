@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/03 23:15:58 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 00:00:23 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int     initmap(t_map *map)
     }
     map->state = 1;
     map->round = 1;
+    map->foundx = 0;
     return (0);
 }
 
