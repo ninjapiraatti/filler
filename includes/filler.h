@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/01 14:26:25 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/03 19:45:55 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,22 @@ typedef struct  s_map
     int         mapW;
     int         esX;
     int         esY;
+    int         dbg;
+    char        **map;
+    int         state;
+    int         round;
 }               t_map;
 
 typedef struct  s_piece
 {
     int         pieceH;
     int         pieceW;
+    char        **pcmap;
 }               t_piece;
 
-int			readinput(t_map *map, t_piece *pc);
+int			readinput(t_map *map, t_piece *pc, int fd);
+int         initmap(t_map *map);
+int         initpiece(t_piece *pc);
 int         printdebug(t_map *map, t_piece *pc);
 
 #endif

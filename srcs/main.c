@@ -6,15 +6,22 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 09:49:09 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/01 14:26:52 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/03 23:13:35 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 #include <unistd.h>
+#include <fcntl.h>
 
 int         printdebug(t_map *map, t_piece *pc)
 {
+    int y;
+    int y2;
+
+    y = 0;
+    y2 = 0;
+
     ft_putstr_fd("\n\n******* DEBUG INFO ********\n", 2);
     ft_putstr_fd("Map height: ", 2);
     ft_putnbr_fd(map->mapH, 2);
@@ -40,18 +47,44 @@ int         printdebug(t_map *map, t_piece *pc)
     ft_putstr_fd("Piece width: ", 2);
     ft_putnbr_fd(pc->pieceW, 2);
     ft_putstr_fd("\n", 2);
+    ft_putstr_fd("Debug INT: ", 2);
+    ft_putnbr_fd(map->dbg, 2);
+    ft_putstr_fd("\n", 2);
+    ft_putstr_fd("Map: \n", 2);
+    while (y < map->mapH)
+    {
+        ft_putstr_fd(map->map[y], 2);
+        ft_putstr_fd("\n", 2);
+        y++;
+    }
+    ft_putstr_fd("\n", 2);
+    ft_putstr_fd("Piece: \n", 2);
+    while (y2 < pc->pieceH)
+    {
+        ft_putstr_fd(pc->pcmap[y2], 2);
+        ft_putstr_fd("\n", 2);
+        y2++;
+    }
     return (0);
 }
 
-int			main(void)
+int     main(int argc, char **argv)
 {
     t_map   *map;
     t_piece *pc;
+    int     fd;
 
+    fd = 0;
+    if (argc == 2)
+	{
+        fd = open(argv[1], O_RDONLY);
+        ft_putnbr(fd);
+		ft_putstr(" is the fd. Using file.\n");
+	}
     if (!(map = (t_map *)malloc(sizeof(t_map))))
 		return (0);
     if (!(pc = (t_piece *)malloc(sizeof(t_piece))))
 		return (0);
-    readinput(map, pc);
+    readinput(map, pc, fd);
     return (0);
 }
