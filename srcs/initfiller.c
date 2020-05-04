@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 14:30:03 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 17:15:08 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int     initpiece(t_piece *pc)
         i++;
     }
     pc->topleftset = 0;
+    pc->isvalidplace = 0;
     return (0);
 }

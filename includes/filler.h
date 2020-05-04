@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 14:35:29 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 17:14:50 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct  s_piece
     int         bottomrightY;
     int         bottomrightX;
     int         topleftset;
+    int         isvalidplace;
 }               t_piece;
 
 int			readinput(t_map *map, t_piece *pc, int fd);
