@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 11:59:52 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 14:35:29 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,21 @@ typedef struct  s_piece
     int         pieceW;
     char        **pcmap;
     int         status;
+    int         placeY;
+    int         placeX;
+    int         topleftY;
+    int         topleftX;
+    int         bottomrightY;
+    int         bottomrightX;
+    int         topleftset;
 }               t_piece;
 
 int			readinput(t_map *map, t_piece *pc, int fd);
 int         initmap(t_map *map);
 int         initpiece(t_piece *pc);
 int         printdebug(t_map *map, t_piece *pc, int pieceonly);
+int         placepiece(t_map *map, t_piece *pc);
+int         definepiece(t_piece *pc);
+int         fizzylogic(t_piece *map, t_piece *pc);
 
 #endif

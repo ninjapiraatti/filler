@@ -6,7 +6,7 @@
 #    By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/01 14:57:04 by tlouekar          #+#    #+#              #
-#    Updated: 2020/05/03 15:59:26 by tlouekar         ###   ########.fr        #
+#    Updated: 2020/05/04 13:44:03 by tlouekar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,16 @@ NAME = resources/players/tlouekar.filler
 SRCS = 	srcs/main.c \
 		srcs/readinput.c \
 		srcs/initfiller.c \
+		srcs/definepiece.c \
+		srcs/placepiece.c \
+		srcs/fizzylogic.c \
 
 OBJS = 	main.o \
 		readinput.o \
 		initfiller.o \
+		definepiece.o \
+		placepiece.o \
+		fizzylogic.o \
 
 INCS = -I ./srcs -I ./libft/includes/
 

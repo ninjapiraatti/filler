@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 00:00:23 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 14:30:03 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int     initpiece(t_piece *pc)
         pc->pcmap[i] = (char *)malloc(sizeof(char *) * (pc->pieceW + 1));
         i++;
     }
+    pc->topleftset = 0;
     return (0);
 }
