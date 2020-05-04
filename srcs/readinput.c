@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 00:06:57 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 11:42:58 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
     int     j;
     
     i = -1;
-    j = -1;
+    j = 0;
     line = NULL;
     while (get_next_line(fd, &line) == 1)
     {
@@ -114,18 +114,16 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             writemap(map, line);
             i++;
         }
-        /*
-        if (j < pc->pieceH && j >= 0)
+        if (pc->status == 1)
         {
             writepiecemap(pc, line, j);
-            j++;
         }
         if (ft_strstr(line, "Piece") != NULL)
         {
-            j = 0;
+            pc->status = 1;
             writepiece(pc, line);
             initpiece(pc);
-        }*/
+        }
         if (i == map->mapH)
         {
             /*
@@ -139,14 +137,13 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putchar(' ');
             ft_putnbr(map->psX - 1);
             ft_putchar('\n');
-            //pc = NULL;
-            //map->map = NULL;
+            pc->status = 0;
             i = -1;
-            j = -1;
+            j = 0;
             map->round++;
             map->foundx = 0;
         }
     }
-    //printdebug(map, pc);
+    printdebug(map, pc);
     return (0);
 }
