@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 12:48:52 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 13:02:17 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(map->psX, 2);
             ft_putchar_fd('\n', 2);
             */
-            printdebug(map, pc, 1);
+            printdebug(map, pc, 0);
             ft_putnbr(map->psY - 1);
             ft_putchar(' ');
             ft_putnbr(map->psX - 1);
