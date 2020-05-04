@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 11:38:14 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 11:59:52 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ typedef struct  s_piece
 int			readinput(t_map *map, t_piece *pc, int fd);
 int         initmap(t_map *map);
 int         initpiece(t_piece *pc);
-int         printdebug(t_map *map, t_piece *pc);
+int         printdebug(t_map *map, t_piece *pc, int pieceonly);
 
 #endif

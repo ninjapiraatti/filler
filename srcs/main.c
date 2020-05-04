@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 09:49:09 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/03 23:13:35 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 12:06:50 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int         printdebug(t_map *map, t_piece *pc)
+int         printdebug(t_map *map, t_piece *pc, int pieceonly)
 {
     int y;
     int y2;
@@ -23,42 +23,45 @@ int         printdebug(t_map *map, t_piece *pc)
     y2 = 0;
 
     ft_putstr_fd("\n\n******* DEBUG INFO ********\n", 2);
-    ft_putstr_fd("Map height: ", 2);
-    ft_putnbr_fd(map->mapH, 2);
-    ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Map width: ", 2);
-    ft_putnbr_fd(map->mapW, 2);
-    ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Player start X: ", 2);
-    ft_putnbr_fd(map->psX, 2);
-    ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Player start Y: ", 2);
-    ft_putnbr_fd(map->psY, 2);
-    ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Opponent start X: ", 2);
-    ft_putnbr_fd(map->esX, 2);
-    ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Opponent start Y: ", 2);
-    ft_putnbr_fd(map->esY, 2);
-    ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Piece height: ", 2);
-    ft_putnbr_fd(pc->pieceH, 2);
-    ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Piece width: ", 2);
-    ft_putnbr_fd(pc->pieceW, 2);
-    ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Debug INT: ", 2);
-    ft_putnbr_fd(map->dbg, 2);
-    ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Map: \n", 2);
-    while (y < map->mapH)
+    if (pieceonly == 0)
     {
-        ft_putstr_fd(map->map[y], 2);
+        ft_putstr_fd("Map height: ", 2);
+        ft_putnbr_fd(map->mapH, 2);
         ft_putstr_fd("\n", 2);
-        y++;
+        ft_putstr_fd("Map width: ", 2);
+        ft_putnbr_fd(map->mapW, 2);
+        ft_putstr_fd("\n", 2);
+        ft_putstr_fd("Player start X: ", 2);
+        ft_putnbr_fd(map->psX, 2);
+        ft_putstr_fd("\n", 2);
+        ft_putstr_fd("Player start Y: ", 2);
+        ft_putnbr_fd(map->psY, 2);
+        ft_putstr_fd("\n", 2);
+        ft_putstr_fd("Opponent start X: ", 2);
+        ft_putnbr_fd(map->esX, 2);
+        ft_putstr_fd("\n", 2);
+        ft_putstr_fd("Opponent start Y: ", 2);
+        ft_putnbr_fd(map->esY, 2);
+        ft_putstr_fd("\n", 2);
+        ft_putstr_fd("Piece height: ", 2);
+        ft_putnbr_fd(pc->pieceH, 2);
+        ft_putstr_fd("\n", 2);
+        ft_putstr_fd("Piece width: ", 2);
+        ft_putnbr_fd(pc->pieceW, 2);
+        ft_putstr_fd("\n", 2);
+        ft_putstr_fd("Debug INT: ", 2);
+        ft_putnbr_fd(map->dbg, 2);
+        ft_putstr_fd("\n", 2);
+        ft_putstr_fd("Map: \n", 2);
+        while (y < map->mapH)
+        {
+            ft_putstr_fd(map->map[y], 2);
+            ft_putstr_fd("\n", 2);
+            y++;
+        }
     }
     ft_putstr_fd("\n", 2);
-    ft_putstr_fd("Piece: \n", 2);
+    ft_putstr_fd("PIECE: \n", 2);
     while (y2 < pc->pieceH)
     {
         ft_putstr_fd(pc->pcmap[y2], 2);

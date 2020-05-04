@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 11:42:58 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/04 12:48:52 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ char    *writepiecemap(t_piece *pc, char *line, int y)
         x++;
         line++;
     }
+    if (y + 1 == pc->pieceH)
+        pc->status = 2;
     return (0);
 }
 
@@ -117,6 +119,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         if (pc->status == 1)
         {
             writepiecemap(pc, line, j);
+            j++;
         }
         if (ft_strstr(line, "Piece") != NULL)
         {
@@ -124,7 +127,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             writepiece(pc, line);
             initpiece(pc);
         }
-        if (i == map->mapH)
+        if (pc->status == 2)
         {
             /*
             ft_putstr_fd("Y and X before end of round:\n", 2);
@@ -133,17 +136,18 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(map->psX, 2);
             ft_putchar_fd('\n', 2);
             */
+            printdebug(map, pc, 1);
             ft_putnbr(map->psY - 1);
             ft_putchar(' ');
             ft_putnbr(map->psX - 1);
             ft_putchar('\n');
             pc->status = 0;
+            pc->pcmap = NULL;
             i = -1;
             j = 0;
             map->round++;
             map->foundx = 0;
         }
     }
-    printdebug(map, pc);
     return (0);
 }
