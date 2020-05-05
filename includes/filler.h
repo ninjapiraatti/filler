@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 17:14:50 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/05 10:31:28 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ typedef struct  s_map
     int         state;
     int         round;
     int         foundx;
+    int         lbranchY;
+    int         lbranchX;
+    int         rbranchY;
+    int         rbranchX;
+    int         strategy;
 }               t_map;
 
 typedef struct  s_piece
@@ -44,7 +49,9 @@ typedef struct  s_piece
     int         bottomrightY;
     int         bottomrightX;
     int         topleftset;
-    int         isvalidplace;
+    int         isvaliddot;
+    int         isvalidx;
+
 }               t_piece;
 
 int			readinput(t_map *map, t_piece *pc, int fd);
