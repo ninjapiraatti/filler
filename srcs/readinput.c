@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/06 12:56:55 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/06 15:25:22 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,17 @@ char    *writemap(t_map *map, char *line)
     while (x < map->mapW)
     {
         map->map[y][x] = line[i];
-        if ((line[i] == map->psymbol) && map->foundx == 0)
+        if ((line[i] == map->psymbol) && map->foundplayer == 0)
         {
-            /*ft_putstr_fd("Y and X of the first X found:\n", 2);
-            ft_putchar_fd('\n', 2);
-            ft_putnbr_fd(map->psY, 2);
-            ft_putnbr_fd(map->psX, 2);
-            ft_putchar_fd('\n', 2);*/
             map->psX = x;
             map->psY = y;
-            map->foundx = 1;
+            map->foundplayer = 1;
+        }
+        else if ((line[i] == map->osymbol) && map->foundop == 0)
+        {
+            map->osX = x;
+            map->osY = y;
+            map->foundop = 1;
         }
         x++;
         i++;
@@ -147,7 +148,8 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             */
             //printdebug(map, pc, 0);
             definepiece(pc);
-            placepiece(map, pc);
+            fizzylogic(map, pc);
+            placepiece(map, pc, map->strategy);
             //ft_putnbr(map->psY - pc->bottomrightY);
             ft_putnbr(pc->placeY);
             ft_putchar(' ');
@@ -159,7 +161,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             i = -1;
             j = 0;
             map->round++;
-            map->foundx = 0;
+            map->foundplayer = 0;
         }
     }
     return (0);

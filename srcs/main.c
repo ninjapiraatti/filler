@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 09:49:09 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 12:06:50 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/06 14:39:12 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int         printdebug(t_map *map, t_piece *pc, int pieceonly)
         ft_putnbr_fd(map->psY, 2);
         ft_putstr_fd("\n", 2);
         ft_putstr_fd("Opponent start X: ", 2);
-        ft_putnbr_fd(map->esX, 2);
+        ft_putnbr_fd(map->osX, 2);
         ft_putstr_fd("\n", 2);
         ft_putstr_fd("Opponent start Y: ", 2);
-        ft_putnbr_fd(map->esY, 2);
+        ft_putnbr_fd(map->osY, 2);
         ft_putstr_fd("\n", 2);
         ft_putstr_fd("Piece height: ", 2);
         ft_putnbr_fd(pc->pieceH, 2);

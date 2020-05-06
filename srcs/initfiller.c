@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/06 12:59:26 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/06 15:10:55 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int     initmap(t_map *map)
     }
     map->state = 1;
     map->round = 1;
-    map->foundx = 0;
+    map->foundplayer = 0;
+    map->foundop = 0;
+    map->strategy = 0;
     return (0);
 }
 

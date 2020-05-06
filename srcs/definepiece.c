@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:16:21 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 14:47:34 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/06 15:55:31 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,11 @@ int     definepiece(t_piece *pc)
         x = 0;
         y++;
     }
+    pc->horizontal = 0;
+    pc->vertical = 0;
+    if (pc->bottomrightX - pc->topleftX > pc->bottomrightY - pc->topleftY)
+        pc->horizontal = 1;
+    else
+        pc->vertical = 1;
     return (0);
 }

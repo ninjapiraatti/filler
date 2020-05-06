@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/06 12:35:05 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/06 18:13:00 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ typedef struct  s_map
     int         psY;
     int         mapH;
     int         mapW;
-    int         esX;
-    int         esY;
+    int         osX;
+    int         osY;
     int         dbg;
     char        **map;
     int         state;
     int         round;
-    int         foundx;
+    int         foundplayer;
+    int         foundop;
     int         lbranchY;
     int         lbranchX;
     int         rbranchY;
     int         rbranchX;
     int         strategy;
+    int         tempX;
+    int         tempY;
     char        psymbol;
     char        osymbol;
 }               t_map;
@@ -62,8 +65,8 @@ int			readinput(t_map *map, t_piece *pc, int fd);
 int         initmap(t_map *map);
 int         initpiece(t_piece *pc);
 int         printdebug(t_map *map, t_piece *pc, int pieceonly);
-int         placepiece(t_map *map, t_piece *pc);
+int         placepiece(t_map *map, t_piece *pc, int strategy);
 int         definepiece(t_piece *pc);
-int         fizzylogic(t_piece *map, t_piece *pc);
+int         fizzylogic(t_map *map, t_piece *pc);
 
 #endif
