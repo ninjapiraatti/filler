@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/05 11:03:01 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/06 12:38:07 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
                     pX++;
                     pc->isvaliddot = 1;
                 }
-                else if (map->map[mY + pY][mX + pX] == 'X')
+                else if (map->map[mY + pY][mX + pX] == map->psymbol)
                 {
                     pX++;
                     pc->isvalidx++;
@@ -70,9 +70,6 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     }
     pc->placeY = mY;
     pc->placeX = mX;
-    //ft_putstr_fd("Place is valid.\n", 2);
-    //ft_putstr_fd(pc->pcmap[0], 2);
-    //ft_putstr_fd(pc->pcmap[1], 2);
     return (1);
 }
 
@@ -86,10 +83,10 @@ int recursion (t_map *map, t_piece *pc, int x, int y, int tries)
     {
         x--;
         y--;
-        if (x < -5)
-            x = 6;
-        if (y < -5)
-            y = 5;
+        if (x < -8)
+            x = 9;
+        if (y < -8)
+            y = 8;
         //ft_putstr_fd("FAILED TO PLACE A PIECE!\n", 2);
     }
     else
@@ -106,7 +103,7 @@ int     placepiece(t_map *map, t_piece *pc)
 
     x = 1;
     y = 1;
-    if (recursion(map, pc, x, y, 10000) == 1)
+    if (recursion(map, pc, x, y, 100000) == 1)
         return (1);
     return (0);
 }

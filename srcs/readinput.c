@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/04 21:39:18 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/06 12:56:55 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 
 char    *writeplayer(t_map *map, char *line)
 {
+
+	if (ft_strstr(line, "p2"))
+    {
+		map->psymbol = 'X';
+        map->osymbol = 'O';
+    }
+	if (ft_strstr(line, "p1"))
+    {
+		map->psymbol = 'O';
+        map->osymbol = 'X';
+    }
     return (line);
 }
 
@@ -45,7 +56,7 @@ char    *writemap(t_map *map, char *line)
     while (x < map->mapW)
     {
         map->map[y][x] = line[i];
-        if ((line[i] == 'X' || line[i] == 'x') && map->foundx == 0)
+        if ((line[i] == map->psymbol) && map->foundx == 0)
         {
             /*ft_putstr_fd("Y and X of the first X found:\n", 2);
             ft_putchar_fd('\n', 2);
@@ -102,12 +113,10 @@ int     readinput(t_map *map, t_piece *pc, int fd)
     {
         if (map->state != 1)
         {
-            //if (ft_strstr(line, "$$$") != NULL)
-            //    writeplayer(map, line);
+            if (ft_strstr(line, "$$$") != NULL)
+                writeplayer(map, line);
             if (ft_strstr(line, "Plateau") != NULL)
-            {
                 writemapsize(map, line);
-            }
         }
         if (ft_strstr(line, "000") != NULL)
             i = 0;

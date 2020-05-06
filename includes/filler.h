@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/05 10:31:28 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/06 12:35:05 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct  s_map
     int         rbranchY;
     int         rbranchX;
     int         strategy;
+    char        psymbol;
+    char        osymbol;
 }               t_map;
 
 typedef struct  s_piece
@@ -51,6 +53,8 @@ typedef struct  s_piece
     int         topleftset;
     int         isvaliddot;
     int         isvalidx;
+    int         horizontal;
+    int         vertical;
 
 }               t_piece;
 
