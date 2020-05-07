@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/06 15:25:22 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/07 08:41:13 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ char    *writemap(t_map *map, char *line)
             map->osX = x;
             map->osY = y;
             map->foundop = 1;
+        }
+        else if (line[i] == (map->osymbol - 32))
+        {
+            map->lastpcopX = x;
+            map->lastpcopY = y;
         }
         x++;
         i++;
