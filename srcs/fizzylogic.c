@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 12:14:35 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 13:50:03 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 int     entercoordinates(t_map *map, t_piece *pc)
 {
+    if (pc->horizontal == 1 && (map->strategy == 10 || map->strategy == 20))
+        direction(map, pc, 3);
+    else if (pc->horizontal == 1 && (map->strategy == 30 || map->strategy == 40))
+        direction(map, pc, 9);
+    else if (pc->vertical == 1 && (map->strategy == 10 || map->strategy == 40))
+        direction(map, pc, 12);
+    else if (pc->vertical == 1 && (map->strategy == 20 || map->strategy == 30))
+        direction(map, pc, 6);
+
+    /*
     if (map->strategy == 10 || map->strategy == 30)
     {
         if (pc->horizontal == 1)
@@ -40,7 +50,10 @@ int     entercoordinates(t_map *map, t_piece *pc)
             map->tempY = map->rbranchY;
         }
     }
-    else if (map->strategy == 1)
+    */
+    map->tempX = map->targetX;
+    map->tempY = map->targetY;
+    if (map->strategy == 1)
     {
         map->tempX = map->osX;
         map->tempY = map->osY;
@@ -50,8 +63,6 @@ int     entercoordinates(t_map *map, t_piece *pc)
         map->tempX = map->lastpcopX;
         map->tempY = map->lastpcopY;
     }
-    else
-        return (0);
     return (1);
 }
 
@@ -61,18 +72,22 @@ int     branchstrategy(t_map *map)
     {
         if (map->psY <= map->osY)
         {
+            /*
             map->lbranchX = map->mapW - 1;
             map->lbranchY = map->psY;
             map->rbranchX = map->psX;
             map->rbranchY = map->mapH - 1;
+            */
             map->strategy = 20;
         }
         else
         {
+            /*
             map->lbranchX = map->psX;
             map->lbranchY = 0;
             map->rbranchX = map->mapW - 1;
             map->rbranchY = map->psY;
+            */
             map->strategy = 10;
         }
     }
@@ -80,21 +95,26 @@ int     branchstrategy(t_map *map)
     {
         if (map->psY >= map->osY)
         {
+            /*
             map->lbranchX = 0;
             map->lbranchY = map->psY;
             map->rbranchX = map->psX;
             map->rbranchY = 0;
+            */
             map->strategy = 40;
         }
         else
         {
+            /*
             map->rbranchX = 0;
             map->rbranchY = map->psY;
             map->lbranchX = map->psX;
             map->lbranchY = map->mapH - 1;
+            */
             map->strategy = 30;
         }
     }
+    /*
     if (map->map[map->lbranchY][map->lbranchX] == map->psymbol)
     {
         map->lbranchX = map->rbranchX;
@@ -115,6 +135,7 @@ int     branchstrategy(t_map *map)
     {
         map->rwallreached = 2;
     } 
+    */
     return (0);
 }
 
@@ -180,11 +201,6 @@ int     checkdiagonals(t_map *map, t_piece *pc)
         y++;
         x = 5;
     }
-    return (0);
-}
-
-int     ping(t_map *map, t_piece *pc)
-{
     return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 12:15:14 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 13:21:29 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ typedef struct  s_map
     int         radius;
     int         lwallreached;
     int         rwallreached;
+    int         targetX;
+    int         targetY;
+    t_ping      *ping;
 }               t_map;
 
 typedef struct  s_piece
@@ -73,8 +76,6 @@ typedef struct  s_piece
     int         isvalidx;
     int         horizontal;
     int         vertical;
-    t_ping      *ping;
-
 }               t_piece;
 
 
@@ -85,5 +86,6 @@ int         printdebug(t_map *map, t_piece *pc, int pieceonly);
 int         placepiece(t_map *map, t_piece *pc, int strategy);
 int         definepiece(t_map *map, t_piece *pc);
 int         fizzylogic(t_map *map, t_piece *pc);
+int         direction (t_map *map, t_piece *pc, int dir);
 
 #endif
