@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 14:54:23 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 15:37:58 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ t_ping     *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radi
     int x = radius;
     int y = 0;
     int err = 0;
+    map->ping->count = 0;
     
- 
+    if (pingX - radius < 0)
+        pingX = 0;
+    if (pingY - radius < 0)
+        pingY = 0;
+    if (pingX + radius > map->mapW)
+        pingX = map->mapW - radius - 2;
+    if (pingY + radius > map->mapH)
+        pingY = map->mapH - radius - 2;
     while (x >= y)
     {
         if(map->map[pingY + y][pingX + x] == c)

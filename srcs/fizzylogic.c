@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 13:50:03 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 15:44:49 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,18 @@ int     entercoordinates(t_map *map, t_piece *pc)
     {
         map->tempX = map->lastpcopX;
         map->tempY = map->lastpcopY;
+        /*
+        ping(map, pc, pc->placeX, pc->placeY, map->psymbol, 5);
+        if(map->ping->count > 12)
+        {
+            map->tempX = map->lastpcopX;
+            map->tempY = map->lastpcopY;
+        }
+        else {
+            map->tempX = map->lastpcX;
+            map->tempY = map->lastpcY;
+        }
+        */
     }
     return (1);
 }
