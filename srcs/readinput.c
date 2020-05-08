@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 09:08:01 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 12:14:40 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         {
             ft_putstr_fd("\n\nSTR:", 2);
             ft_putnbr_fd(map->strategy, 2);
+            /*
             ft_putstr_fd(" | psX, psY: ", 2);
             ft_putnbr_fd(map->psX, 2);
             ft_putstr_fd(", ", 2);
@@ -155,10 +156,18 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(map->osX, 2);
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(map->osY, 2);
+            */
+            ft_putstr_fd(" | tempX, tempY: ", 2);
+            ft_putnbr_fd(map->tempX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->tempY, 2);
             ft_putstr_fd(" | LatestosX, LatestosY: ", 2);
             ft_putnbr_fd(map->lastpcopX, 2);
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(map->lastpcopY, 2);
+            ft_putstr_fd(" | Walls, LR: ", 2);
+            ft_putnbr_fd(map->lwallreached, 2);
+            ft_putnbr_fd(map->rwallreached, 2);
             ft_putchar_fd('\n', 2);
             
             //printdebug(map, pc, 0);

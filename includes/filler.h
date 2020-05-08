@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 09:07:20 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 12:15:14 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 # define BUFF_SIZE 21
 
 # include "../libft/includes/libft.h"
+
+typedef struct  s_ping
+{
+    int         count;
+    char        ndl;
+    char        hstck;
+}               t_ping;
 
 typedef struct  s_map
 {
@@ -66,8 +73,10 @@ typedef struct  s_piece
     int         isvalidx;
     int         horizontal;
     int         vertical;
+    t_ping      *ping;
 
 }               t_piece;
+
 
 int			readinput(t_map *map, t_piece *pc, int fd);
 int         initmap(t_map *map);

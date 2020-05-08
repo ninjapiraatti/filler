@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 09:36:49 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 12:14:35 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int     entercoordinates(t_map *map, t_piece *pc)
         map->tempX = map->lastpcopX;
         map->tempY = map->lastpcopY;
     }
+    else
+        return (0);
     return (1);
 }
 
@@ -134,6 +136,55 @@ int     latestrategy(t_map *map)
 
 int     checkdiagonals(t_map *map, t_piece *pc)
 {
+    int     x;
+    int     y;
+
+    x = 5;
+    y = 5;
+    while (y < (map->mapH - 5))
+    {
+        while (x < (map->mapW - 5))
+        {
+            if(map->map[y][x] == '.' && map->map[y][x + 1] == map->osymbol)
+            {
+                if (map->map[y + 1][x] == map->osymbol && map->map[y + 1][x + 1] == '.')
+                {
+                    map->tempY = y;
+                    map->tempX = x;
+                    map->strategy = 100;
+                    /*
+                    ft_putstr_fd("FOUND DIAGONAL\n", 2);
+                    ft_putstr_fd(map->map[y], 2);
+                    ft_putstr_fd("\n", 2);
+                    ft_putstr_fd(map->map[y + 1], 2);
+                    */
+                }
+            }
+            else if (map->map[y][x] == map->osymbol && map->map[y][x + 1] == '.')
+            {
+                if (map->map[y + 1][x] == '.' && map->map[y + 1][x + 1] == map->osymbol)
+                {
+                    map->tempY = y;
+                    map->tempX = x;
+                    map->strategy = 100;
+                    /*
+                    ft_putstr_fd("FOUND DIAGONAL\n", 2);
+                    ft_putstr_fd(map->map[y], 2);
+                    ft_putstr_fd("\n", 2);
+                    ft_putstr_fd(map->map[y + 1], 2);
+                    */
+                }
+            }
+            x++;
+        }
+        y++;
+        x = 5;
+    }
+    return (0);
+}
+
+int     ping(t_map *map, t_piece *pc)
+{
     return (0);
 }
 
@@ -146,7 +197,7 @@ int     updatestrategy(t_map *map, t_piece *pc)
         latestrategy(map);
     else
         branchstrategy(map);
-    checkdiagonals(map, pc);
+    //checkdiagonals(map, pc);
     return (0);
 }
 
