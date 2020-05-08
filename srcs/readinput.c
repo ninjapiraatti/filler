@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/07 08:41:13 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 09:08:01 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ char    *writemap(t_map *map, char *line)
     i = 4;
     while (x < map->mapW)
     {
+        if(line[i] == map->osymbol && map->map[y][x] == '.' && map->lastpcopfound == 0)
+        {
+            map->lastpcopX = x;
+            map->lastpcopY = y;
+            map->lastpcopfound = 1;
+        }
         map->map[y][x] = line[i];
         if ((line[i] == map->psymbol) && map->foundplayer == 0)
         {
@@ -67,11 +73,6 @@ char    *writemap(t_map *map, char *line)
             map->osX = x;
             map->osY = y;
             map->foundop = 1;
-        }
-        else if (line[i] == (map->osymbol - 32))
-        {
-            map->lastpcopX = x;
-            map->lastpcopY = y;
         }
         x++;
         i++;
@@ -144,15 +145,24 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         }
         if (pc->status == 2)
         {
-            /*
-            ft_putstr_fd("Y and X before end of round:\n", 2);
-            ft_putchar_fd('\n', 2);
-            ft_putnbr_fd(map->psY, 2);
+            ft_putstr_fd("\n\nSTR:", 2);
+            ft_putnbr_fd(map->strategy, 2);
+            ft_putstr_fd(" | psX, psY: ", 2);
             ft_putnbr_fd(map->psX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->psY, 2);
+            ft_putstr_fd(" | osX, osY: ", 2);
+            ft_putnbr_fd(map->osX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->osY, 2);
+            ft_putstr_fd(" | LatestosX, LatestosY: ", 2);
+            ft_putnbr_fd(map->lastpcopX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->lastpcopY, 2);
             ft_putchar_fd('\n', 2);
-            */
+            
             //printdebug(map, pc, 0);
-            definepiece(pc);
+            definepiece(map, pc);
             fizzylogic(map, pc);
             placepiece(map, pc, map->strategy);
             //ft_putnbr(map->psY - pc->bottomrightY);
@@ -166,7 +176,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             i = -1;
             j = 0;
             map->round++;
-            map->foundplayer = 0;
+            map->lastpcopfound = 0;
         }
     }
     return (0);

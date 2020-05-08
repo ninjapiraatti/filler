@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/07 15:55:37 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 09:07:20 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct  s_map
     char        osymbol;
     int         lastpcX;
     int         lastpcY;
+    int         lastpcopfound;
     int         lastpcopX;
     int         lastpcopY;
     int         radius;
@@ -73,7 +74,7 @@ int         initmap(t_map *map);
 int         initpiece(t_piece *pc);
 int         printdebug(t_map *map, t_piece *pc, int pieceonly);
 int         placepiece(t_map *map, t_piece *pc, int strategy);
-int         definepiece(t_piece *pc);
+int         definepiece(t_map *map, t_piece *pc);
 int         fizzylogic(t_map *map, t_piece *pc);
 
 #endif

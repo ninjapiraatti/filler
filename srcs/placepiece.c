@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/07 14:42:02 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 06:35:45 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
     {
         map->tempX++;
         map->tempY++;
+        ft_putstr_fd("SHIFT.", 2);
     }
     return (0);
 }

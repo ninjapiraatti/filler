@@ -6,13 +6,13 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:16:21 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/06 15:55:31 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 09:07:05 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-int     definepiece(t_piece *pc)
+int     definepiece(t_map *map, t_piece *pc)
 {
     int y;
     int x;
@@ -45,6 +45,10 @@ int     definepiece(t_piece *pc)
     pc->horizontal = 0;
     pc->vertical = 0;
     if (pc->bottomrightX - pc->topleftX > pc->bottomrightY - pc->topleftY)
+        pc->horizontal = 1;
+    else if (pc->bottomrightX - pc->topleftX < pc->bottomrightY - pc->topleftY)
+        pc->vertical = 1;
+    else if (map->round % 2 == 0)
         pc->horizontal = 1;
     else
         pc->vertical = 1;

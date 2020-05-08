@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/07 16:01:09 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 09:36:49 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int     entercoordinates(t_map *map, t_piece *pc)
     }
     else if (map->strategy == 2)
     {
-        map->tempX = map->psX;
-        map->tempY = map->psY;
+        map->tempX = map->lastpcopX;
+        map->tempY = map->lastpcopY;
     }
     return (1);
 }
@@ -108,7 +108,6 @@ int     branchstrategy(t_map *map)
         map->rbranchX = map->lbranchX;
         map->rbranchY = map->lbranchY;
         map->rwallreached = 1;
-        ft_putstr_fd("END OF RBRANCH\n\n\n\n\n\n", 2);
     }
     else if(map->map[map->rbranchY][map->rbranchX] == map->osymbol)
     {
@@ -129,17 +128,25 @@ int     latestrategy(t_map *map)
         map->tempX = map->lastpcopX;
         map->tempY = map->lastpcopY;
     }
+    map->strategy = 2;
+    return (0);
+}
+
+int     checkdiagonals(t_map *map, t_piece *pc)
+{
     return (0);
 }
 
 int     updatestrategy(t_map *map, t_piece *pc)
 {
-    if (map->round < ((map->mapH + map->mapW) / 24))
+    ft_putnbr_fd(map->round, 2);
+    if (map->round < (map->mapH + map->mapW) / 1000) // 20 for mid. Smaller = Initial state stays longer
         map->strategy = 1;
-    if (map->round > ((map->mapH * map->mapW) / 10))
+    else if (map->round > ((map->mapH * map->mapW) / 80)) // (0 for small), 40 for mid, (80 for large). Smaller = late comes earlier
         latestrategy(map);
     else
         branchstrategy(map);
+    checkdiagonals(map, pc);
     return (0);
 }
 
