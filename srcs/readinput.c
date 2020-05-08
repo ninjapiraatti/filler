@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 12:14:40 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 14:58:59 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,12 +168,15 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putstr_fd(" | Walls, LR: ", 2);
             ft_putnbr_fd(map->lwallreached, 2);
             ft_putnbr_fd(map->rwallreached, 2);
+            ft_putstr_fd(" | Number of op @ ping: ", 2);
+            ft_putnbr_fd(map->ping->count, 2);
             ft_putchar_fd('\n', 2);
             
             //printdebug(map, pc, 0);
             definepiece(map, pc);
             fizzylogic(map, pc);
             placepiece(map, pc, map->strategy);
+            ping(map, pc, pc->placeX, pc->placeY, map->osymbol, 3);
             //ft_putnbr(map->psY - pc->bottomrightY);
             ft_putnbr(pc->placeY);
             ft_putchar(' ');

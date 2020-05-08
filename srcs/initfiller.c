@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/06 15:10:55 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 14:32:19 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int     initmap(t_map *map)
     map->foundplayer = 0;
     map->foundop = 0;
     map->strategy = 0;
+    if (!(map->ping = (t_ping *)malloc(sizeof(t_ping))))
+		return (0);
     return (0);
 }
 

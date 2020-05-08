@@ -6,15 +6,49 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 13:20:48 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/08 14:54:23 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-int     ping(t_map *map, t_piece *pc)
+t_ping     *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radius)
 {
-    return (0);
+    int x = radius;
+    int y = 0;
+    int err = 0;
+    
+ 
+    while (x >= y)
+    {
+        if(map->map[pingY + y][pingX + x] == c)
+            map->ping->count++;
+        if(map->map[pingY + x][pingX + y] == c)
+            map->ping->count++;
+        if(map->map[pingY + x][pingX - y] == c)
+            map->ping->count++;
+        if(map->map[pingY + y][pingX - x] == c)
+            map->ping->count++;
+        if(map->map[pingY - y][pingX - x] == c)
+            map->ping->count++;
+        if(map->map[pingY - x][pingX - y] == c)
+            map->ping->count++;
+        if(map->map[pingY - x][pingX + y] == c)
+            map->ping->count++;
+        if(map->map[pingY - y][pingX + x] == c)
+            map->ping->count++;
+        if (err <= 0)
+        {
+            y += 1;
+            err += 2*y + 1;
+        }
+        if (err > 0)
+        {
+            x -= 1;
+            err -= 2*x + 1;
+        }
+    }
+    return (map->ping);
 }
 
 int     direction (t_map *map, t_piece *pc, int dir)
