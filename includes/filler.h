@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 14:29:52 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/10 13:42:27 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct  s_ping
     int         count;
     char        ndl;
     char        hstck;
+    int         pingedX;
+    int         pingedY;
 }               t_ping;
 
 typedef struct  s_map
@@ -56,6 +58,8 @@ typedef struct  s_map
     int         rwallreached;
     int         targetX;
     int         targetY;
+    int         dirh;
+    int         dirv;
     t_ping      *ping;
 }               t_map;
 

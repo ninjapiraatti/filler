@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 15:38:58 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/10 14:09:50 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,10 +165,16 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(map->lastpcopX, 2);
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(map->lastpcopY, 2);
-            ft_putstr_fd(" | Walls, LR: ", 2);
-            ft_putnbr_fd(map->lwallreached, 2);
-            ft_putnbr_fd(map->rwallreached, 2);
-            ft_putstr_fd(" | Number of op @ ping: ", 2);
+            ft_putstr_fd(" | Directions, H, V: ", 2);
+            ft_putnbr_fd(map->dirh, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->dirv, 2);
+            ft_putstr_fd(" | Pinged at X, Y: ", 2);
+            ft_putnbr_fd(map->ping->pingedX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->ping->pingedY, 2);
+            ft_putchar_fd('\n', 2);
+            ft_putstr_fd(" Number ping count: ", 2);
             ft_putnbr_fd(map->ping->count, 2);
             ft_putchar_fd('\n', 2);
             

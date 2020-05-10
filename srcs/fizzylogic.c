@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 15:44:49 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/10 18:28:17 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,6 @@
 
 int     entercoordinates(t_map *map, t_piece *pc)
 {
-    if (pc->horizontal == 1 && (map->strategy == 10 || map->strategy == 20))
-        direction(map, pc, 3);
-    else if (pc->horizontal == 1 && (map->strategy == 30 || map->strategy == 40))
-        direction(map, pc, 9);
-    else if (pc->vertical == 1 && (map->strategy == 10 || map->strategy == 40))
-        direction(map, pc, 12);
-    else if (pc->vertical == 1 && (map->strategy == 20 || map->strategy == 30))
-        direction(map, pc, 6);
-
-    /*
-    if (map->strategy == 10 || map->strategy == 30)
-    {
-        if (pc->horizontal == 1)
-        {
-            map->tempX = map->rbranchX;
-            map->tempY = map->rbranchY;
-        }
-        else if (pc->vertical == 1)
-        {
-            map->tempX = map->lbranchX;
-            map->tempY = map->lbranchY;
-        }
-    }
-    else if (map->strategy == 20 || map->strategy == 40)
-    {
-        if (pc->horizontal == 1)
-        {
-            map->tempX = map->lbranchX;
-            map->tempY = map->lbranchY;
-        }
-        else if (pc->vertical == 1)
-        {
-            map->tempX = map->rbranchX;
-            map->tempY = map->rbranchY;
-        }
-    }
-    */
     map->tempX = map->targetX;
     map->tempY = map->targetY;
     if (map->strategy == 1)
@@ -60,8 +23,8 @@ int     entercoordinates(t_map *map, t_piece *pc)
     }
     else if (map->strategy == 2)
     {
-        map->tempX = map->lastpcopX;
-        map->tempY = map->lastpcopY;
+        map->tempX = map->targetX;
+        map->tempY = map->targetY;
         /*
         ping(map, pc, pc->placeX, pc->placeY, map->psymbol, 5);
         if(map->ping->count > 12)
@@ -78,9 +41,9 @@ int     entercoordinates(t_map *map, t_piece *pc)
     return (1);
 }
 
-int     branchstrategy(t_map *map)
+int     branchstrategy(t_map *map, t_piece *pc)
 {
-    if (map->psX <= map->osX)
+    if (map->psX <= map->osX && (map->dirh == 0 || map->dirv == 0))
     {
         if (map->psY <= map->osY)
         {
@@ -90,6 +53,8 @@ int     branchstrategy(t_map *map)
             map->rbranchX = map->psX;
             map->rbranchY = map->mapH - 1;
             */
+            map->dirh = 3;
+            map->dirv = 6;
             map->strategy = 20;
         }
         else
@@ -100,10 +65,12 @@ int     branchstrategy(t_map *map)
             map->rbranchX = map->mapW - 1;
             map->rbranchY = map->psY;
             */
+            map->dirh = 3;
+            map->dirv = 12;
             map->strategy = 10;
         }
     }
-    else
+    else if (map->dirh == 0 || map->dirv == 0)
     {
         if (map->psY >= map->osY)
         {
@@ -113,6 +80,8 @@ int     branchstrategy(t_map *map)
             map->rbranchX = map->psX;
             map->rbranchY = 0;
             */
+            map->dirh = 8;
+            map->dirv = 1;
             map->strategy = 40;
         }
         else
@@ -123,9 +92,35 @@ int     branchstrategy(t_map *map)
             map->lbranchX = map->psX;
             map->lbranchY = map->mapH - 1;
             */
+            map->dirh = 9;
+            map->dirv = 6;
             map->strategy = 30;
         }
     }
+    ping(map, pc, map->targetX, map->targetY, map->psymbol, 5);
+    if (map->ping->count > 4 && map->strategy % 10 == 0)
+    {
+        if (pc->horizontal == 1)
+            map->dirh = map->dirv;
+        else
+            map->dirv = map->dirh;
+        //map->strategy++;
+    }
+    ping(map, pc, map->lastpcX, map->lastpcY, map->osymbol, 5);
+    /*
+    if (map->ping->count > 10 && map->strategy % 10 == 0)
+    {
+        if (pc->horizontal == 1)
+            map->dirh--;
+        else
+            map->dirv--;
+        map->strategy += 2;
+    }
+    */
+    if (pc->horizontal == 1)
+        direction(map, pc, map->dirh);
+    else
+        direction(map, pc, map->dirv);
     /*
     if (map->map[map->lbranchY][map->lbranchX] == map->psymbol)
     {
@@ -151,17 +146,23 @@ int     branchstrategy(t_map *map)
     return (0);
 }
 
-int     latestrategy(t_map *map)
+int     latestrategy(t_map *map, t_piece *pc)
 {
-    if (map->lwallreached == 1 && map->rwallreached == 1)
+    //ping(map, pc, map->targetX, map->targetY, map->psymbol, 5);
+    ping(map, pc, 0, 0, map->psymbol, 6);
+    if (map->ping->count > 1)
     {
-        map->tempX = map->psX;
-        map->tempY = map->psY;
+        //map->targetX = map->osX;
+        //map->targetY = map->osY;
+        map->targetX = map->lastpcopX;
+        map->targetY = map->lastpcopY;
     }
     else
     {
-        map->tempX = map->lastpcopX;
-        map->tempY = map->lastpcopY;
+        //map->targetX = map->lastpcopX;
+        //map->targetY = map->lastpcopY;
+        map->targetX = 0;
+        map->targetY = 0;
     }
     map->strategy = 2;
     return (0);
@@ -221,10 +222,10 @@ int     updatestrategy(t_map *map, t_piece *pc)
     ft_putnbr_fd(map->round, 2);
     if (map->round < (map->mapH + map->mapW) / 1000) // 20 for mid. Smaller = Initial state stays longer
         map->strategy = 1;
-    else if (map->round > ((map->mapH * map->mapW) / 80)) // (0 for small), 40 for mid, (80 for large). Smaller = late comes earlier
-        latestrategy(map);
+    else if (map->round > ((map->mapH * map->mapW) / 140)) // (40 for small), 40 for mid, (140 for large). Smaller = late comes earlier
+        latestrategy(map, pc);
     else
-        branchstrategy(map);
+        branchstrategy(map, pc);
     //checkdiagonals(map, pc);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/08 15:37:58 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/10 14:08:26 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,35 @@ t_ping     *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radi
     int y = 0;
     int err = 0;
     map->ping->count = 0;
+    map->ping->pingedX = pingX;
+    map->ping->pingedY = pingY;
     
-    if (pingX - radius < 0)
-        pingX = 0;
-    if (pingY - radius < 0)
-        pingY = 0;
-    if (pingX + radius > map->mapW)
-        pingX = map->mapW - radius - 2;
-    if (pingY + radius > map->mapH)
-        pingY = map->mapH - radius - 2;
     while (x >= y)
     {
-        if(map->map[pingY + y][pingX + x] == c)
-            map->ping->count++;
-        if(map->map[pingY + x][pingX + y] == c)
-            map->ping->count++;
-        if(map->map[pingY + x][pingX - y] == c)
-            map->ping->count++;
-        if(map->map[pingY + y][pingX - x] == c)
-            map->ping->count++;
-        if(map->map[pingY - y][pingX - x] == c)
-            map->ping->count++;
-        if(map->map[pingY - x][pingX - y] == c)
-            map->ping->count++;
-        if(map->map[pingY - x][pingX + y] == c)
-            map->ping->count++;
-        if(map->map[pingY - y][pingX + x] == c)
-            map->ping->count++;
+        if(!((pingY + y >= map->mapH - 1) || (pingX + x >= map->mapW - 1)))
+            if(map->map[pingY + y][pingX + x] == c)
+                map->ping->count++;
+        if(!((pingY + x >= map->mapH - 1) || (pingX + y >= map->mapW - 1)))
+            if(map->map[pingY + x][pingX + y] == c)
+                map->ping->count++;
+        if(!((pingY + x >= map->mapH - 1) || (pingX - y < 0)))
+            if(map->map[pingY + x][pingX - y] == c)
+                map->ping->count++;
+        if(!((pingY + y >= map->mapH - 1) || (pingX - x < 0)))
+            if(map->map[pingY + y][pingX - x] == c)
+                map->ping->count++;
+        if(!((pingY - y < 0) ||(pingX - x < 0)))
+            if(map->map[pingY - y][pingX - x] == c)
+                map->ping->count++;
+        if(!((pingY - x < 0) || (pingX - y < 0)))
+            if(map->map[pingY - x][pingX - y] == c)
+                map->ping->count++;
+        if(!((pingY - x < 0) || (pingX + y >= map->mapW - 1)))
+            if(map->map[pingY - x][pingX + y] == c)
+                map->ping->count++;
+        if(!((pingY - y < 0) || (pingX + x >= map->mapW - 1)))
+            if(map->map[pingY - y][pingX + x] == c)
+                map->ping->count++;
         if (err <= 0)
         {
             y += 1;
@@ -61,6 +63,8 @@ t_ping     *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radi
 
 int     direction (t_map *map, t_piece *pc, int dir)
 {
+    if (dir < 1)
+        dir = 12;
     if (dir == 11 || dir == 12 || dir == 1)
     {
         map->targetY = 0;
