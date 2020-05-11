@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 13:57:57 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/11 17:12:28 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,6 @@ int     entercoordinates(t_map *map, t_piece *pc)
             map->tempY = map->lastpcY;
         }
         */
-    }
-    ping(map, pc, map->tempX, map->tempY, map->psymbol, 8);
-    if (map->ping->count > 15)
-    {
-        map->tempX = 0;
-        map->tempY = 0;
-        ft_putstr_fd("Disregarded a too full position.\n", 2);
     }
     return (1);
 }
@@ -164,23 +157,45 @@ int     branchstrategy(t_map *map, t_piece *pc)
 
 int     latestrategy(t_map *map, t_piece *pc)
 {
-    ping(map, pc, map->targetX, map->targetY, map->psymbol, 5);
-    if (map->ping->count > 5 && map->round < 200)
+    ping(map, pc, map->targetX, map->targetY, map->psymbol, 6);
+    if (map->round < 120)
     {
-        map->targetX = map->osX;
-        map->targetY = map->osY;
-        //map->targetX = map->lastpcopX;
-        //map->targetY = map->lastpcopY;
+        if (map->raytrace == 0)
+            raytrace(map, pc);
+        map->targetX = map->rttargetX;
+        map->targetY = map->rttargetY;
     }
     else
     {
+        if (map->raytrace == 0)
+            raytrace(map, pc);
         map->targetX = map->lastpcopX;
         map->targetY = map->lastpcopY;
         //map->targetX = 0;
         //map->targetY = 0;
         //map->targetX = map->osX;
         //map->targetY = map->osY;
-    }   
+    }
+    /*
+    ping(map, pc, map->tempX, map->tempY, map->psymbol, 8);
+    if (map->ping->count > 15)
+    {
+        if (map->raytrace == 1)
+        {
+            map->targetX = map->rttargetX;
+            map->targetY = map->rttargetY;
+        }
+        else 
+        {
+            map->targetX = map->lastpcopX;
+            map->targetY = map->lastpcopY;
+        }
+        ft_putstr_fd("Disregarded as too full position.\n", 2);
+    }
+    */  
+    ping(map, pc, map->rttargetX, map->rttargetY, map->psymbol, 3);
+    if (map->ping->count > 4)
+        map->raytrace = 2;
     map->strategy = 2;
     return (0);
 }

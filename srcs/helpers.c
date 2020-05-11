@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/10 14:08:26 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/11 16:53:51 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,64 @@ int     direction (t_map *map, t_piece *pc, int dir)
         map->targetX = 0;  
         map->targetY = (map->mapH / 4) * (11 - dir);
     }
+    return (0);
+}
+
+int     raytrace(t_map *map, t_piece *pc)
+{
+    int     x;
+    int     y;
+    int     count;
+
+    x = 0;
+    y = 0;
+    count = 0;
+    while (y < map->mapH - 1)
+    {
+        while (x < map->mapW - 1)
+        {
+            map->targetX = 0;
+            while(map->map[y][x] == '.')
+                x++;
+            if (map->map[y][x] == map->psymbol)
+            {
+                if (x > count)
+                {
+                    map->rttargetY = y;
+                    count = x;
+                    break ;
+                }
+            }
+            else
+                break ;
+            x++;
+        }
+        x = map->mapW - 1;
+        while (x > 0)
+        {
+            map->targetX = map->mapW - 1;
+            while(map->map[y][x] == '.')
+                x--;
+            if (map->map[y][x] == map->psymbol)
+            {
+                if ((map->mapW - x) > count)
+                {
+                    map->rttargetY = y;
+                    count = x;
+                    break ;
+                }
+            }
+            else
+                break;
+            x--;
+        }
+        y++;
+    }
+    map->raytrace = 1;
+    ft_putstr_fd("\n\n\n", 2);
+    ft_putstr_fd("Raytrace coords: ", 2);
+    ft_putnbr_fd(map->rttargetX, 2);
+    ft_putstr_fd(", ", 2);
+    ft_putnbr_fd(map->rttargetY, 2);
     return (0);
 }
