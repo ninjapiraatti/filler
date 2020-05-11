@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/10 18:28:17 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/11 13:57:57 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int     entercoordinates(t_map *map, t_piece *pc)
 {
-    map->tempX = map->targetX;
-    map->tempY = map->targetY;
+    if (map->founddiagonal != 1)
+    {
+        map->tempX = map->targetX;
+        map->tempY = map->targetY;
+    }
     if (map->strategy == 1)
     {
         map->tempX = map->osX;
@@ -37,6 +40,13 @@ int     entercoordinates(t_map *map, t_piece *pc)
             map->tempY = map->lastpcY;
         }
         */
+    }
+    ping(map, pc, map->tempX, map->tempY, map->psymbol, 8);
+    if (map->ping->count > 15)
+    {
+        map->tempX = 0;
+        map->tempY = 0;
+        ft_putstr_fd("Disregarded a too full position.\n", 2);
     }
     return (1);
 }
@@ -97,8 +107,29 @@ int     branchstrategy(t_map *map, t_piece *pc)
             map->strategy = 30;
         }
     }
+    /*
+    ping(map, pc, map->lastpcX, map->lastpcY, map->osymbol, 5);
+    if (map->ping->count > 1 && map->strategy % 10 == 0)
+    {
+        if (pc->horizontal == 1)
+            if (map->strategy ==  40 && map->strategy == 20)
+                map->dirh--;
+            else
+                map->dirh++;
+        else
+            if (map->strategy ==  40 && map->strategy == 20)
+                map->dirv++;
+            else
+                map->dirv++;
+        //map->strategy += 2;
+    }
+    */
+    if (pc->horizontal == 1)
+        direction(map, pc, map->dirh);
+    else
+        direction(map, pc, map->dirv);
     ping(map, pc, map->targetX, map->targetY, map->psymbol, 5);
-    if (map->ping->count > 4 && map->strategy % 10 == 0)
+    if (map->ping->count > 8 && map->strategy % 10 == 0)
     {
         if (pc->horizontal == 1)
             map->dirh = map->dirv;
@@ -106,21 +137,6 @@ int     branchstrategy(t_map *map, t_piece *pc)
             map->dirv = map->dirh;
         //map->strategy++;
     }
-    ping(map, pc, map->lastpcX, map->lastpcY, map->osymbol, 5);
-    /*
-    if (map->ping->count > 10 && map->strategy % 10 == 0)
-    {
-        if (pc->horizontal == 1)
-            map->dirh--;
-        else
-            map->dirv--;
-        map->strategy += 2;
-    }
-    */
-    if (pc->horizontal == 1)
-        direction(map, pc, map->dirh);
-    else
-        direction(map, pc, map->dirv);
     /*
     if (map->map[map->lbranchY][map->lbranchX] == map->psymbol)
     {
@@ -148,22 +164,23 @@ int     branchstrategy(t_map *map, t_piece *pc)
 
 int     latestrategy(t_map *map, t_piece *pc)
 {
-    //ping(map, pc, map->targetX, map->targetY, map->psymbol, 5);
-    ping(map, pc, 0, 0, map->psymbol, 6);
-    if (map->ping->count > 1)
+    ping(map, pc, map->targetX, map->targetY, map->psymbol, 5);
+    if (map->ping->count > 5 && map->round < 200)
     {
-        //map->targetX = map->osX;
-        //map->targetY = map->osY;
-        map->targetX = map->lastpcopX;
-        map->targetY = map->lastpcopY;
+        map->targetX = map->osX;
+        map->targetY = map->osY;
+        //map->targetX = map->lastpcopX;
+        //map->targetY = map->lastpcopY;
     }
     else
     {
-        //map->targetX = map->lastpcopX;
-        //map->targetY = map->lastpcopY;
-        map->targetX = 0;
-        map->targetY = 0;
-    }
+        map->targetX = map->lastpcopX;
+        map->targetY = map->lastpcopY;
+        //map->targetX = 0;
+        //map->targetY = 0;
+        //map->targetX = map->osX;
+        //map->targetY = map->osY;
+    }   
     map->strategy = 2;
     return (0);
 }
@@ -172,9 +189,13 @@ int     checkdiagonals(t_map *map, t_piece *pc)
 {
     int     x;
     int     y;
+    int     i;
 
     x = 5;
     y = 5;
+    i = 0;
+    if (pc->diagonal == 0)
+        return (0);
     while (y < (map->mapH - 5))
     {
         while (x < (map->mapW - 5))
@@ -185,13 +206,19 @@ int     checkdiagonals(t_map *map, t_piece *pc)
                 {
                     map->tempY = y;
                     map->tempX = x;
-                    map->strategy = 100;
-                    /*
-                    ft_putstr_fd("FOUND DIAGONAL\n", 2);
-                    ft_putstr_fd(map->map[y], 2);
-                    ft_putstr_fd("\n", 2);
-                    ft_putstr_fd(map->map[y + 1], 2);
-                    */
+                    //ft_putstr_fd(map->map[y], 2);
+                    //ft_putstr_fd("\n", 2);
+                    //ft_putstr_fd(map->map[y + 1], 2);
+                    if (drawcircle(map, pc, 0, 2) == 1)
+                    {
+                        ft_putstr_fd("PLACED DIAGONAL AT: ", 2);
+                        ft_putnbr_fd(x, 2);
+                        ft_putstr_fd(", ", 2);
+                        ft_putnbr_fd(y, 2);
+                        ft_putstr_fd("\n\n\n\n\n\n\n\n\n\n", 2);
+                        map->founddiagonal = 1;
+                        return (1);
+                    }
                 }
             }
             else if (map->map[y][x] == map->osymbol && map->map[y][x + 1] == '.')
@@ -200,13 +227,19 @@ int     checkdiagonals(t_map *map, t_piece *pc)
                 {
                     map->tempY = y;
                     map->tempX = x;
-                    map->strategy = 100;
-                    /*
-                    ft_putstr_fd("FOUND DIAGONAL\n", 2);
-                    ft_putstr_fd(map->map[y], 2);
-                    ft_putstr_fd("\n", 2);
-                    ft_putstr_fd(map->map[y + 1], 2);
-                    */
+                    //ft_putstr_fd(map->map[y], 2);
+                    //ft_putstr_fd("\n", 2);
+                    //ft_putstr_fd(map->map[y + 1], 2);
+                    if (drawcircle(map, pc, 0, 3) == 1)
+                    {
+                        ft_putstr_fd("PLACED DIAGONAL AT: ", 2);
+                        ft_putnbr_fd(x, 2);
+                        ft_putstr_fd(", ", 2);
+                        ft_putnbr_fd(y, 2);
+                        ft_putstr_fd("\n", 2);
+                        map->founddiagonal = 1;
+                        return (1);
+                    }
                 }
             }
             x++;
@@ -222,11 +255,12 @@ int     updatestrategy(t_map *map, t_piece *pc)
     ft_putnbr_fd(map->round, 2);
     if (map->round < (map->mapH + map->mapW) / 1000) // 20 for mid. Smaller = Initial state stays longer
         map->strategy = 1;
-    else if (map->round > ((map->mapH * map->mapW) / 140)) // (40 for small), 40 for mid, (140 for large). Smaller = late comes earlier
+    else if (map->round > ((map->mapH * map->mapW) / 200)) // (40 for small), 40 for mid, (140 for large). Smaller = late comes earlier
         latestrategy(map, pc);
     else
         branchstrategy(map, pc);
-    //checkdiagonals(map, pc);
+    if (checkdiagonals(map, pc) == 1)
+        map->founddiagonal = 1;
     return (0);
 }
 

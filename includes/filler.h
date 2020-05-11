@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/10 13:42:27 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/11 11:53:48 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct  s_map
     int         targetY;
     int         dirh;
     int         dirv;
+    int         founddiagonal;
     t_ping      *ping;
 }               t_map;
 
@@ -80,6 +81,7 @@ typedef struct  s_piece
     int         isvalidx;
     int         horizontal;
     int         vertical;
+    int         diagonal;
 }               t_piece;
 
 
@@ -92,5 +94,7 @@ int         definepiece(t_map *map, t_piece *pc);
 int         fizzylogic(t_map *map, t_piece *pc);
 int         direction (t_map *map, t_piece *pc, int dir);
 t_ping      *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radius);
+int         drawcircle(t_map *map, t_piece *pc, int tries, int radius);
+int         checkdiagonals(t_map *map, t_piece *pc);
 
 #endif
