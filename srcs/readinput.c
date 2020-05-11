@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 14:11:28 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/11 17:32:56 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,10 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(map->tempX, 2);
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(map->tempY, 2);
+            ft_putstr_fd(" | rtX, rtY: ", 2);
+            ft_putnbr_fd(map->rttargetX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->rttargetY, 2);
             ft_putstr_fd(" | LatestosX, LatestosY: ", 2);
             ft_putnbr_fd(map->lastpcopX, 2);
             ft_putstr_fd(", ", 2);

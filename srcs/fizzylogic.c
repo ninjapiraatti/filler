@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 17:12:28 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/11 17:47:27 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,8 @@ int     branchstrategy(t_map *map, t_piece *pc)
 int     latestrategy(t_map *map, t_piece *pc)
 {
     ping(map, pc, map->targetX, map->targetY, map->psymbol, 6);
+    if (map->round % 200 == 0)
+        map->raytrace = 0;
     if (map->round < 120)
     {
         if (map->raytrace == 0)
@@ -171,6 +173,11 @@ int     latestrategy(t_map *map, t_piece *pc)
             raytrace(map, pc);
         map->targetX = map->lastpcopX;
         map->targetY = map->lastpcopY;
+        if (map->raytrace == 1)
+        {
+            map->targetX = map->rttargetX;
+            map->targetY = map->rttargetY;
+        }
         //map->targetX = 0;
         //map->targetY = 0;
         //map->targetX = map->osX;
@@ -193,8 +200,8 @@ int     latestrategy(t_map *map, t_piece *pc)
         ft_putstr_fd("Disregarded as too full position.\n", 2);
     }
     */  
-    ping(map, pc, map->rttargetX, map->rttargetY, map->psymbol, 3);
-    if (map->ping->count > 4)
+    ping(map, pc, map->rttargetX, map->rttargetY, map->psymbol, 4);
+    if (map->ping->count > 5)
         map->raytrace = 2;
     map->strategy = 2;
     return (0);

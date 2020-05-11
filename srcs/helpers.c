@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 16:53:51 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/11 18:03:33 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,34 +104,39 @@ int     raytrace(t_map *map, t_piece *pc)
     {
         while (x < map->mapW - 1)
         {
-            map->targetX = 0;
             while(map->map[y][x] == '.')
                 x++;
             if (map->map[y][x] == map->psymbol)
             {
                 if (x > count)
                 {
+                    map->rttargetX = 0;
                     map->rttargetY = y;
                     count = x;
                     break ;
                 }
             }
             else
-                break ;
+               break ;
             x++;
         }
+        y++;
+    }
+    y = 0;
+    while (y < map->mapH - 1)
+    {
         x = map->mapW - 1;
         while (x > 0)
         {
-            map->targetX = map->mapW - 1;
             while(map->map[y][x] == '.')
                 x--;
             if (map->map[y][x] == map->psymbol)
             {
                 if ((map->mapW - x) > count)
                 {
+                    map->rttargetX = map->mapW - 1;
                     map->rttargetY = y;
-                    count = x;
+                    count = map->mapW - x;
                     break ;
                 }
             }
