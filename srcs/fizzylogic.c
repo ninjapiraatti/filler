@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/12 21:11:39 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/27 12:15:52 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int     entercoordinates(t_map *map, t_piece *pc)
         map->tempX = map->targetX;
         map->tempY = map->targetY;
     }
-    if (map->strategy == 1)
+    if (map->strategy == 1) // Initial strategy builds towards the opponent
     {
         map->tempX = map->osX;
         map->tempY = map->osY;
@@ -100,6 +100,8 @@ int     branchstrategy(t_map *map, t_piece *pc)
             map->strategy = 30;
         }
     }
+    if (map->mapW < 40)
+        map->dirh = map->dirv;
     /*
     ping(map, pc, map->lastpcX, map->lastpcY, map->osymbol, 5);
     if (map->ping->count > 1 && map->strategy % 10 == 0)
@@ -160,7 +162,7 @@ int     latestrategy(t_map *map, t_piece *pc)
     ping(map, pc, map->targetX, map->targetY, map->psymbol, 6);
     if (map->round % 200 == 0)
         map->raytrace = 0;
-    if (map->round < 120)
+    if (map->round < 120 && map->mapW > 80) // This magic number seems to work only on bigger maps
     {
         if (map->raytrace == 0)
             raytrace(map, pc);
@@ -280,14 +282,14 @@ int     updatestrategy(t_map *map, t_piece *pc)
 {
     int     turns;
 
-    turns = 100;
+    turns = 15; // Best guess so far 10
     if (map->mapW > 30)
-        turns = 30;
+        turns = 40; // Best guess so far 40
     if (map->mapW > 90)
-        turns = 200;
-    if (map->round < (map->mapH + map->mapW) / 1000) // 20 for mid. Smaller = Initial state stays longer
+        turns = 200; // Best guess so far 200
+    if (map->round < ((map->mapH * map->mapW) / (10 * turns))) // Smaller = Initial state stays longer
         map->strategy = 1;
-    else if (map->round > ((map->mapH * map->mapW) / turns)) // (40 for small), 40 for mid, (140 for large). Bigger = late comes earlier
+    else if (map->round > ((map->mapH * map->mapW) / turns)) // Bigger = late comes earlier
         latestrategy(map, pc);
     else
         branchstrategy(map, pc);
