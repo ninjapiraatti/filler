@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 13:24:46 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/12 20:35:32 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
     if (tries % 200 == 0)
     {
         map->tempX++;
-        map->tempY++;
     }
     return (0);
 }
@@ -133,9 +132,9 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
 int recursion (t_map *map, t_piece *pc, int tries)
 {
     tries++;
-    if (tries > 2000)
+    if (tries > 4000)
     {
-        ft_putstr_fd("TRIES OVERLOAD!!!!\n\n\n\n\n\n\n\n", 2);
+        ft_putstr_fd("TRIES OVERLOAD!!!!\n\n", 2);
         return (0);
     }
     /*

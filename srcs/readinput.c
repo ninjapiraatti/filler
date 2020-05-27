@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 17:32:56 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/12 21:03:26 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,6 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         }
         if (pc->status == 2)
         {
-            ft_putstr_fd("\n\nSTR:", 2);
-            ft_putnbr_fd(map->strategy, 2);
             /*
             ft_putstr_fd(" | psX, psY: ", 2);
             ft_putnbr_fd(map->psX, 2);
@@ -157,31 +155,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(map->osY, 2);
             */
-            ft_putstr_fd(" | tempX, tempY: ", 2);
-            ft_putnbr_fd(map->tempX, 2);
-            ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->tempY, 2);
-            ft_putstr_fd(" | rtX, rtY: ", 2);
-            ft_putnbr_fd(map->rttargetX, 2);
-            ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->rttargetY, 2);
-            ft_putstr_fd(" | LatestosX, LatestosY: ", 2);
-            ft_putnbr_fd(map->lastpcopX, 2);
-            ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->lastpcopY, 2);
-            ft_putstr_fd(" | Directions, H, V: ", 2);
-            ft_putnbr_fd(map->dirh, 2);
-            ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->dirv, 2);
-            ft_putstr_fd(" | Pinged at X, Y: ", 2);
-            ft_putnbr_fd(map->ping->pingedX, 2);
-            ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->ping->pingedY, 2);
-            ft_putchar_fd('\n', 2);
-            ft_putstr_fd(" Number ping count: ", 2);
-            ft_putnbr_fd(map->ping->count, 2);
-            ft_putchar_fd('\n', 2);
-            
+            ft_putnbr_fd(map->strategy, 2);
             //printdebug(map, pc, 0);
             definepiece(map, pc);
             fizzylogic(map, pc);
@@ -193,10 +167,12 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             //ft_putnbr(map->psX - pc->bottomrightX);
             ft_putnbr(pc->placeX);
             ft_putchar('\n');
+            /*
             ft_putstr_fd(" | placeX, placeY: ", 2);
             ft_putnbr_fd(pc->placeX, 2);
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(pc->placeY, 2);
+            */
             pc->status = 0;
             pc->pcmap = NULL;
             i = -1;

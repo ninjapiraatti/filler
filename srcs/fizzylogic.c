@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 17:47:27 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/12 21:11:39 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,11 +233,13 @@ int     checkdiagonals(t_map *map, t_piece *pc)
                     //ft_putstr_fd(map->map[y + 1], 2);
                     if (drawcircle(map, pc, 0, 2) == 1)
                     {
+                        /*
                         ft_putstr_fd("PLACED DIAGONAL AT: ", 2);
                         ft_putnbr_fd(x, 2);
                         ft_putstr_fd(", ", 2);
                         ft_putnbr_fd(y, 2);
                         ft_putstr_fd("\n\n\n\n\n\n\n\n\n\n", 2);
+                        */
                         map->founddiagonal = 1;
                         return (1);
                     }
@@ -254,11 +256,13 @@ int     checkdiagonals(t_map *map, t_piece *pc)
                     //ft_putstr_fd(map->map[y + 1], 2);
                     if (drawcircle(map, pc, 0, 3) == 1)
                     {
+                        /*
                         ft_putstr_fd("PLACED DIAGONAL AT: ", 2);
                         ft_putnbr_fd(x, 2);
                         ft_putstr_fd(", ", 2);
                         ft_putnbr_fd(y, 2);
                         ft_putstr_fd("\n", 2);
+                        */
                         map->founddiagonal = 1;
                         return (1);
                     }
@@ -274,10 +278,16 @@ int     checkdiagonals(t_map *map, t_piece *pc)
 
 int     updatestrategy(t_map *map, t_piece *pc)
 {
-    ft_putnbr_fd(map->round, 2);
+    int     turns;
+
+    turns = 100;
+    if (map->mapW > 30)
+        turns = 30;
+    if (map->mapW > 90)
+        turns = 200;
     if (map->round < (map->mapH + map->mapW) / 1000) // 20 for mid. Smaller = Initial state stays longer
         map->strategy = 1;
-    else if (map->round > ((map->mapH * map->mapW) / 200)) // (40 for small), 40 for mid, (140 for large). Smaller = late comes earlier
+    else if (map->round > ((map->mapH * map->mapW) / turns)) // (40 for small), 40 for mid, (140 for large). Bigger = late comes earlier
         latestrategy(map, pc);
     else
         branchstrategy(map, pc);

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 21:37:48 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/12 20:23:00 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,11 @@ int     raytrace(t_map *map, t_piece *pc)
                     map->rttargetX = 0;
                     map->rttargetY = y;
                     count = x;
+                    /*
                     ft_putstr_fd("Raytrace from left: ", 2);
                     ft_putnbr_fd(count, 2);
                     ft_putstr_fd("\n", 2);
+                    */
                     break ;
                 }
             }
@@ -141,9 +143,11 @@ int     raytrace(t_map *map, t_piece *pc)
                     map->rttargetX = map->mapW - 1;
                     map->rttargetY = y;
                     count = map->mapW - x;
+                    /*
                     ft_putstr_fd("Raytrace from right: ", 2);
                     ft_putnbr_fd(count, 2);
                     ft_putstr_fd("\n", 2);
+                    */
                     break ;
                 }
             }
@@ -154,10 +158,12 @@ int     raytrace(t_map *map, t_piece *pc)
         y++;
     }
     map->raytrace = 1;
+    /*
     ft_putstr_fd("\n\n\n", 2);
     ft_putstr_fd("Raytrace coords: ", 2);
     ft_putnbr_fd(map->rttargetX, 2);
     ft_putstr_fd(", ", 2);
     ft_putnbr_fd(map->rttargetY, 2);
+    */
     return (0);
 }
