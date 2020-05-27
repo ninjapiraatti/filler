@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/12 20:35:32 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/27 18:42:29 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,41 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
 
 int recursion (t_map *map, t_piece *pc, int tries)
 {
+    int     x;
+    int     y;
+    int     i;
+
+    x = 0;
+    y = 0;
+    i = 0;
     tries++;
-    if (tries > 4000)
+    if (tries > 2000)
     {
-        ft_putstr_fd("TRIES OVERLOAD!!!!\n\n", 2);
+        while (y < map->mapH)
+        {
+            x = 0;
+            while (x < map->mapW)
+            {
+                if (isplacevalid(map, pc, x, y) == 1)
+                    return (1);
+                x++;
+                i = 0;
+                /*
+                ft_putstr_fd("Failed to place a piece at:", 2);
+                ft_putnbr_fd(x, 2);
+                ft_putstr_fd(", ", 2);
+                ft_putnbr_fd(y, 2);
+                ft_putstr_fd("\n", 2);
+                while (i < pc->pieceH)
+                {
+                    ft_putstr_fd(pc->pcmap[i], 2);
+                    ft_putstr_fd("\n", 2);
+                    i++;
+                }
+                */
+            }
+            y++;
+        } 
         return (0);
     }
     /*

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/27 12:15:52 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/27 19:33:44 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int     branchstrategy(t_map *map, t_piece *pc)
             map->rbranchX = map->psX;
             map->rbranchY = map->mapH - 1;
             */
-            map->dirh = 3;
-            map->dirv = 6;
-            map->strategy = 20;
+            map->dirh = 2; // 4?
+            map->dirv = 7; // 10?
+            map->strategy = 20; 
         }
         else
         {
@@ -175,7 +175,7 @@ int     latestrategy(t_map *map, t_piece *pc)
             raytrace(map, pc);
         map->targetX = map->lastpcopX;
         map->targetY = map->lastpcopY;
-        if (map->raytrace == 1)
+        if (map->raytrace == 1 && map->mapW > 50)
         {
             map->targetX = map->rttargetX;
             map->targetY = map->rttargetY;
@@ -282,11 +282,11 @@ int     updatestrategy(t_map *map, t_piece *pc)
 {
     int     turns;
 
-    turns = 15; // Best guess so far 10
+    turns = 15; // Best guess so far 15: 43/50 and 33/50 against Carli
     if (map->mapW > 30)
-        turns = 40; // Best guess so far 40
+        turns = 40; // Best guess so far 40: 43/50 and 26/50 against Carli
     if (map->mapW > 90)
-        turns = 200; // Best guess so far 200
+        turns = 150; // Best guess so far 200
     if (map->round < ((map->mapH * map->mapW) / (10 * turns))) // Smaller = Initial state stays longer
         map->strategy = 1;
     else if (map->round > ((map->mapH * map->mapW) / turns)) // Bigger = late comes earlier
