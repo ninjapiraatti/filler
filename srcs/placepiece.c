@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/27 18:42:29 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/28 13:13:18 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     int pX;
     int mY;
     int mX;
+    int i;
 
     pY = 0;
     pX = 0;
     mY = y;
     mX = x;
+    i = 0;
     
     while (pY < pc->pieceH)
     {
@@ -36,12 +38,12 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
             }
             if (pc->pcmap[pY][pX] == '*')
             {
-                if (map->map[mY + pY][mX + pX] == '.')
+                if (map->map[mY + (pY - pc->offset_top)][mX + pX] == '.')
                 {
                     pX++;
                     pc->isvaliddot = 1;
                 }
-                else if (map->map[mY + pY][mX + pX] == map->psymbol)
+                else if (map->map[mY + (pY - pc->offset_top)][mX + pX] == map->psymbol)
                 {
                     pX++;
                     pc->isvalidx++;
@@ -65,7 +67,21 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
         pc->isvalidx = 0;
         return (0);
     }
-    pc->placeY = mY;
+    /*
+    ft_putstr_fd("Offset: ", 2);
+    ft_putnbr_fd(pc->offset_top, 2);
+    ft_putstr_fd("\nPlace X, Y: ", 2);
+    ft_putnbr_fd(pc->placeX, 2);
+    ft_putstr_fd(", ", 2);
+    ft_putnbr_fd(pc->placeY, 2);
+    ft_putstr_fd("\n", 2);
+    while (i < pc->pieceH)
+    {
+        ft_putstr_fd(pc->pcmap[i], 2);
+        ft_putstr_fd("\n", 2);
+        i++;
+    }*/
+    pc->placeY = (mY - pc->offset_top);
     pc->placeX = mX;
     map->lastpcY = mY;
     map->lastpcX = mX;
@@ -149,23 +165,20 @@ int recursion (t_map *map, t_piece *pc, int tries)
                 if (isplacevalid(map, pc, x, y) == 1)
                     return (1);
                 x++;
-                i = 0;
-                /*
-                ft_putstr_fd("Failed to place a piece at:", 2);
-                ft_putnbr_fd(x, 2);
-                ft_putstr_fd(", ", 2);
-                ft_putnbr_fd(y, 2);
-                ft_putstr_fd("\n", 2);
-                while (i < pc->pieceH)
-                {
-                    ft_putstr_fd(pc->pcmap[i], 2);
-                    ft_putstr_fd("\n", 2);
-                    i++;
-                }
-                */
             }
             y++;
-        } 
+        }
+        ft_putstr_fd("Failed to place a piece at:", 2);
+        ft_putnbr_fd(x, 2);
+        ft_putstr_fd(", ", 2);
+        ft_putnbr_fd(y, 2);
+        ft_putstr_fd("\n", 2);
+        while (i < pc->pieceH)
+        {
+            ft_putstr_fd(pc->pcmap[i], 2);
+            ft_putstr_fd("\n", 2);
+            i++;
+        }
         return (0);
     }
     /*

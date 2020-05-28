@@ -6,11 +6,39 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:16:21 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 13:20:47 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/28 13:06:08 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+
+int     offset(t_piece *pc)
+{
+    int     top;
+    int     x;
+    int     y;
+
+    top = 0;
+    x = 0;
+    y = 0;
+
+    while (y < (pc->pieceH - 1))
+    {
+        x = 0;
+        while (x < (pc->pieceW))
+        {
+            if (pc->pcmap[y][x] == '*')
+                return (top);
+            else
+                x++;
+        }
+        y++;
+        top++;
+        //ft_putstr_fd(pc->pcmap[y], 2);
+        //ft_putstr_fd("\n", 2);
+    }
+    return (top);
+}
 
 int     checkdiagonalpiece(t_map *map, t_piece *pc)
 {
@@ -88,6 +116,7 @@ int     definepiece(t_map *map, t_piece *pc)
         pc->horizontal = 1;
     else
         pc->vertical = 1;
+    pc->offset_top = offset(pc);
     checkdiagonalpiece(map, pc);
     return (0);
 }

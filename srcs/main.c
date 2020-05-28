@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 09:49:09 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/12 20:26:36 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/28 11:54:37 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int         printdebug(t_map *map, t_piece *pc, int pieceonly)
         }
         */
     }
-    /*
     ft_putstr_fd("\n", 2);
     ft_putstr_fd("PIECE: \n", 2);
     while (y2 < pc->pieceH)
@@ -69,7 +68,6 @@ int         printdebug(t_map *map, t_piece *pc, int pieceonly)
         ft_putstr_fd("\n", 2);
         y2++;
     }
-    */
     return (0);
 }
 

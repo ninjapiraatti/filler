@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/27 19:33:44 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/27 19:36:30 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int     latestrategy(t_map *map, t_piece *pc)
             raytrace(map, pc);
         map->targetX = map->lastpcopX;
         map->targetY = map->lastpcopY;
-        if (map->raytrace == 1 && map->mapW > 50)
+        if (map->raytrace == 1 && map->mapW > 30)
         {
             map->targetX = map->rttargetX;
             map->targetY = map->rttargetY;
