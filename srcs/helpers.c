@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/12 20:23:00 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/28 16:42:09 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,12 @@ int     raytrace(t_map *map, t_piece *pc)
 {
     int     x;
     int     y;
+    int     i;
     int     count;
 
     x = 0;
     y = 0;
+    i = 0;
     count = 0;
     while (y < map->mapH - 1)
     {
@@ -111,20 +113,23 @@ int     raytrace(t_map *map, t_piece *pc)
             {
                 if (x > count)
                 {
+                    ft_putstr_fd("Count at 1: ", 2);
+                    ft_putnbr_fd(count, 2);
+                    ft_putstr_fd("\n", 2);
                     map->rttargetX = 0;
                     map->rttargetY = y;
                     count = x;
-                    /*
-                    ft_putstr_fd("Raytrace from left: ", 2);
-                    ft_putnbr_fd(count, 2);
-                    ft_putstr_fd("\n", 2);
-                    */
                     break ;
                 }
+                else
+                    break ;
             }
             else
-                break ;
-            x++;
+            {
+                x = 0;
+                break;
+            }
+            //x++;
         }
         y++;
     }
@@ -140,30 +145,73 @@ int     raytrace(t_map *map, t_piece *pc)
             {
                 if ((map->mapW - x) > count)
                 {
+                    ft_putstr_fd("Count at 2: ", 2);
+                    ft_putnbr_fd(count, 2);
+                    ft_putstr_fd("\n", 2);
                     map->rttargetX = map->mapW - 1;
                     map->rttargetY = y;
                     count = map->mapW - x;
-                    /*
-                    ft_putstr_fd("Raytrace from right: ", 2);
-                    ft_putnbr_fd(count, 2);
-                    ft_putstr_fd("\n", 2);
-                    */
                     break ;
                 }
+                else
+                    break ;
             }
             else
+            {
+                x = map->mapW - 1;
                 break;
-            x--;
+            }
+            //x--;
         }
         y++;
     }
+    x = 0;
+    if (map->round > 140)
+    {
+        while (x < map->mapW - 1)
+        {
+            y = map->mapH - 1;
+            while (y > 0)
+            {
+                while(map->map[y][x] == '.' && y > 0)
+                    y--;
+                if (map->map[y][x] == map->psymbol)
+                {
+                    if ((map->mapH - y) > count)
+                    {
+                        ft_putstr_fd("Count at 3: ", 2);
+                        ft_putnbr_fd(count, 2);
+                        ft_putstr_fd("\n", 2);
+                        map->rttargetX = x;
+                        map->rttargetY = map->mapH - 1;
+                        count = map->mapH - y;
+                        break ;
+                    }
+                    else
+                        break ;
+                }
+                else
+                {
+                    y = map->mapH - 1;
+                    break;
+                }
+                //y--;
+            }
+            x++;
+        }
+    }
     map->raytrace = 1;
-    /*
-    ft_putstr_fd("\n\n\n", 2);
+    ft_putstr_fd("\n\n", 2);
     ft_putstr_fd("Raytrace coords: ", 2);
     ft_putnbr_fd(map->rttargetX, 2);
     ft_putstr_fd(", ", 2);
     ft_putnbr_fd(map->rttargetY, 2);
-    */
+    ft_putstr_fd("\n\n", 2);
+    while (i < map->mapH)
+    {
+        ft_putstr_fd(map->map[i], 2);
+        ft_putstr_fd("\n", 2);
+        i++;
+    }
     return (0);
 }

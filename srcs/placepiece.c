@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/28 13:13:18 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/28 14:46:28 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,11 +168,13 @@ int recursion (t_map *map, t_piece *pc, int tries)
             }
             y++;
         }
-        ft_putstr_fd("Failed to place a piece at:", 2);
-        ft_putnbr_fd(x, 2);
-        ft_putstr_fd(", ", 2);
-        ft_putnbr_fd(y, 2);
-        ft_putstr_fd("\n", 2);
+        return (0);
+    }
+    if (drawcircle(map, pc, tries, map->radius) == 1)
+        return (1);
+    if (recursion(map, pc, tries) == 0)
+    {
+        ft_putstr_fd("Failed to place a piece:\n", 2);
         while (i < pc->pieceH)
         {
             ft_putstr_fd(pc->pcmap[i], 2);
@@ -181,16 +183,6 @@ int recursion (t_map *map, t_piece *pc, int tries)
         }
         return (0);
     }
-    /*
-    if (isplacevalid(map, pc, map->tempX, map->tempY) == 0)
-    {
-        //tries = seekplace(map, pc, tries, map->radius);
-    }
-    */
-    if (drawcircle(map, pc, tries, map->radius) == 1)
-        return (1);
-    if (recursion(map, pc, tries) == 0)
-        return (0);
     return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/27 19:36:30 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/05/28 16:03:39 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,12 @@ int     branchstrategy(t_map *map, t_piece *pc)
     {
         if (map->psY <= map->osY)
         {
-            /*
-            map->lbranchX = map->mapW - 1;
-            map->lbranchY = map->psY;
-            map->rbranchX = map->psX;
-            map->rbranchY = map->mapH - 1;
-            */
             map->dirh = 2; // 4?
             map->dirv = 7; // 10?
             map->strategy = 20; 
         }
         else
         {
-            /*
-            map->lbranchX = map->psX;
-            map->lbranchY = 0;
-            map->rbranchX = map->mapW - 1;
-            map->rbranchY = map->psY;
-            */
             map->dirh = 3;
             map->dirv = 12;
             map->strategy = 10;
@@ -77,24 +65,12 @@ int     branchstrategy(t_map *map, t_piece *pc)
     {
         if (map->psY >= map->osY)
         {
-            /*
-            map->lbranchX = 0;
-            map->lbranchY = map->psY;
-            map->rbranchX = map->psX;
-            map->rbranchY = 0;
-            */
             map->dirh = 8;
             map->dirv = 1;
             map->strategy = 40;
         }
         else
         {
-            /*
-            map->rbranchX = 0;
-            map->rbranchY = map->psY;
-            map->lbranchX = map->psX;
-            map->lbranchY = map->mapH - 1;
-            */
             map->dirh = 9;
             map->dirv = 6;
             map->strategy = 30;
@@ -123,44 +99,21 @@ int     branchstrategy(t_map *map, t_piece *pc)
         direction(map, pc, map->dirh);
     else
         direction(map, pc, map->dirv);
-    ping(map, pc, map->targetX, map->targetY, map->psymbol, 5);
-    if (map->ping->count > 8 && map->strategy % 10 == 0)
+    ping(map, pc, map->targetX, map->targetY, map->psymbol, 2);
+    if (map->ping->count > 1 && map->strategy % 10 == 0)
     {
         if (pc->horizontal == 1)
             map->dirh = map->dirv;
         else
             map->dirv = map->dirh;
-        //map->strategy++;
     }
-    /*
-    if (map->map[map->lbranchY][map->lbranchX] == map->psymbol)
-    {
-        map->lbranchX = map->rbranchX;
-        map->lbranchY = map->rbranchY;
-        map->lwallreached = 1;
-    }
-    else if(map->map[map->lbranchY][map->lbranchX] == map->osymbol)
-    {
-        map->lwallreached = 2;
-    }
-    if (map->map[map->rbranchY][map->rbranchX] == map->psymbol)
-    {
-        map->rbranchX = map->lbranchX;
-        map->rbranchY = map->lbranchY;
-        map->rwallreached = 1;
-    }
-    else if(map->map[map->rbranchY][map->rbranchX] == map->osymbol)
-    {
-        map->rwallreached = 2;
-    } 
-    */
     return (0);
 }
 
 int     latestrategy(t_map *map, t_piece *pc)
 {
     ping(map, pc, map->targetX, map->targetY, map->psymbol, 6);
-    if (map->round % 200 == 0)
+    if (map->round % 150 == 0)
         map->raytrace = 0;
     if (map->round < 120 && map->mapW > 80) // This magic number seems to work only on bigger maps
     {
@@ -180,30 +133,9 @@ int     latestrategy(t_map *map, t_piece *pc)
             map->targetX = map->rttargetX;
             map->targetY = map->rttargetY;
         }
-        //map->targetX = 0;
-        //map->targetY = 0;
-        //map->targetX = map->osX;
-        //map->targetY = map->osY;
-    }
-    /*
-    ping(map, pc, map->tempX, map->tempY, map->psymbol, 8);
-    if (map->ping->count > 15)
-    {
-        if (map->raytrace == 1)
-        {
-            map->targetX = map->rttargetX;
-            map->targetY = map->rttargetY;
-        }
-        else 
-        {
-            map->targetX = map->lastpcopX;
-            map->targetY = map->lastpcopY;
-        }
-        ft_putstr_fd("Disregarded as too full position.\n", 2);
-    }
-    */  
-    ping(map, pc, map->rttargetX, map->rttargetY, map->psymbol, 4);
-    if (map->ping->count > 5)
+    } 
+    ping(map, pc, map->rttargetX, map->rttargetY, map->psymbol, 2);
+    if (map->ping->count > 1)
         map->raytrace = 2;
     map->strategy = 2;
     return (0);
