@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/08 14:59:03 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/08 21:43:49 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,9 @@ int     raytrace(t_map *map, t_piece *pc)
                         ft_putstr_fd("Count at 3: ", 2);
                         ft_putnbr_fd(count, 2);
                         ft_putstr_fd("\n", 2);
+                        ft_putstr_fd("Targetx and y: \n", 2);
+                        ft_putnbr_fd(x, 2);
+                        ft_putnbr_fd(map->mapH - 1, 2);
                         */
                         map->rttargetX = x;
                         map->rttargetY = map->mapH - 1;
@@ -207,6 +210,44 @@ int     raytrace(t_map *map, t_piece *pc)
             }
             x++;
         }
+        x = 0;
+        while (x < map->mapW - 1)
+        {
+            y = 0;
+            while (y < map->mapH)
+            {
+                while(map->map[y][x] == '.' && y < map->mapH - 1)
+                {
+                    y++;
+                }
+                if (map->map[y][x] == map->psymbol)
+                {
+                    //if ((map->mapH - y) > count && map->rttargetY != map->mapH - 1)
+                    if (y > count)
+                    {
+                        /*
+                        ft_putstr_fd("Count at 4: ", 2);
+                        ft_putnbr_fd(count, 2);
+                        ft_putstr_fd("\n", 2);
+                        */
+                        map->rttargetX = x;
+                        map->rttargetY = 0;
+                        count = y;
+                        break ;
+                    }
+                    else
+                        break ;
+                }
+                else
+                {
+                    y = 0;
+                    x++;
+                    break;
+                }
+                //y++;
+            }
+            x++;
+        }
     }
     map->raytrace = 1;
     ft_putstr_fd("\n\n", 2);
@@ -215,13 +256,13 @@ int     raytrace(t_map *map, t_piece *pc)
     ft_putstr_fd(", ", 2);
     ft_putnbr_fd(map->rttargetY, 2);
     ft_putstr_fd("\n\n", 2);
+    /*
     while (i < map->mapH)
     {
-        /*
         ft_putstr_fd(map->map[i], 2);
         ft_putstr_fd("\n", 2);
-        */
         i++;
     }
+    */
     return (0);
 }
