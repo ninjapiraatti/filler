@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/28 16:42:09 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/08 14:59:03 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,13 @@ int     raytrace(t_map *map, t_piece *pc)
                 x++;
             if (map->map[y][x] == map->psymbol)
             {
-                if (x > count)
+                if (x > count && map->rttargetX != 0)
                 {
+                    /*
                     ft_putstr_fd("Count at 1: ", 2);
                     ft_putnbr_fd(count, 2);
                     ft_putstr_fd("\n", 2);
+                    */
                     map->rttargetX = 0;
                     map->rttargetY = y;
                     count = x;
@@ -144,10 +146,13 @@ int     raytrace(t_map *map, t_piece *pc)
             if (map->map[y][x] == map->psymbol)
             {
                 if ((map->mapW - x) > count)
+                //if ((map->mapW - x) > count && map->rttargetX != map->mapW - 1)
                 {
+                    /*
                     ft_putstr_fd("Count at 2: ", 2);
                     ft_putnbr_fd(count, 2);
                     ft_putstr_fd("\n", 2);
+                    */
                     map->rttargetX = map->mapW - 1;
                     map->rttargetY = y;
                     count = map->mapW - x;
@@ -177,11 +182,14 @@ int     raytrace(t_map *map, t_piece *pc)
                     y--;
                 if (map->map[y][x] == map->psymbol)
                 {
+                    //if ((map->mapH - y) > count && map->rttargetY != map->mapH - 1)
                     if ((map->mapH - y) > count)
                     {
+                        /*
                         ft_putstr_fd("Count at 3: ", 2);
                         ft_putnbr_fd(count, 2);
                         ft_putstr_fd("\n", 2);
+                        */
                         map->rttargetX = x;
                         map->rttargetY = map->mapH - 1;
                         count = map->mapH - y;
@@ -209,8 +217,10 @@ int     raytrace(t_map *map, t_piece *pc)
     ft_putstr_fd("\n\n", 2);
     while (i < map->mapH)
     {
+        /*
         ft_putstr_fd(map->map[i], 2);
         ft_putstr_fd("\n", 2);
+        */
         i++;
     }
     return (0);

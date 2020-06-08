@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/28 15:46:06 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/08 13:50:30 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,10 +155,13 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(map->osY, 2);
             */
+
+            /*
             ft_putnbr_fd(map->round, 2);
             ft_putstr_fd(" - ", 2);
             ft_putnbr_fd(map->strategy, 2);
             ft_putstr_fd(" | ", 2);
+            */
             //ft_putnbr_fd(pc->offset_top, 2);
             //printdebug(map, pc, 0);
             definepiece(map, pc);

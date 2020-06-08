@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/28 16:03:39 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/08 14:36:27 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int     branchstrategy(t_map *map, t_piece *pc)
 int     latestrategy(t_map *map, t_piece *pc)
 {
     ping(map, pc, map->targetX, map->targetY, map->psymbol, 6);
-    if (map->round % 150 == 0)
+    if (map->round % 170 == 0)
         map->raytrace = 0;
     if (map->round < 120 && map->mapW > 80) // This magic number seems to work only on bigger maps
     {
@@ -218,7 +218,7 @@ int     updatestrategy(t_map *map, t_piece *pc)
     if (map->mapW > 30)
         turns = 40; // Best guess so far 40: 43/50 and 26/50 against Carli
     if (map->mapW > 90)
-        turns = 150; // Best guess so far 200
+        turns = 200; // Best guess so far 200
     if (map->round < ((map->mapH * map->mapW) / (10 * turns))) // Smaller = Initial state stays longer
         map->strategy = 1;
     else if (map->round > ((map->mapH * map->mapW) / turns)) // Bigger = late comes earlier

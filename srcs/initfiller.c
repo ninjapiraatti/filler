@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/11 16:29:18 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/08 14:21:58 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int     initmap(t_map *map)
     map->dirh = 0;
     map->dirv = 0;
     map->raytrace = 0;
-    map->rttargetX = 0;
-    map->rttargetY = 0;
+    map->rttargetX = -1;
+    map->rttargetY = -1;
     if (!(map->ping = (t_ping *)malloc(sizeof(t_ping))))
 		return (0);
     return (0);
