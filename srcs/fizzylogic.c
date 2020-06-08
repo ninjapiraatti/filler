@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/08 14:36:27 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/08 18:01:35 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ int     branchstrategy(t_map *map, t_piece *pc)
 int     latestrategy(t_map *map, t_piece *pc)
 {
     ping(map, pc, map->targetX, map->targetY, map->psymbol, 6);
-    if (map->round % 170 == 0)
+    if (map->round % 85 == 0) // Quicker raytraces mean more aggressive strategy but there may be loose ends
         map->raytrace = 0;
-    if (map->round < 120 && map->mapW > 80) // This magic number seems to work only on bigger maps
+    if (map->round < 90 && map->mapW > 80) // This magic number seems to work only on bigger maps
     {
         if (map->raytrace == 0)
             raytrace(map, pc);

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/28 14:46:28 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/08 18:10:10 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,12 +175,14 @@ int recursion (t_map *map, t_piece *pc, int tries)
     if (recursion(map, pc, tries) == 0)
     {
         ft_putstr_fd("Failed to place a piece:\n", 2);
+        /*
         while (i < pc->pieceH)
         {
             ft_putstr_fd(pc->pcmap[i], 2);
             ft_putstr_fd("\n", 2);
             i++;
         }
+        */
         return (0);
     }
     return (1);
