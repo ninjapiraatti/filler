@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/09 14:20:51 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/09 15:37:27 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             //printdebug(map, pc, 0);
             definepiece(map, pc);
             fizzylogic(map, pc);
-            //ft_putnbr_fd(map->raytrace, 2);
+            ft_putnbr_fd(map->raytrace, 2);
             if (map->founddiagonal != 1)
                 placepiece(map, pc, map->strategy);
             //ft_putnbr(map->psY - pc->bottomrightY);
