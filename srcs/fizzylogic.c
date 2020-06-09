@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/08 21:11:06 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/09 12:00:29 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ int     branchstrategy(t_map *map, t_piece *pc)
 int     latestrategy(t_map *map, t_piece *pc)
 {
     ping(map, pc, map->targetX, map->targetY, map->psymbol, 6);
-    if (map->round % 80 == 0) // Quicker raytraces mean more aggressive strategy but there may be loose ends
+    if (map->round % 90 == 0) // Quicker raytraces mean more aggressive strategy but there may be loose ends. 80 for big maps?
         map->raytrace = 0;
-    if (map->round < 100 && map->mapW > 80) // This magic number seems to work only on bigger maps
+    if (map->round < 150 && map->mapW > 80) // This magic number seems to work only on bigger maps
     {
         if (map->raytrace == 0)
             raytrace(map, pc);
@@ -216,10 +216,10 @@ int     updatestrategy(t_map *map, t_piece *pc)
 
     turns = 15; // Best guess so far 15: 43/50 and 33/50 against Carli
     if (map->mapW > 30)
-        turns = 40; // Best guess so far 40: 43/50 and 26/50 against Carli
+        turns = 24; // Best guess so far 40: 43/50 and 26/50 against Carli
     if (map->mapW > 90)
-        turns = 200; // Best guess so far 200
-    if (map->round < ((map->mapH * map->mapW) / (10 * turns))) // Smaller = Initial state stays longer
+        turns = 140; // Best guess so far 200
+    if (map->round < ((map->mapH * map->mapW) / (20 * turns))) // Smaller = Initial state stays longer
         map->strategy = 1;
     else if (map->round > ((map->mapH * map->mapW) / turns)) // Bigger = late comes earlier
         latestrategy(map, pc);

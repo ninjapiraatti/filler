@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/28 14:09:37 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/09 12:31:29 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct  s_piece
     int         vertical;
     int         diagonal;
     int         offset_top;
+    int         offset_left;
 }               t_piece;
 
 

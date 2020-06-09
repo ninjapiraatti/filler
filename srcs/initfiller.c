@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/08 14:21:58 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/09 15:21:41 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ int     initpiece(t_piece *pc)
     pc->topleftset = 0;
     pc->isvaliddot = 0;
     pc->isvalidx = 0;
+    pc->offset_left = -1;
+    pc->offset_top = -1;
     return (0);
 }

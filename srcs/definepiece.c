@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:16:21 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/05/28 14:16:52 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/09 15:21:24 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,25 @@
 int     offset(t_piece *pc)
 {
     int     top;
+    int     left;
     int     x;
     int     y;
 
     top = 0;
+    left = 0;
     x = 0;
     y = 0;
 
-    while (y < (pc->pieceH - 1))
+    while (y < (pc->pieceH))
     {
         x = 0;
         while (x < (pc->pieceW))
         {
-            if (pc->pcmap[y][x] == '*')
-                return (top);
+            if (pc->pcmap[y][x] == '*' && pc->offset_top == -1)
+            {
+                pc->offset_top = top;
+                x++;
+            }
             else
                 x++;
         }
@@ -37,7 +42,26 @@ int     offset(t_piece *pc)
         //ft_putstr_fd(pc->pcmap[y], 2);
         //ft_putstr_fd("\n", 2);
     }
-    return (top);
+    x = 0;
+    while (x < (pc->pieceW))
+    {
+        y = 0;
+        while (y < (pc->pieceH))
+        {
+            if (pc->pcmap[y][x] == '*' && pc->offset_left == -1)
+            {
+                pc->offset_left = left;
+                y++;
+            }
+            else
+                y++;
+        }
+        x++;
+        left++;
+        //ft_putstr_fd(pc->pcmap[y], 2);
+        //ft_putstr_fd("\n", 2);
+    }
+    return (1);
 }
 
 int     checkdiagonalpiece(t_map *map, t_piece *pc)
@@ -116,7 +140,7 @@ int     definepiece(t_map *map, t_piece *pc)
         pc->horizontal = 1;
     else
         pc->vertical = 1;
-    pc->offset_top = offset(pc);
+    offset(pc);
     checkdiagonalpiece(map, pc);
     return (0);
 }

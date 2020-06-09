@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/08 21:21:26 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/09 15:04:41 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     {
         while (pX < pc->pieceW)
         {
-            if (mY + pY >= map->mapH || mX + pX >= map->mapW || mY + pY < 0 || mX + pX < 0)
+            if (mY + pY >= map->mapH || mX + pX >= map->mapW || mY + (pY + pc->offset_top) < 0 || mX + (pX + pc->offset_left) < 0)
             {
                 pc->isvaliddot = 0;
                 pc->isvalidx = 0;
@@ -38,12 +38,12 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
             }
             if (pc->pcmap[pY][pX] == '*')
             {
-                if (map->map[mY + (pY - pc->offset_top)][mX + pX] == '.')
+                if (map->map[mY + pY][mX + (pX - pc->offset_left)] == '.')
                 {
                     pX++;
                     pc->isvaliddot = 1;
                 }
-                else if (map->map[mY + (pY - pc->offset_top)][mX + pX] == map->psymbol)
+                else if (map->map[mY + pY][mX + (pX - pc->offset_left)] == map->psymbol)
                 {
                     pX++;
                     pc->isvalidx++;
@@ -81,8 +81,8 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
         ft_putstr_fd("\n", 2);
         i++;
     }*/
-    pc->placeY = (mY - pc->offset_top);
-    pc->placeX = mX;
+    pc->placeY = mY;
+    pc->placeX = mX - pc->offset_left;
     map->lastpcY = mY;
     map->lastpcX = mX;
     return (1);
@@ -150,29 +150,29 @@ int crosscheck(t_map *map, t_piece *pc)
     int     x;
     int     y;
     
-    x = -1;
-    while (x < 1)
+    y = -100;
+    while (y < 100)
     {
-        y = -100;
-        while (y < 100)
+        x = -1;
+        while (x < 1)
         {
             if (isplacevalid(map, pc, map->targetX, map->targetY + y))
-                return (1);
-            y++;
-        }
-        x++;
-    }
-    y = -1;
-    while (y < 1)
-    {
-        x = -100;
-        while (x < 100)
-        {
-            if (isplacevalid(map, pc, map->targetX + x, map->targetY))
                 return (1);
             x++;
         }
         y++;
+    }
+    x = -100;
+    while (y < 1)
+    {
+        y = -1;
+        while (y < 1)
+        {
+            if (isplacevalid(map, pc, map->targetX + x, map->targetY))
+                return (1);
+            y++;
+        }
+        x++;
     }
     return (0);
 }
@@ -183,15 +183,15 @@ int recursion (t_map *map, t_piece *pc, int tries)
     int     y;
     int     i;
 
-    x = 0;
-    y = 0;
+    y = -50;
+    x = -50;
     i = 0;
     tries++;
     if (tries > 2000)
     {
         while (y < map->mapH)
         {
-            x = 0;
+            x = -50;
             while (x < map->mapW)
             {
                 if (isplacevalid(map, pc, x, y) == 1)
@@ -202,21 +202,12 @@ int recursion (t_map *map, t_piece *pc, int tries)
         }
         return (0);
     }
-    if (map->round < 300 && map->raytrace == 1 && crosscheck(map, pc) == 1)
+    if (map->mapW > 50 && map->round < 300 && map->raytrace == 1 && crosscheck(map, pc) == 1)
        return (1);
     if (drawcircle(map, pc, tries, map->radius) == 1)
         return (1);
     if (recursion(map, pc, tries) == 0)
     {
-        ft_putstr_fd("Failed to place a piece:\n", 2);
-        /*
-        while (i < pc->pieceH)
-        {
-            ft_putstr_fd(pc->pcmap[i], 2);
-            ft_putstr_fd("\n", 2);
-            i++;
-        }
-        */
         return (0);
     }
     return (1);
@@ -224,8 +215,17 @@ int recursion (t_map *map, t_piece *pc, int tries)
 
 int     placepiece(t_map *map, t_piece *pc, int strategy)
 {
+    int     i;
+    i = 0;
     map->radius = 0;
     if (recursion(map, pc, 2) == 1)
         return (1);
+    ft_putstr_fd("Failed to place a piece:\n", 2);
+    while (i < pc->pieceH)
+    {
+        ft_putstr_fd(pc->pcmap[i], 2);
+        ft_putstr_fd("\n", 2);
+        i++;
+    }
     return (0);
 }
