@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/09 15:04:41 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/09 18:38:50 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,37 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
 {
     int pY;
     int pX;
-    int mY;
-    int mX;
+    int pH;
+    int pW;
     int i;
 
-    pY = 0;
-    pX = 0;
-    mY = y;
-    mX = x;
+    pY = pc->offset_top;
+    pX = pc->offset_left;
+    pW = pc->bottomrightX - pc->topleftX + 1;
+    pH = pc->bottomrightY - pc->topleftY + 1; 
     i = 0;
     
     while (pY < pc->pieceH)
     {
         while (pX < pc->pieceW)
         {
-            if (mY + pY >= map->mapH || mX + pX >= map->mapW || mY + (pY + pc->offset_top) < 0 || mX + (pX + pc->offset_left) < 0)
+            if (y + pY >= map->mapH || x + pX > map->mapW || (y + pY) < 0 || (x + pX) < 0)
             {
                 pc->isvaliddot = 0;
                 pc->isvalidx = 0;
                 return (0);
             }
-            if (pc->pcmap[pY][pX] == '*')
+            if (pc->pcmap[pY][pX] == '*') // pY = 2 pX = 1
             {
-                if (map->map[mY + pY][mX + (pX - pc->offset_left)] == '.')
+                if (map->map[y + pY][x + pX] == '.') // y = -2 x = 1
                 {
-                    pX++;
                     pc->isvaliddot = 1;
-                }
-                else if (map->map[mY + pY][mX + (pX - pc->offset_left)] == map->psymbol)
-                {
                     pX++;
+                }
+                else if (map->map[y + pY][x + pX] == map->psymbol)
+                {
                     pc->isvalidx++;
+                    pX++;
                 }
                 else
                 {
@@ -58,7 +58,7 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
             else
                 pX++;
         }
-        pX = 0;
+        pX = pc->offset_left;
         pY++;
     }
     if (pc->isvaliddot == 0 || pc->isvalidx == 0 || pc->isvalidx > 1)
@@ -81,10 +81,10 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
         ft_putstr_fd("\n", 2);
         i++;
     }*/
-    pc->placeY = mY;
-    pc->placeX = mX - pc->offset_left;
-    map->lastpcY = mY;
-    map->lastpcX = mX;
+    pc->placeY = y;
+    pc->placeX = x;
+    map->lastpcY = y;
+    map->lastpcX = x;
     return (1);
 }
 
@@ -197,6 +197,7 @@ int recursion (t_map *map, t_piece *pc, int tries)
                 if (isplacevalid(map, pc, x, y) == 1)
                     return (1);
                 x++;
+                ft_putstr_fd("DESPARE ", 2);
             }
             y++;
         }
