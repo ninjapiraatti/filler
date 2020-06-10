@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/09 15:37:27 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/10 12:55:02 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,29 +144,31 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             initpiece(pc);
         }
         if (pc->status == 2)
-        {
-            /*
-            ft_putstr_fd(" | psX, psY: ", 2);
-            ft_putnbr_fd(map->psX, 2);
-            ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->psY, 2);
-            ft_putstr_fd(" | osX, osY: ", 2);
-            ft_putnbr_fd(map->osX, 2);
-            ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->osY, 2);
-            */
-
-            /*
+        {   
+            ft_putstr_fd(" Round: ", 2);
             ft_putnbr_fd(map->round, 2);
-            ft_putstr_fd(" - ", 2);
+            ft_putstr_fd(" | lastPX, lastPY: ", 2);
+            ft_putnbr_fd(map->lastpcX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->lastpcY, 2);
+            ft_putstr_fd(" | lastOX, lastOY: ", 2);
+            ft_putnbr_fd(map->lastpcopX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->lastpcopY, 2);
+
+            ft_putstr_fd(" | Strategy: ", 2);
             ft_putnbr_fd(map->strategy, 2);
-            ft_putstr_fd(" | ", 2);
-            */
+            ft_putstr_fd(" | Raytrace: ", 2);
+            ft_putnbr_fd(map->raytrace, 2);
+            ft_putstr_fd(" at: ", 2);
+            ft_putnbr_fd(map->rttargetX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(map->rttargetY, 2);
             //ft_putnbr_fd(pc->offset_top, 2);
             //printdebug(map, pc, 0);
+            ft_putstr_fd("\n", 2);
             definepiece(map, pc);
             fizzylogic(map, pc);
-            ft_putnbr_fd(map->raytrace, 2);
             if (map->founddiagonal != 1)
                 placepiece(map, pc, map->strategy);
             //ft_putnbr(map->psY - pc->bottomrightY);

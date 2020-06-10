@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/09 18:38:50 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/10 13:26:35 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     {
         while (pX < pc->pieceW)
         {
-            if (y + pY >= map->mapH || x + pX > map->mapW || (y + pY) < 0 || (x + pX) < 0)
+            if (y + pY >= map->mapH || x + pW > map->mapW || (y + pY) < 0 || (x + pX) < 0)
             {
                 pc->isvaliddot = 0;
                 pc->isvalidx = 0;
@@ -183,21 +183,27 @@ int recursion (t_map *map, t_piece *pc, int tries)
     int     y;
     int     i;
 
-    y = -50;
-    x = -50;
+    y = -80;
+    x = -80;
     i = 0;
     tries++;
     if (tries > 2000)
     {
         while (y < map->mapH)
         {
-            x = -50;
+            x = -80;
             while (x < map->mapW)
             {
                 if (isplacevalid(map, pc, x, y) == 1)
                     return (1);
                 x++;
-                ft_putstr_fd("DESPARE ", 2);
+                i++;
+                ft_putnbr_fd(i, 2);
+                ft_putstr_fd(": ", 2);
+                ft_putnbr_fd(x, 2);
+                ft_putstr_fd(", ", 2);
+                ft_putnbr_fd(y, 2);
+                ft_putstr_fd(" | ", 2);
             }
             y++;
         }
