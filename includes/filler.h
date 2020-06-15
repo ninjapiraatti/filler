@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/09 12:31:29 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/11 09:22:02 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # define BUFF_SIZE 21
 
 # include "../libft/includes/libft.h"
+
+typedef struct  s_area
+{
+    int         **empties;
+    int         rows;
+}               t_area;
 
 typedef struct  s_ping
 {
@@ -65,6 +71,7 @@ typedef struct  s_map
     int         rttargetX;
     int         rttargetY;
     t_ping      *ping;
+    t_area      *area;
 }               t_map;
 
 typedef struct  s_piece
@@ -102,5 +109,6 @@ t_ping      *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int rad
 int         drawcircle(t_map *map, t_piece *pc, int tries, int radius);
 int         checkdiagonals(t_map *map, t_piece *pc);
 int         raytrace(t_map *map, t_piece *pc);
+int         closedarea(t_map *map, t_piece *pc, int ox, int oy, int rounds);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/10 13:13:02 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/10 13:34:12 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int     branchstrategy(t_map *map, t_piece *pc)
     else
         direction(map, pc, map->dirv);
     ping(map, pc, map->targetX, map->targetY, map->psymbol, 2);
-    if (map->ping->count > 1 && map->strategy % 10 == 0)
+    if (map->ping->count > 2 && map->strategy % 10 == 0)
     {
         if (pc->horizontal == 1)
             map->dirh = map->dirv;
@@ -136,7 +136,7 @@ int     latestrategy(t_map *map, t_piece *pc)
         }
     } 
     ping(map, pc, map->rttargetX, map->rttargetY, map->psymbol, 2);
-    if (map->ping->count > 1)
+    if (map->ping->count > 2)
         map->raytrace = 2;
     map->strategy = 2;
     return (0);

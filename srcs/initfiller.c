@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/09 15:21:41 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/11 09:14:40 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int     initmap(t_map *map)
     map->rttargetX = -1;
     map->rttargetY = -1;
     if (!(map->ping = (t_ping *)malloc(sizeof(t_ping))))
+		return (0);
+    if (!(map->area = (t_area *)malloc(sizeof(t_area))))
 		return (0);
     return (0);
 }

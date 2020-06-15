@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/10 13:26:35 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/11 15:55:55 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,48 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     int pH;
     int pW;
     int i;
+    int j;
 
     pY = pc->offset_top;
     pX = pc->offset_left;
     pW = pc->bottomrightX - pc->topleftX + 1;
     pH = pc->bottomrightY - pc->topleftY + 1; 
     i = 0;
+    j = 0;
     
+    if (map->area->rows > 1 && map->round < 600) 
+    {
+        j = 0;
+        while (j < map->area->rows)
+        {
+            if (map->area->empties[j][0] == x + pX && map->area->empties[j][1] == y + pY)
+            {
+                /*
+                ft_putstr_fd("\nX and Y: ", 2);
+                ft_putnbr_fd(x, 2);
+                ft_putstr_fd(", ", 2);
+                ft_putnbr_fd(y, 2);
+                ft_putstr_fd(" Forbidden X and Y: ", 2);
+                ft_putnbr_fd(map->area->empties[j][0], 2);
+                ft_putstr_fd(", ", 2);
+                ft_putnbr_fd(map->area->empties[j][1], 2);
+                ft_putstr_fd("\nAvoided closed area", 2);
+                */
+                return (0);
+            }
+            j++;
+        }
+        /*
+        ft_putstr_fd("\nX and Y: ", 2);
+        ft_putnbr_fd(x, 2);
+        ft_putstr_fd(", ", 2);
+        ft_putnbr_fd(y, 2);
+        ft_putstr_fd(" Forbidden X and Y: ", 2);
+        ft_putnbr_fd(map->area->empties[j][0], 2);
+        ft_putstr_fd(", ", 2);
+        ft_putnbr_fd(map->area->empties[j][1], 2);
+        */
+    }
     while (pY < pc->pieceH)
     {
         while (pX < pc->pieceW)
@@ -189,6 +224,7 @@ int recursion (t_map *map, t_piece *pc, int tries)
     tries++;
     if (tries > 2000)
     {
+        map->state = 3;
         while (y < map->mapH)
         {
             x = -80;
@@ -225,6 +261,8 @@ int     placepiece(t_map *map, t_piece *pc, int strategy)
     int     i;
     i = 0;
     map->radius = 0;
+    if (map->round == 200)
+        closedarea(map, pc, 90, 50, 50);
     if (recursion(map, pc, 2) == 1)
         return (1);
     ft_putstr_fd("Failed to place a piece:\n", 2);
