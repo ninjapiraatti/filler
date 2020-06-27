@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/10 12:55:02 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/27 11:54:58 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 char    *writeplayer(t_map *map, char *line)
 {
-
 	if (ft_strstr(line, "p2"))
     {
 		map->psymbol = 'X';

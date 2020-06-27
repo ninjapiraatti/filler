@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/11 09:47:37 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/27 12:16:50 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,6 @@ int     raytrace(t_map *map, t_piece *pc)
             {
                 if (x > count && map->rttargetX != 0)
                 {
-                    /*
-                    ft_putstr_fd("Count at 1: ", 2);
-                    ft_putnbr_fd(count, 2);
-                    ft_putstr_fd("\n", 2);
-                    */
                     map->rttargetX = 0;
                     map->rttargetY = y;
                     count = x;
@@ -131,7 +126,6 @@ int     raytrace(t_map *map, t_piece *pc)
                 x = 0;
                 break;
             }
-            //x++;
         }
         y++;
     }
@@ -148,11 +142,6 @@ int     raytrace(t_map *map, t_piece *pc)
                 if ((map->mapW - x) > count)
                 //if ((map->mapW - x) > count && map->rttargetX != map->mapW - 1)
                 {
-                    /*
-                    ft_putstr_fd("Count at 2: ", 2);
-                    ft_putnbr_fd(count, 2);
-                    ft_putstr_fd("\n", 2);
-                    */
                     map->rttargetX = map->mapW - 1;
                     map->rttargetY = y;
                     count = map->mapW - x;

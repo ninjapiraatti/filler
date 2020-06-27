@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/11 15:55:55 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/27 12:25:02 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,21 +162,9 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
             }   
         }
     }
-    if (map->founddiagonal != 1)
-    {
-        map->radius++;
-    }
-    /*
-    if (map->radius > 100)
-    {
-        map->radius = 2;
-        map->tempX = map->psX;
-        map->tempY = map->psY;
-    }*/
-    if (tries % 200 == 0)
-    {
+    map->radius++;
+    if (tries % TRIES_INTERVAL == 0)
         map->tempX++;
-    }
     return (0);
 }
 
