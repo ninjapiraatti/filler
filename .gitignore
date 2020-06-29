@@ -1,12 +1,7 @@
 # Project specific
 
 .vscode
-resources
-resources.zip
-lcharvol
-gmolin
 filler_check
-spentti
 # Prerequisites
 *.d
 
