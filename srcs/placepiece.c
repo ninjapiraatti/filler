@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/27 12:25:02 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 13:47:22 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     pH = pc->bottomrightY - pc->topleftY + 1; 
     i = 0;
     j = 0;
-    
+    pc->bestvaluetemp = 0;
+	pc->bestvalueX = x;
+	pc->bestvalueY = y;
     if (map->area->rows > 1 && map->round < 600) 
     {
         j = 0;
@@ -71,11 +73,13 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
                 pc->isvalidx = 0;
                 return (0);
             }
-            if (pc->pcmap[pY][pX] == '*') // pY = 2 pX = 1
+            if (pc->pcmap[pY][pX] == '*')
             {
-                if (map->map[y + pY][x + pX] == '.') // y = -2 x = 1
+                if (map->map[y + pY][x + pX] == '.')
                 {
                     pc->isvaliddot = 1;
+					pc->bestvaluetemp += map->heatmap[y + pY][x + pX];
+					//ft_putnbr_fd(map->heatmap[y + pY][x + pX], 2);
                     pX++;
                 }
                 else if (map->map[y + pY][x + pX] == map->psymbol)
@@ -116,8 +120,14 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
         ft_putstr_fd("\n", 2);
         i++;
     }*/
-    pc->placeY = y;
-    pc->placeX = x;
+	if (pc->bestvaluetemp < pc->bestvalue && pc->bestvaluetemp > 0)
+	{
+		pc->bestvalue = pc->bestvaluetemp;
+		pc->bestvalueX = x;
+		pc->bestvalueY = y;
+	}
+    pc->placeY = pc->bestvalueY;
+    pc->placeX = pc->bestvalueX;
     map->lastpcY = y;
     map->lastpcX = x;
     return (1);

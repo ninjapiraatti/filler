@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 10:57:06 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 11:05:50 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,6 @@ int     fizzylogic(t_map *map, t_piece *pc)
 {
     updatestrategy(map, pc);
     entercoordinates(map, pc);
+	heatmap(map);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/28 17:30:46 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 13:47:41 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,10 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             if (ft_strstr(line, "$$$") != NULL)
                 writeplayer(map, line);
             if (ft_strstr(line, "Plateau") != NULL)
+			{
                 getmapsize(map, line);
+				initheatmap(map);
+			}
         }
         if (ft_strstr(line, "000") != NULL)
             i = 0;
@@ -155,6 +158,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         }
         if (pc->status == 2)
         {   
+			/*
             ft_putstr_fd(" Round: ", 2);
             ft_putnbr_fd(map->round, 2);
             ft_putstr_fd(" | lastPX, lastPY: ", 2);
@@ -173,7 +177,16 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(map->rttargetX, 2);
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(map->rttargetY, 2);
-            ft_putstr_fd("\n", 2);
+			*/
+
+			ft_putstr_fd(" | Optimal place: ", 2);
+            ft_putnbr_fd(pc->bestvalue, 2);
+            ft_putstr_fd(" at: ", 2);
+            ft_putnbr_fd(pc->bestvalueX, 2);
+            ft_putstr_fd(", ", 2);
+            ft_putnbr_fd(pc->bestvalueY, 2);
+            ft_putstr_fd(" Temp best: ", 2);
+            ft_putnbr_fd(pc->bestvaluetemp, 2);
 
             definepiece(map, pc);
             fizzylogic(map, pc);

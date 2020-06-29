@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 10:51:23 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 13:14:44 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct  s_map
     int         osY;
     int         dbg;
     char        **map;
-	char		**heatmap;
+	int			**heatmap;
     int         state;
     int         round;
     int         foundplayer;
@@ -107,6 +107,10 @@ typedef struct  s_piece
     int         diagonal;
     int         offset_top;
     int         offset_left;
+	int			bestvalue;
+	int			bestvaluetemp;
+	int			bestvalueX;
+	int			bestvalueY;
 }               t_piece;
 
 
@@ -123,5 +127,7 @@ int         drawcircle(t_map *map, t_piece *pc, int tries, int radius);
 int         checkdiagonals(t_map *map, t_piece *pc);
 int         raytrace(t_map *map, t_piece *pc);
 int         closedarea(t_map *map, t_piece *pc, int ox, int oy, int rounds);
+void		heatmap(t_map *map);
+void    	initheatmap(t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 10:27:19 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 13:38:01 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int     initmap(t_map *map)
         map->map[i] = (char *)malloc(sizeof(char *) * (map->mapW + 1));
         i++;
     }
-	map->heatmap = (char **)malloc(sizeof(char *) * (map->mapH + 1));
+	i = 0;
+	map->heatmap = (int **)malloc(sizeof(int *) * (map->mapH + 1));
     while (i < map->mapH)
     {
-        map->heatmap[i] = (char *)malloc(sizeof(char *) * (map->mapW + 1));
+        map->heatmap[i] = (int *)malloc(sizeof(int *) * (map->mapW + 1));
         i++;
     }
     map->state = 1;
@@ -46,6 +47,24 @@ int     initmap(t_map *map)
     return (0);
 }
 
+void    initheatmap(t_map *map)
+{
+    int x;
+    int y;
+
+    x = 0;
+    y = 0;
+    while (y < map->mapH)
+    {
+        while (x < map->mapW)
+        {
+            map->heatmap[y][x] = 0;
+			x++;
+        }
+        y++;
+    }
+}
+
 int     initpiece(t_piece *pc)
 {
     int i;
@@ -60,6 +79,9 @@ int     initpiece(t_piece *pc)
     pc->topleftset = 0;
     pc->isvaliddot = 0;
     pc->isvalidx = 0;
+	pc->bestvalueY = 0;
+	pc->bestvalueX = 0;
+	pc->bestvalue = 1000000;
     pc->offset_left = -1;
     pc->offset_top = -1;
     return (0);
