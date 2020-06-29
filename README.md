@@ -1,3 +1,3 @@
 # filler
 
-A dabble into AI.
+A dabble into algorithms.
