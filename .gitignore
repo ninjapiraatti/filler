@@ -2,6 +2,7 @@
 
 .vscode
 filler_check
+*.trace
 # Prerequisites
 *.d
 
