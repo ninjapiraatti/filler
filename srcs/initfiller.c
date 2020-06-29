@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/11 09:14:40 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 10:27:19 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ int     initmap(t_map *map)
     while (i < map->mapH)
     {
         map->map[i] = (char *)malloc(sizeof(char *) * (map->mapW + 1));
+        i++;
+    }
+	map->heatmap = (char **)malloc(sizeof(char *) * (map->mapH + 1));
+    while (i < map->mapH)
+    {
+        map->heatmap[i] = (char *)malloc(sizeof(char *) * (map->mapW + 1));
         i++;
     }
     map->state = 1;

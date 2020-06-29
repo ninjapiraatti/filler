@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/27 12:25:22 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 10:51:23 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct  s_map
     int         osY;
     int         dbg;
     char        **map;
+	char		**heatmap;
     int         state;
     int         round;
     int         foundplayer;
@@ -117,7 +118,7 @@ int         placepiece(t_map *map, t_piece *pc, int strategy);
 int         definepiece(t_map *map, t_piece *pc);
 int         fizzylogic(t_map *map, t_piece *pc);
 int         direction (t_map *map, t_piece *pc, int dir);
-t_ping      *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radius);
+t_ping      *ping(t_map *map, int pingX, int pingY, char c, int radius);
 int         drawcircle(t_map *map, t_piece *pc, int tries, int radius);
 int         checkdiagonals(t_map *map, t_piece *pc);
 int         raytrace(t_map *map, t_piece *pc);

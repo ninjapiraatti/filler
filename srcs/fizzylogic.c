@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 09:54:19 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 10:57:06 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int     branchstrategy(t_map *map, t_piece *pc)
         direction(map, pc, map->dirh);
     else
         direction(map, pc, map->dirv);
-    ping(map, pc, map->targetX, map->targetY, map->psymbol, 2);
+    ping(map, map->targetX, map->targetY, map->psymbol, 2);
     if (map->ping->count > 2 && map->strategy % 10 == 0)
     {
         if (pc->horizontal == 1)
@@ -84,7 +84,7 @@ close gaps on the map thus containing the opponent into smaller sections */
 
 int     latestrategy(t_map *map, t_piece *pc)
 {
-    ping(map, pc, map->targetX, map->targetY, map->psymbol, 6);
+    ping(map, map->targetX, map->targetY, map->psymbol, 6);
     if (map->round % 90 == 0)
         map->raytrace = 0;
     if (map->round < 90 && map->mapW > 80)
@@ -106,7 +106,7 @@ int     latestrategy(t_map *map, t_piece *pc)
             map->targetY = map->rttargetY;
         }
     } 
-    ping(map, pc, map->rttargetX, map->rttargetY, map->psymbol, 2);
+    ping(map, map->rttargetX, map->rttargetY, map->psymbol, 2);
     if (map->ping->count > 2)
         map->raytrace = 2;
     map->strategy = STRATEGY_LATE;

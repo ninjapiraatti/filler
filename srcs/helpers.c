@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/28 16:56:44 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 10:46:43 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* Ping takes coordinates from the map, the "needle" character and radius. 
 It returns the number of occurrences of that character within the radius. */
 
-t_ping     *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radius)
+t_ping     *ping(t_map *map, int pingX, int pingY, char c, int radius)
 {
     int x = radius;
     int y = 0;

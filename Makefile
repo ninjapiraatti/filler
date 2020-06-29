@@ -6,7 +6,7 @@
 #    By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/01 14:57:04 by tlouekar          #+#    #+#              #
-#    Updated: 2020/06/10 16:01:11 by tlouekar         ###   ########.fr        #
+#    Updated: 2020/06/29 10:25:09 by tlouekar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = 	srcs/main.c \
 		srcs/fizzylogic.c \
 		srcs/helpers.c \
 		srcs/closedarea.c \
+		srcs/heatmap.c
 
 OBJS = 	main.o \
 		readinput.o \
@@ -29,6 +30,7 @@ OBJS = 	main.o \
 		fizzylogic.o \
 		helpers.o \
 		closedarea.o \
+		heatmap.o \
 
 INCS = -I ./srcs -I ./libft/includes/
 
