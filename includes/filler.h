@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 13:14:44 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 14:29:23 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct  s_map
     int         raytrace;
     int         rttargetX;
     int         rttargetY;
+	int			validplaces;
     t_ping      *ping;
     t_area      *area;
 }               t_map;

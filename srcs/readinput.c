@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 13:47:41 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 14:03:51 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,14 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(map->rttargetY, 2);
 			*/
 
+            definepiece(map, pc);
+            fizzylogic(map, pc);
+            placepiece(map, pc, map->strategy);
+            ft_putnbr(pc->placeY);
+            ft_putchar(' ');
+            ft_putnbr(pc->placeX);
+            ft_putchar('\n');
+
 			ft_putstr_fd(" | Optimal place: ", 2);
             ft_putnbr_fd(pc->bestvalue, 2);
             ft_putstr_fd(" at: ", 2);
@@ -187,14 +195,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(pc->bestvalueY, 2);
             ft_putstr_fd(" Temp best: ", 2);
             ft_putnbr_fd(pc->bestvaluetemp, 2);
-
-            definepiece(map, pc);
-            fizzylogic(map, pc);
-            placepiece(map, pc, map->strategy);
-            ft_putnbr(pc->placeY);
-            ft_putchar(' ');
-            ft_putnbr(pc->placeX);
-            ft_putchar('\n');
+			ft_putchar_fd('\n', 2);
 
             pc->status = 0;
             pc->pcmap = NULL;

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 13:47:22 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 14:41:19 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,36 +141,37 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
  
     while (x >= y)
     {
+		//ft_putstr_fd("Round of drawcircle! ", 2);
+		//ft_putnbr_fd(map->validplaces, 2);
+		if (map->validplaces > 0)
+			return (1);
         if (isplacevalid(map, pc, map->tempX + x, map->tempY + y))
-            return (1);
-        else if (isplacevalid(map, pc, map->tempX + y, map->tempY + x))
-            return (1);
-        else if(isplacevalid(map, pc, map->tempX - y, map->tempY + x))
-            return (1);
-        else if(isplacevalid(map, pc, map->tempX - x, map->tempY + y))
-            return (1);
-        else if(isplacevalid(map, pc, map->tempX - x, map->tempY - y))
-            return (1);
-        else if(isplacevalid(map, pc, map->tempX - y, map->tempY - x))
-            return (1);
-        else if(isplacevalid(map, pc, map->tempX + y, map->tempY - x))
-            return (1);
-        else if(isplacevalid(map, pc, map->tempX + x, map->tempY - y))
-            return (1);
-        else
-        {
-            if (err <= 0)
-            {
-                y += 1;
-                err += 2*y + 1;
-            }
-        
-            if (err > 0)
-            {
-                x -= 1;
-                err -= 2*x + 1;
-            }   
-        }
+            map->validplaces++;
+        if (isplacevalid(map, pc, map->tempX + y, map->tempY + x))
+            map->validplaces++;
+        if (isplacevalid(map, pc, map->tempX - y, map->tempY + x))
+            map->validplaces++;
+        if (isplacevalid(map, pc, map->tempX - x, map->tempY + y))
+            map->validplaces++;
+        if (isplacevalid(map, pc, map->tempX - x, map->tempY - y))
+            map->validplaces++;
+        if (isplacevalid(map, pc, map->tempX - y, map->tempY - x))
+            map->validplaces++;
+        if (isplacevalid(map, pc, map->tempX + y, map->tempY - x))
+            map->validplaces++;
+        if (isplacevalid(map, pc, map->tempX + x, map->tempY - y))
+            map->validplaces++;
+		if (err <= 0)
+		{
+			y += 1;
+			err += 2*y + 1;
+		}
+	
+		if (err > 0)
+		{
+			x -= 1;
+			err -= 2*x + 1;
+		}   
     }
     map->radius++;
     if (tries % TRIES_INTERVAL == 0)
@@ -259,6 +260,7 @@ int     placepiece(t_map *map, t_piece *pc, int strategy)
     int     i;
     i = 0;
     map->radius = 0;
+	map->validplaces = 0;
     if (map->round == 200)
         closedarea(map, pc, 90, 50, 50);
     if (recursion(map, pc, 2) == 1)
