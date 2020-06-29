@@ -6,11 +6,14 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/11 09:47:37 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/28 16:56:44 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+
+/* Ping takes coordinates from the map, the "needle" character and radius. 
+It returns the number of occurrences of that character within the radius. */
 
 t_ping     *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radius)
 {
@@ -61,6 +64,8 @@ t_ping     *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radi
     return (map->ping);
 }
 
+/* Direction takes an integer as a direction (like "bogey at your six") and turns it into coordinate on the map */
+
 int     direction (t_map *map, t_piece *pc, int dir)
 {
     if (dir < 1)
@@ -91,6 +96,9 @@ int     direction (t_map *map, t_piece *pc, int dir)
     return (0);
 }
 
+/* Raytrace finds the biggest stretch of empty spaces between an edge of the map and first player character. 
+It tries, with variable degree of success, not to get the new result too close to the previous one. */
+
 int     raytrace(t_map *map, t_piece *pc)
 {
     int     x;
@@ -113,11 +121,6 @@ int     raytrace(t_map *map, t_piece *pc)
             {
                 if (x > count && map->rttargetX != 0)
                 {
-                    /*
-                    ft_putstr_fd("Count at 1: ", 2);
-                    ft_putnbr_fd(count, 2);
-                    ft_putstr_fd("\n", 2);
-                    */
                     map->rttargetX = 0;
                     map->rttargetY = y;
                     count = x;
@@ -131,7 +134,6 @@ int     raytrace(t_map *map, t_piece *pc)
                 x = 0;
                 break;
             }
-            //x++;
         }
         y++;
     }
@@ -148,11 +150,6 @@ int     raytrace(t_map *map, t_piece *pc)
                 if ((map->mapW - x) > count)
                 //if ((map->mapW - x) > count && map->rttargetX != map->mapW - 1)
                 {
-                    /*
-                    ft_putstr_fd("Count at 2: ", 2);
-                    ft_putnbr_fd(count, 2);
-                    ft_putstr_fd("\n", 2);
-                    */
                     map->rttargetX = map->mapW - 1;
                     map->rttargetY = y;
                     count = map->mapW - x;

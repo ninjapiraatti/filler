@@ -6,13 +6,25 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/11 09:22:02 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/27 12:25:22 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 # define BUFF_SIZE 21
+# define TURNS_THRESHOLD_SMALL 15
+# define TURNS_THRESHOLD_MEDIUM 24
+# define TURNS_THRESHOLD_LARGE 140
+# define TURNS_MULTIPLIER 20
+# define STRATEGY_INITIAL 1
+# define STRATEGY_LATE 2
+# define STRATEGY_TO_SE 20
+# define STRATEGY_TO_SW 30
+# define STRATEGY_TO_NE 10
+# define STRATEGY_TO_NW 40
+# define TRIES_INTERVAL 200
+
 
 # include "../libft/includes/libft.h"
 
