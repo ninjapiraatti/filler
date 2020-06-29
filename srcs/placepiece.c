@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 14:41:19 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 20:22:49 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     i = 0;
     j = 0;
     pc->bestvaluetemp = 0;
-	pc->bestvalueX = x;
-	pc->bestvalueY = y;
+	pc->isvalidx = 0;
     if (map->area->rows > 1 && map->round < 600) 
     {
         j = 0;
@@ -79,7 +78,6 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
                 {
                     pc->isvaliddot = 1;
 					pc->bestvaluetemp += map->heatmap[y + pY][x + pX];
-					//ft_putnbr_fd(map->heatmap[y + pY][x + pX], 2);
                     pX++;
                 }
                 else if (map->map[y + pY][x + pX] == map->psymbol)
@@ -122,12 +120,20 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     }*/
 	if (pc->bestvaluetemp < pc->bestvalue && pc->bestvaluetemp > 0)
 	{
+		/*
+		ft_putstr_fd("\nBestX: ", 2);
+		ft_putnbr_fd(pc->bestvalueX, 2);
+		ft_putstr_fd("\nBestY: ", 2);
+		ft_putnbr_fd(pc->bestvalueY, 2);
+		*/
 		pc->bestvalue = pc->bestvaluetemp;
 		pc->bestvalueX = x;
 		pc->bestvalueY = y;
+		//ft_putnbr_fd(pc->bestvalueX, 2);
+		//ft_putstr_fd("\n", 2);
 	}
-    pc->placeY = pc->bestvalueY;
-    pc->placeX = pc->bestvalueX;
+    pc->placeY = y;
+    pc->placeX = x;
     map->lastpcY = y;
     map->lastpcX = x;
     return (1);
@@ -142,8 +148,7 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
     while (x >= y)
     {
 		//ft_putstr_fd("Round of drawcircle! ", 2);
-		//ft_putnbr_fd(map->validplaces, 2);
-		if (map->validplaces > 0)
+		if (map->validplaces > 5)
 			return (1);
         if (isplacevalid(map, pc, map->tempX + x, map->tempY + y))
             map->validplaces++;
@@ -233,12 +238,14 @@ int recursion (t_map *map, t_piece *pc, int tries)
                     return (1);
                 x++;
                 i++;
+				/*
                 ft_putnbr_fd(i, 2);
                 ft_putstr_fd(": ", 2);
                 ft_putnbr_fd(x, 2);
                 ft_putstr_fd(", ", 2);
                 ft_putnbr_fd(y, 2);
                 ft_putstr_fd(" | ", 2);
+				*/
             }
             y++;
         }

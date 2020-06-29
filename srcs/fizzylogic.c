@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 11:05:50 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 20:04:55 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int     latestrategy(t_map *map, t_piece *pc)
         if (map->raytrace == 1 && map->mapW > 30)
         {
             map->targetX = map->rttargetX;
-            map->targetY = map->rttargetY;
+        	map->targetY = map->rttargetY;
         }
     } 
     ping(map, map->rttargetX, map->rttargetY, map->psymbol, 2);

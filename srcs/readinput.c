@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 14:03:51 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 19:55:20 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         }
         if (pc->status == 2)
         {   
-			/*
             ft_putstr_fd(" Round: ", 2);
             ft_putnbr_fd(map->round, 2);
             ft_putstr_fd(" | lastPX, lastPY: ", 2);
@@ -176,8 +175,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putstr_fd(" at: ", 2);
             ft_putnbr_fd(map->rttargetX, 2);
             ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->rttargetY, 2);
-			*/
+            ft_putnbr_fd(map->rttargetY, 2);	
 
             definepiece(map, pc);
             fizzylogic(map, pc);
