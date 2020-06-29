@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/27 11:54:58 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/28 17:30:46 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include "../includes/filler.h"
 
+/* Writeplayer just tells which characters to use. */
 
 char    *writeplayer(t_map *map, char *line)
 {
@@ -31,7 +32,9 @@ char    *writeplayer(t_map *map, char *line)
     return (line);
 }
 
-char    *writemapsize(t_map *map, char *line)
+/* Getmapsize gets the map size and fires initmap. */
+
+char    *getmapsize(t_map *map, char *line)
 {
     while (ft_isdigit(*line) == 0)
         line++;
@@ -43,7 +46,9 @@ char    *writemapsize(t_map *map, char *line)
     return (line);
 }
 
-char    *writemap(t_map *map, char *line)
+/* Getplayers enters the players' initial positions to the struct. */
+
+char    *getplayers(t_map *map, char *line)
 {
     int x;
     int y;
@@ -79,6 +84,8 @@ char    *writemap(t_map *map, char *line)
     return (0);
 }
 
+/* Writepiecemap gets the piece and makes a 2D-array of it. */
+
 char    *writepiecemap(t_piece *pc, char *line, int y)
 {
     int x;
@@ -95,6 +102,8 @@ char    *writepiecemap(t_piece *pc, char *line, int y)
     return (0);
 }
 
+/* Writepiece gets the piece dimensions. */
+
 char    *writepiece(t_piece *pc, char *line)
 {
     while (ft_isdigit(*line) == 0)
@@ -105,6 +114,8 @@ char    *writepiece(t_piece *pc, char *line)
     pc->pieceW = ft_atoi(line);
     return (line);
 }
+
+/* Readinput takes in the map from standard input and turns it into nicer data. */
 
 int     readinput(t_map *map, t_piece *pc, int fd)
 {
@@ -122,13 +133,13 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             if (ft_strstr(line, "$$$") != NULL)
                 writeplayer(map, line);
             if (ft_strstr(line, "Plateau") != NULL)
-                writemapsize(map, line);
+                getmapsize(map, line);
         }
         if (ft_strstr(line, "000") != NULL)
             i = 0;
         if (i < map->mapH && i >= 0)
         {
-            writemap(map, line);
+            getplayers(map, line);
             i++;
         }
         if (pc->status == 1)
@@ -154,7 +165,6 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(map->lastpcopX, 2);
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(map->lastpcopY, 2);
-
             ft_putstr_fd(" | Strategy: ", 2);
             ft_putnbr_fd(map->strategy, 2);
             ft_putstr_fd(" | Raytrace: ", 2);
@@ -163,25 +173,16 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putnbr_fd(map->rttargetX, 2);
             ft_putstr_fd(", ", 2);
             ft_putnbr_fd(map->rttargetY, 2);
-            //ft_putnbr_fd(pc->offset_top, 2);
-            //printdebug(map, pc, 0);
             ft_putstr_fd("\n", 2);
+
             definepiece(map, pc);
             fizzylogic(map, pc);
-            if (map->founddiagonal != 1)
-                placepiece(map, pc, map->strategy);
-            //ft_putnbr(map->psY - pc->bottomrightY);
+            placepiece(map, pc, map->strategy);
             ft_putnbr(pc->placeY);
             ft_putchar(' ');
-            //ft_putnbr(map->psX - pc->bottomrightX);
             ft_putnbr(pc->placeX);
             ft_putchar('\n');
-            /*
-            ft_putstr_fd(" | placeX, placeY: ", 2);
-            ft_putnbr_fd(pc->placeX, 2);
-            ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(pc->placeY, 2);
-            */
+
             pc->status = 0;
             pc->pcmap = NULL;
             i = -1;

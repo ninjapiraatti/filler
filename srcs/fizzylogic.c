@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/27 12:15:06 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/28 17:41:43 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,20 @@
 
 int     entercoordinates(t_map *map, t_piece *pc)
 {
-    if (map->founddiagonal != 1)
-    {
-        map->tempX = map->targetX;
-        map->tempY = map->targetY;
-    }
     if (map->strategy == STRATEGY_INITIAL) // Initial strategy builds towards the opponent
     {
         map->tempX = map->osX;
         map->tempY = map->osY;
     }
-    else if (map->strategy == STRATEGY_LATE)
+    else
     {
         map->tempX = map->targetX;
         map->tempY = map->targetY;
     }
     return (1);
 }
+
+/* Branchstrategy grows two branches from the pieces and tries to contain the opponent */
 
 int     branchstrategy(t_map *map, t_piece *pc)
 {
@@ -82,12 +79,15 @@ int     branchstrategy(t_map *map, t_piece *pc)
     return (0);
 }
 
+/* Latestrategy switches between building close to the opponent and using the raytrace function to
+close gaps on the map thus containing the opponent into smaller sections */
+
 int     latestrategy(t_map *map, t_piece *pc)
 {
     ping(map, pc, map->targetX, map->targetY, map->psymbol, 6);
-    if (map->round % 90 == 0) // Quicker raytraces mean more aggressive strategy but there may be loose ends. 80 for big maps?
+    if (map->round % 90 == 0)
         map->raytrace = 0;
-    if (map->round < 90 && map->mapW > 80) // This magic number seems to work only on bigger maps
+    if (map->round < 90 && map->mapW > 80)
     {
         if (map->raytrace == 0)
             raytrace(map, pc);
@@ -113,6 +113,9 @@ int     latestrategy(t_map *map, t_piece *pc)
     return (0);
 }
 
+/* Updatestrategy, well, updates strategy. Different settings are used for different map sizes and
+the beginning of the late strategy. */
+
 int     updatestrategy(t_map *map, t_piece *pc)
 {
     int     turns;
@@ -130,6 +133,8 @@ int     updatestrategy(t_map *map, t_piece *pc)
         branchstrategy(map, pc);
     return (0);
 }
+
+/* Fizzylogic doesn't really do much anymore */
 
 int     fizzylogic(t_map *map, t_piece *pc)
 {
