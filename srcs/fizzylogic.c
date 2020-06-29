@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 09:53:40 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/29 09:54:19 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int     entercoordinates(t_map *map, t_piece *pc)
 {
-    if (map->strategy == STRATEGY_INIT) // Initial strategy builds towards the opponent
+    if (map->strategy == STRATEGY_INITIAL) // Initial strategy builds towards the opponent
     {
         map->tempX = map->osX;
         map->tempY = map->osY;
