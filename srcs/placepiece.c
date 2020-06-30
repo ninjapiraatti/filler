@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 16:21:15 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:21:22 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
 		ft_putstr_fd("\nBestY: ", 2);
 		ft_putnbr_fd(pc->bestvalueY, 2);
 		*/
-		ft_putstr_fd("\nInserted best value!", 2);
 		pc->bestvalue = pc->bestvaluetemp;
 		pc->bestvalueX = x;
 		pc->bestvalueY = y;
@@ -150,7 +149,7 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     return (1);
 }
 
-int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
+int drawcircle(t_map *map, t_piece *pc, int tries, int radius, int threshold)
 {
     int x = radius;
     int y = 0;
@@ -159,7 +158,7 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
     while (x >= y)
     {
 		//ft_putstr_fd("Round of drawcircle! ", 2);
-		if (map->validplaces > 50)
+		if (map->validplaces > threshold)
 			return (1);
         if (isplacevalid(map, pc, map->tempX + x, map->tempY + y))
             map->validplaces++;
@@ -263,7 +262,7 @@ int recursion (t_map *map, t_piece *pc, int tries)
     }
     if (map->mapW > 50 && map->round < 300 && map->raytrace == 1 && crosscheck(map, pc) == 1)
        return (1);
-    if (drawcircle(map, pc, tries, map->radius) == 1)
+    if (drawcircle(map, pc, tries, map->radius, map->threshold) == 1)
         return (1);
     if (recursion(map, pc, tries) == 0)
     {

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:24:12 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 16:25:52 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:10:00 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ int		iterate_map(t_map *map)
 			if (map->map[y][x] == '.')
 			{
 				map->heatmap[y][x] = doping(map, x, y);
-				ft_putnbr_fd(map->heatmap[y][x], 2);
+				//ft_putnbr_fd(map->heatmap[y][x], 2);
 			}
 			else
 			{
 				map->heatmap[y][x] = 0;
-				ft_putstr_fd(".", 2);
+				//ft_putstr_fd(".", 2);
 			}
-			ft_putstr_fd(" ", 2);
+			//ft_putstr_fd(" ", 2);
 			x++;
 		}
-		ft_putstr_fd("\n", 2);
+		//ft_putstr_fd("\n", 2);
 		y++;
 		x = 1;
 	}

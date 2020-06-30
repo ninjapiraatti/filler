@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 15:39:49 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:35:56 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,25 +84,20 @@ close gaps on the map thus containing the opponent into smaller sections */
 
 int     latestrategy(t_map *map, t_piece *pc)
 {
-    ping(map, map->targetX, map->targetY, map->psymbol, 6);
-    if (map->round % 90 == 0)
+    //ping(map, map->targetX, map->targetY, map->psymbol, 6);
+    if (map->round % 100 == 0)
         map->raytrace = 0;
-	if (map->round < 900)
-    {
+	if (map->round < 2000)
+    {	
+		map->threshold = 50;
         map->targetX = map->lastpcopX;
         map->targetY = map->lastpcopY;
 		map->strategy = STRATEGY_LATE;
 		return (0);
     }
-    if (map->round < 90 && map->mapW > 80)
-    {
-        if (map->raytrace == 0)
-            raytrace(map, pc);
-        map->targetX = map->rttargetX;
-        map->targetY = map->rttargetY;
-    }
     else
     {
+		map->threshold = 1;
         if (map->raytrace == 0)
             raytrace(map, pc);
         map->targetX = map->lastpcopX;

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 14:29:23 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:31:38 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define BUFF_SIZE 21
 # define TURNS_THRESHOLD_SMALL 15
 # define TURNS_THRESHOLD_MEDIUM 24
-# define TURNS_THRESHOLD_LARGE 140
+# define TURNS_THRESHOLD_LARGE 120
 # define TURNS_MULTIPLIER 20
 # define STRATEGY_INITIAL 1
 # define STRATEGY_LATE 2
@@ -84,6 +84,7 @@ typedef struct  s_map
     int         rttargetX;
     int         rttargetY;
 	int			validplaces;
+	int			threshold;
     t_ping      *ping;
     t_area      *area;
 }               t_map;
@@ -124,7 +125,7 @@ int         definepiece(t_map *map, t_piece *pc);
 int         fizzylogic(t_map *map, t_piece *pc);
 int         direction (t_map *map, t_piece *pc, int dir);
 t_ping      *ping(t_map *map, int pingX, int pingY, char c, int radius);
-int         drawcircle(t_map *map, t_piece *pc, int tries, int radius);
+int         drawcircle(t_map *map, t_piece *pc, int tries, int radius, int threshold);
 int         checkdiagonals(t_map *map, t_piece *pc);
 int         raytrace(t_map *map, t_piece *pc);
 int         closedarea(t_map *map, t_piece *pc, int ox, int oy, int rounds);
