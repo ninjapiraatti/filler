@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 14:25:24 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 14:52:53 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ int     readinput(t_map *map, t_piece *pc, int fd)
 			{
                 getmapsize(map, line);
 				initheatmap(map);
-				ft_putstr_fd("Map inited", 2);
 			}
         }
         if (ft_strstr(line, "000") != NULL)
@@ -181,10 +180,6 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             definepiece(map, pc);
             fizzylogic(map, pc);
             placepiece(map, pc, map->strategy);
-            ft_putnbr(pc->placeY);
-            ft_putchar(' ');
-            ft_putnbr(pc->placeX);
-            ft_putchar('\n');
 
 			ft_putstr_fd(" | Optimal place: ", 2);
             ft_putnbr_fd(pc->bestvalue, 2);
@@ -195,6 +190,11 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putstr_fd(" Temp best: ", 2);
             ft_putnbr_fd(pc->bestvaluetemp, 2);
 			ft_putchar_fd('\n', 2);
+
+            ft_putnbr(pc->placeY);
+            ft_putchar(' ');
+            ft_putnbr(pc->placeX);
+            ft_putchar('\n');
 
             pc->status = 0;
             pc->pcmap = NULL;

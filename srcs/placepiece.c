@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 14:09:58 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 15:41:23 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,25 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
 		ft_putstr_fd("\nBestY: ", 2);
 		ft_putnbr_fd(pc->bestvalueY, 2);
 		*/
+		ft_putstr_fd("\nInserted best value!", 2);
 		pc->bestvalue = pc->bestvaluetemp;
 		pc->bestvalueX = x;
 		pc->bestvalueY = y;
+		pc->placeY = pc->bestvalueY;
+    	pc->placeX = pc->bestvalueX;
 		//ft_putnbr_fd(pc->bestvalueX, 2);
 		//ft_putstr_fd("\n", 2);
 	}
-    pc->placeY = y;
-    pc->placeX = x;
+	else if (pc->bestvalue != 1000000)
+	{
+		pc->placeY = pc->bestvalueY;
+    	pc->placeX = pc->bestvalueX;
+	}
+	else 
+	{
+		pc->placeY = y;
+    	pc->placeX = x;
+	}
     map->lastpcY = y;
     map->lastpcX = x;
     return (1);
@@ -148,7 +159,7 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
     while (x >= y)
     {
 		//ft_putstr_fd("Round of drawcircle! ", 2);
-		if (map->validplaces > 20)
+		if (map->validplaces > 5)
 			return (1);
         if (isplacevalid(map, pc, map->tempX + x, map->tempY + y))
             map->validplaces++;
@@ -228,7 +239,6 @@ int recursion (t_map *map, t_piece *pc, int tries)
     tries++;
     if (tries > 2000)
     {
-        map->state = 3;
         while (y < map->mapH)
         {
             x = -80;
