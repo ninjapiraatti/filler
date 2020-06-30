@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 15:41:23 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 16:21:15 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius)
     while (x >= y)
     {
 		//ft_putstr_fd("Round of drawcircle! ", 2);
-		if (map->validplaces > 5)
+		if (map->validplaces > 50)
 			return (1);
         if (isplacevalid(map, pc, map->tempX + x, map->tempY + y))
             map->validplaces++;

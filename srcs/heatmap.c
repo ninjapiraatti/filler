@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:24:12 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 15:17:06 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 16:25:52 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int		doping(t_map *map, int x, int y)
 	int	radius;
 
 	radius = 0;
-	ping(map, x, y, map->psymbol, radius);
-	while (map->ping->count < 1 && radius < 80)
+	ping(map, x, y, map->osymbol, radius);
+	while (map->ping->count < 1 && radius < 40)
 	{
 		radius++;
-		ping(map, x, y, map->psymbol, radius);
+		ping(map, x, y, map->osymbol, radius);
 	}
 	return (radius);
 }
@@ -49,20 +49,21 @@ int		iterate_map(t_map *map)
 	{
 		while (x < map->mapW - 1)
 		{
-			if (map->map[y][x] == '.' && adjacent(map, x, y) == 1)
+			//f (map->map[y][x] == '.' && adjacent(map, x, y) == 1)
+			if (map->map[y][x] == '.')
 			{
 				map->heatmap[y][x] = doping(map, x, y);
-				//ft_putnbr_fd(map->heatmap[y][x], 2);
+				ft_putnbr_fd(map->heatmap[y][x], 2);
 			}
 			else
 			{
 				map->heatmap[y][x] = 0;
-				//ft_putstr_fd(".", 2);
+				ft_putstr_fd(".", 2);
 			}
-			//ft_putstr_fd(" ", 2);
+			ft_putstr_fd(" ", 2);
 			x++;
 		}
-		//ft_putstr_fd("\n", 2);
+		ft_putstr_fd("\n", 2);
 		y++;
 		x = 1;
 	}
