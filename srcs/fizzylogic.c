@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 17:35:56 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 18:01:59 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int     branchstrategy(t_map *map, t_piece *pc)
     {
         if (map->psY >= map->osY)
         {
-            map->dirh = 8;
+            map->dirh = 9;
             map->dirv = 1;
             map->strategy = STRATEGY_TO_NW;
         }
@@ -89,7 +89,7 @@ int     latestrategy(t_map *map, t_piece *pc)
         map->raytrace = 0;
 	if (map->round < 2000)
     {	
-		map->threshold = 50;
+		map->threshold = 100;
         map->targetX = map->lastpcopX;
         map->targetY = map->lastpcopY;
 		map->strategy = STRATEGY_LATE;

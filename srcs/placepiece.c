@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 17:21:22 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 18:03:09 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,8 +277,6 @@ int     placepiece(t_map *map, t_piece *pc, int strategy)
     i = 0;
     map->radius = 0;
 	map->validplaces = 0;
-    if (map->round == 200)
-        closedarea(map, pc, 90, 50, 50);
     if (recursion(map, pc, 2) == 1)
         return (1);
     ft_putstr_fd("Failed to place a piece:\n", 2);
