@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/29 19:55:20 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 14:25:24 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
 			{
                 getmapsize(map, line);
 				initheatmap(map);
+				ft_putstr_fd("Map inited", 2);
 			}
         }
         if (ft_strstr(line, "000") != NULL)

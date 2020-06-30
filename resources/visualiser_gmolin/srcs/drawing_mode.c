@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 14:28:22 by gmolin            #+#    #+#             */
-/*   Updated: 2020/05/11 10:23:19 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/06/30 14:13:05 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void		draw_map(t_env *p)
 			if (p->map[i][i2] == '.' && is_aly_adj(p, i, i2) == 2)
 				modif_color(50, 50, 50, p);
 			else if (p->map[i][i2] == '.' && is_aly_adj(p, i, i2) == 1)
-				modif_color(243, 232, 97, p);
+				modif_color(0, 0, 0, p);
 			else if (p->map[i][i2] == '.')
 				modif_color(0, 0, 0, p);
 			else if (p->map[i][i2] == 'X')
