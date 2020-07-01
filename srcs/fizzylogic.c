@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 18:01:59 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/01 09:24:24 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int     entercoordinates(t_map *map, t_piece *pc)
 {
-    if (map->strategy == STRATEGY_INITIAL) // Initial strategy builds towards the opponent
+    if (map->strategy == STRATEGY_INITIAL)
     {
         map->tempX = map->osX;
         map->tempY = map->osY;
@@ -35,8 +35,8 @@ int     branchstrategy(t_map *map, t_piece *pc)
     {
         if (map->psY <= map->osY)
         {
-            map->dirh = 2; // 4?
-            map->dirv = 7; // 10?
+            map->dirh = 2;
+            map->dirv = 7;
             map->strategy = STRATEGY_TO_SE; 
         }
         else
@@ -84,7 +84,6 @@ close gaps on the map thus containing the opponent into smaller sections */
 
 int     latestrategy(t_map *map, t_piece *pc)
 {
-    //ping(map, map->targetX, map->targetY, map->psymbol, 6);
     if (map->round % 100 == 0)
         map->raytrace = 0;
 	if (map->round < 2000)
@@ -122,14 +121,14 @@ int     updatestrategy(t_map *map, t_piece *pc)
 {
     int     turns;
 
-    turns = TURNS_THRESHOLD_SMALL; // Best guess so far 15: 43/50 and 33/50 against Carli
+    turns = TURNS_THRESHOLD_SMALL;
     if (map->mapW > 30)
-        turns = TURNS_THRESHOLD_MEDIUM; // Best guess so far 40: 43/50 and 26/50 against Carli
+        turns = TURNS_THRESHOLD_MEDIUM;
     if (map->mapW > 90)
         turns = TURNS_THRESHOLD_LARGE; // Best guess so far 200
-    if (map->round < ((map->mapH * map->mapW) / (TURNS_MULTIPLIER * turns))) // Smaller = Initial state stays longer
+    if (map->round < ((map->mapH * map->mapW) / (TURNS_MULTIPLIER * turns)))
         map->strategy = 1;
-    else if (map->round > ((map->mapH * map->mapW) / turns)) // Bigger = late comes earlier
+    else if (map->round > ((map->mapH * map->mapW) / turns))
         latestrategy(map, pc);
     else
         branchstrategy(map, pc);

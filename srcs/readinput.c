@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 17:12:50 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/01 09:28:43 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,6 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             j = 0;
             map->round++;
             map->lastpcopfound = 0;
-            map->founddiagonal = 0;
         }
     }
     return (0);

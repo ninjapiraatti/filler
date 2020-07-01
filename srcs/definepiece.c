@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:16:21 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/09 15:21:24 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/01 09:23:39 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int     offset(t_piece *pc)
         }
         y++;
         top++;
-        //ft_putstr_fd(pc->pcmap[y], 2);
-        //ft_putstr_fd("\n", 2);
     }
     x = 0;
     while (x < (pc->pieceW))
@@ -58,8 +56,6 @@ int     offset(t_piece *pc)
         }
         x++;
         left++;
-        //ft_putstr_fd(pc->pcmap[y], 2);
-        //ft_putstr_fd("\n", 2);
     }
     return (1);
 }

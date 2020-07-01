@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 17:31:38 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/01 09:28:07 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,12 @@ typedef struct  s_map
     int         mapW;
     int         osX;
     int         osY;
-    int         dbg;
     char        **map;
 	int			**heatmap;
     int         state;
     int         round;
     int         foundplayer;
     int         foundop;
-    int         lbranchY;
-    int         lbranchX;
-    int         rbranchY;
-    int         rbranchX;
     int         strategy;
     int         tempX;
     int         tempY;
@@ -73,13 +68,10 @@ typedef struct  s_map
     int         lastpcopX;
     int         lastpcopY;
     int         radius;
-    int         lwallreached;
-    int         rwallreached;
     int         targetX;
     int         targetY;
     int         dirh;
     int         dirv;
-    int         founddiagonal;
     int         raytrace;
     int         rttargetX;
     int         rttargetY;
@@ -126,9 +118,7 @@ int         fizzylogic(t_map *map, t_piece *pc);
 int         direction (t_map *map, t_piece *pc, int dir);
 t_ping      *ping(t_map *map, int pingX, int pingY, char c, int radius);
 int         drawcircle(t_map *map, t_piece *pc, int tries, int radius, int threshold);
-int         checkdiagonals(t_map *map, t_piece *pc);
 int         raytrace(t_map *map, t_piece *pc);
-int         closedarea(t_map *map, t_piece *pc, int ox, int oy, int rounds);
 void		heatmap(t_map *map);
 void    	initheatmap(t_map *map);
 

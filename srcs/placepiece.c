@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 18:03:09 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/01 09:27:17 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,39 +29,6 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     j = 0;
     pc->bestvaluetemp = 0;
 	pc->isvalidx = 0;
-    if (map->area->rows > 1 && map->round < 600) 
-    {
-        j = 0;
-        while (j < map->area->rows)
-        {
-            if (map->area->empties[j][0] == x + pX && map->area->empties[j][1] == y + pY)
-            {
-                /*
-                ft_putstr_fd("\nX and Y: ", 2);
-                ft_putnbr_fd(x, 2);
-                ft_putstr_fd(", ", 2);
-                ft_putnbr_fd(y, 2);
-                ft_putstr_fd(" Forbidden X and Y: ", 2);
-                ft_putnbr_fd(map->area->empties[j][0], 2);
-                ft_putstr_fd(", ", 2);
-                ft_putnbr_fd(map->area->empties[j][1], 2);
-                ft_putstr_fd("\nAvoided closed area", 2);
-                */
-                return (0);
-            }
-            j++;
-        }
-        /*
-        ft_putstr_fd("\nX and Y: ", 2);
-        ft_putnbr_fd(x, 2);
-        ft_putstr_fd(", ", 2);
-        ft_putnbr_fd(y, 2);
-        ft_putstr_fd(" Forbidden X and Y: ", 2);
-        ft_putnbr_fd(map->area->empties[j][0], 2);
-        ft_putstr_fd(", ", 2);
-        ft_putnbr_fd(map->area->empties[j][1], 2);
-        */
-    }
     while (pY < pc->pieceH)
     {
         while (pX < pc->pieceW)
@@ -104,35 +71,13 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
         pc->isvalidx = 0;
         return (0);
     }
-    /*
-    ft_putstr_fd("Offset: ", 2);
-    ft_putnbr_fd(pc->offset_top, 2);
-    ft_putstr_fd("\nPlace X, Y: ", 2);
-    ft_putnbr_fd(pc->placeX, 2);
-    ft_putstr_fd(", ", 2);
-    ft_putnbr_fd(pc->placeY, 2);
-    ft_putstr_fd("\n", 2);
-    while (i < pc->pieceH)
-    {
-        ft_putstr_fd(pc->pcmap[i], 2);
-        ft_putstr_fd("\n", 2);
-        i++;
-    }*/
 	if (pc->bestvaluetemp < pc->bestvalue && pc->bestvaluetemp > 0)
 	{
-		/*
-		ft_putstr_fd("\nBestX: ", 2);
-		ft_putnbr_fd(pc->bestvalueX, 2);
-		ft_putstr_fd("\nBestY: ", 2);
-		ft_putnbr_fd(pc->bestvalueY, 2);
-		*/
 		pc->bestvalue = pc->bestvaluetemp;
 		pc->bestvalueX = x;
 		pc->bestvalueY = y;
 		pc->placeY = pc->bestvalueY;
     	pc->placeX = pc->bestvalueX;
-		//ft_putnbr_fd(pc->bestvalueX, 2);
-		//ft_putstr_fd("\n", 2);
 	}
 	else if (pc->bestvalue != 1000000)
 	{
@@ -157,7 +102,6 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius, int threshold)
  
     while (x >= y)
     {
-		//ft_putstr_fd("Round of drawcircle! ", 2);
 		if (map->validplaces > threshold)
 			return (1);
         if (isplacevalid(map, pc, map->tempX + x, map->tempY + y))
@@ -247,14 +191,6 @@ int recursion (t_map *map, t_piece *pc, int tries)
                     return (1);
                 x++;
                 i++;
-				/*
-                ft_putnbr_fd(i, 2);
-                ft_putstr_fd(": ", 2);
-                ft_putnbr_fd(x, 2);
-                ft_putstr_fd(", ", 2);
-                ft_putnbr_fd(y, 2);
-                ft_putstr_fd(" | ", 2);
-				*/
             }
             y++;
         }
