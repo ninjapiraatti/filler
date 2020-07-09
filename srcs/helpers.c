@@ -6,50 +6,55 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/01 09:25:40 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/09 19:44:42 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-/* Ping takes coordinates from the map, the "needle" character and radius. 
-It returns the number of occurrences of that character within the radius. */
+/* Ping and its buddy ping_circle takescoordinates from the map, the "needle" character and radius. 
+Ping returns the number of occurrences of that character within the radius. */
 
-t_ping     *ping(t_map *map, int pingX, int pingY, char c, int radius)
+void			ping_circle(t_map *map, int x, int y, char c, int radius)
 {
-    int x = radius;
-    int y = 0;
-    int err = 0;
-    map->ping->count = 0;
-    map->ping->pingedX = pingX;
-    map->ping->pingedY = pingY;
-    
-    while (x >= y)
+	if(!((map->ping->pingedY + y >= map->mapH - 1) || (map->ping->pingedX + x >= map->mapW - 1)))
+		if(map->map[map->ping->pingedY + y][map->ping->pingedX + x] == c)
+			map->ping->count++;
+	if(!((map->ping->pingedY + x >= map->mapH - 1) || (map->ping->pingedX + y >= map->mapW - 1)))
+		if(map->map[map->ping->pingedY + x][map->ping->pingedX + y] == c)
+			map->ping->count++;
+	if(!((map->ping->pingedY + x >= map->mapH - 1) || (map->ping->pingedX - y < 0)))
+		if(map->map[map->ping->pingedY + x][map->ping->pingedX - y] == c)
+			map->ping->count++;
+	if(!((map->ping->pingedY + y >= map->mapH - 1) || (map->ping->pingedX - x < 0)))
+		if(map->map[map->ping->pingedY + y][map->ping->pingedX - x] == c)
+			map->ping->count++;
+	if(!((map->ping->pingedY - y < 0) || (map->ping->pingedX - x < 0)))
+		if(map->map[map->ping->pingedY - y][map->ping->pingedX - x] == c)
+			map->ping->count++;
+	if(!((map->ping->pingedY - x < 0) || (map->ping->pingedX - y < 0)))
+		if(map->map[map->ping->pingedY - x][map->ping->pingedX - y] == c)
+			map->ping->count++;
+	if(!((map->ping->pingedY - x < 0) || (map->ping->pingedX + y >= map->mapW - 1)))
+		if(map->map[map->ping->pingedY - x][map->ping->pingedX + y] == c)
+			map->ping->count++;
+	if(!((map->ping->pingedY - y < 0) || (map->ping->pingedX + x >= map->mapW - 1)))
+		if(map->map[map->ping->pingedY - y][map->ping->pingedX + x] == c)
+			map->ping->count++;
+}
+
+t_ping		*ping(t_map *map, int pingX, int pingY, char c, int radius)
+{
+	int x = radius;
+	int y = 0;
+	int err = 0;
+	map->ping->count = 0;
+	map->ping->pingedX = pingX;
+	map->ping->pingedY = pingY;
+
+	while (x >= y)
     {
-        if(!((pingY + y >= map->mapH - 1) || (pingX + x >= map->mapW - 1)))
-            if(map->map[pingY + y][pingX + x] == c)
-                map->ping->count++;
-        if(!((pingY + x >= map->mapH - 1) || (pingX + y >= map->mapW - 1)))
-            if(map->map[pingY + x][pingX + y] == c)
-                map->ping->count++;
-        if(!((pingY + x >= map->mapH - 1) || (pingX - y < 0)))
-            if(map->map[pingY + x][pingX - y] == c)
-                map->ping->count++;
-        if(!((pingY + y >= map->mapH - 1) || (pingX - x < 0)))
-            if(map->map[pingY + y][pingX - x] == c)
-                map->ping->count++;
-        if(!((pingY - y < 0) ||(pingX - x < 0)))
-            if(map->map[pingY - y][pingX - x] == c)
-                map->ping->count++;
-        if(!((pingY - x < 0) || (pingX - y < 0)))
-            if(map->map[pingY - x][pingX - y] == c)
-                map->ping->count++;
-        if(!((pingY - x < 0) || (pingX + y >= map->mapW - 1)))
-            if(map->map[pingY - x][pingX + y] == c)
-                map->ping->count++;
-        if(!((pingY - y < 0) || (pingX + x >= map->mapW - 1)))
-            if(map->map[pingY - y][pingX + x] == c)
-                map->ping->count++;
+		ping_circle(map, x, y, c, radius);
         if (err <= 0)
         {
             y += 1;
@@ -61,7 +66,7 @@ t_ping     *ping(t_map *map, int pingX, int pingY, char c, int radius)
             err -= 2*x + 1;
         }
     }
-    return (map->ping);
+	return (map->ping);
 }
 
 /* Direction takes an integer as a direction (like "bogey at your six") and turns it into coordinate on the map */
