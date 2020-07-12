@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 14:41:22 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 17:56:25 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,39 @@ t_ping		*ping(t_map *map, int pingX, int pingY, char c)
 	return (map->ping);
 }
 
+void	strategy_to_dir(t_map *map)
+{
+	if (map->psx <= map->osx && (map->dirh == 0 || map->dirv == 0))
+	{
+		if (map->psy <= map->osy)
+		{
+			map->dirh = 2;
+			map->dirv = 7;
+			map->strategy = STRATEGY_TO_SE;
+		}
+		else
+		{
+			map->dirh = 3;
+			map->dirv = 12;
+			map->strategy = STRATEGY_TO_NE;
+		}
+	}
+	else if (map->dirh == 0 || map->dirv == 0)
+	{
+		if (map->psy >= map->osy)
+		{
+			map->dirh = 9;
+			map->dirv = 1;
+			map->strategy = STRATEGY_TO_NW;
+		}
+		else
+		{
+			map->dirh = 9;
+			map->dirv = 6;
+			map->strategy = STRATEGY_TO_SW;
+		}
+	}
+}
 /* Direction takes an integer as a direction (like "bogey at your six") and turns it into coordinate on the map */
 
 int     direction (t_map *map, t_piece *pc, int dir)
