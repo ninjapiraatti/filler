@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:24:12 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/01 09:24:51 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:24:33 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int		iterate_map(t_map *map)
 
 	x = 1;
 	y = 1;
-	while (y < map->mapH - 1)
+	while (y < map->h - 1)
 	{
-		while (x < map->mapW - 1)
+		while (x < map->w - 1)
 		{
 			if (map->map[y][x] == '.')
 				map->heatmap[y][x] = doping(map, x, y);

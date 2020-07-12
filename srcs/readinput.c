@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/01 09:28:43 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:28:01 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ char    *getmapsize(t_map *map, char *line)
 {
     while (ft_isdigit(*line) == 0)
         line++;
-    map->mapH = ft_atoi(line);
+    map->h = ft_atoi(line);
     while (ft_isdigit(*line) == 1)
         line++;
-    map->mapW = ft_atoi(line);
+    map->w = ft_atoi(line);
     initmap(map);
     return (line);
 }
@@ -57,25 +57,25 @@ char    *getplayers(t_map *map, char *line)
     x = 0;
     y = ft_atoi(line);
     i = 4;
-    while (x < map->mapW)
+    while (x < map->w)
     {
         if(line[i] == map->osymbol && map->map[y][x] == '.' && map->lastpcopfound == 0)
         {
-            map->lastpcopX = x;
-            map->lastpcopY = y;
+            map->lastpcopx = x;
+            map->lastpcopy = y;
             map->lastpcopfound = 1;
         }
         map->map[y][x] = line[i];
         if ((line[i] == map->psymbol) && map->foundplayer == 0)
         {
-            map->psX = x;
-            map->psY = y;
+            map->psx = x;
+            map->psy = y;
             map->foundplayer = 1;
         }
         else if ((line[i] == map->osymbol) && map->foundop == 0)
         {
-            map->osX = x;
-            map->osY = y;
+            map->osx = x;
+            map->osy = y;
             map->foundop = 1;
         }
         x++;
@@ -140,7 +140,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         }
         if (ft_strstr(line, "000") != NULL)
             i = 0;
-        if (i < map->mapH && i >= 0)
+        if (i < map->h && i >= 0)
         {
             getplayers(map, line);
             i++;
@@ -161,21 +161,21 @@ int     readinput(t_map *map, t_piece *pc, int fd)
             ft_putstr_fd(" Round: ", 2);
             ft_putnbr_fd(map->round, 2);
             ft_putstr_fd(" | lastPX, lastPY: ", 2);
-            ft_putnbr_fd(map->lastpcX, 2);
+            ft_putnbr_fd(map->lastpcx, 2);
             ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->lastpcY, 2);
+            ft_putnbr_fd(map->lastpcy, 2);
             ft_putstr_fd(" | lastOX, lastOY: ", 2);
-            ft_putnbr_fd(map->lastpcopX, 2);
+            ft_putnbr_fd(map->lastpcopx, 2);
             ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->lastpcopY, 2);
+            ft_putnbr_fd(map->lastpcopy, 2);
             ft_putstr_fd(" | Strategy: ", 2);
             ft_putnbr_fd(map->strategy, 2);
             ft_putstr_fd(" | Raytrace: ", 2);
             ft_putnbr_fd(map->raytrace, 2);
             ft_putstr_fd(" at: ", 2);
-            ft_putnbr_fd(map->rttargetX, 2);
+            ft_putnbr_fd(map->rttargetx, 2);
             ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->rttargetY, 2);	
+            ft_putnbr_fd(map->rttargety, 2);	
 
             definepiece(map, pc);
             fizzylogic(map, pc);

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/30 17:22:05 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:27:47 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ int     initmap(t_map *map)
     int i;
 
     i = 0;
-    map->map = (char **)malloc(sizeof(char *) * (map->mapH + 1));
-    while (i < map->mapH)
+    map->map = (char **)malloc(sizeof(char *) * (map->h + 1));
+    while (i < map->h)
     {
-        map->map[i] = (char *)malloc(sizeof(char *) * (map->mapW + 1));
+        map->map[i] = (char *)malloc(sizeof(char *) * (map->w + 1));
         i++;
     }
 	i = 0;
-	map->heatmap = (int **)malloc(sizeof(int *) * (map->mapH + 1));
-    while (i < map->mapH)
+	map->heatmap = (int **)malloc(sizeof(int *) * (map->h + 1));
+    while (i < map->h)
     {
-        map->heatmap[i] = (int *)malloc(sizeof(int *) * (map->mapW + 1));
+        map->heatmap[i] = (int *)malloc(sizeof(int *) * (map->w + 1));
         i++;
     }
     map->state = 1;
@@ -38,8 +38,8 @@ int     initmap(t_map *map)
     map->dirh = 0;
     map->dirv = 0;
     map->raytrace = 0;
-    map->rttargetX = -1;
-    map->rttargetY = -1;
+    map->rttargetx = -1;
+    map->rttargety = -1;
 	map->validplaces = 0;
 	map->threshold = 0;
     if (!(map->ping = (t_ping *)malloc(sizeof(t_ping))))
@@ -56,9 +56,9 @@ void    initheatmap(t_map *map)
 
     x = 0;
     y = 0;
-    while (y < map->mapH)
+    while (y < map->h)
     {
-        while (x < map->mapW)
+        while (x < map->w)
         {
             map->heatmap[y][x] = 0;
 			x++;

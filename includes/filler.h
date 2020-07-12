@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/01 09:28:07 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:28:01 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ typedef struct  s_ping
     int         count;
     char        ndl;
     char        hstck;
-    int         pingedX;
-    int         pingedY;
+    int         x;
+    int         y;
 }               t_ping;
 
 typedef struct  s_map
 {
-    int         psX;
-    int         psY;
-    int         mapH;
-    int         mapW;
-    int         osX;
-    int         osY;
+    int         psx;
+    int         psy;
+    int         h;
+    int         w;
+    int         osx;
+    int         osy;
     char        **map;
 	int			**heatmap;
     int         state;
@@ -58,23 +58,23 @@ typedef struct  s_map
     int         foundplayer;
     int         foundop;
     int         strategy;
-    int         tempX;
-    int         tempY;
+    int         tempx;
+    int         tempy;
     char        psymbol;
     char        osymbol;
-    int         lastpcX;
-    int         lastpcY;
+    int         lastpcx;
+    int         lastpcy;
     int         lastpcopfound;
-    int         lastpcopX;
-    int         lastpcopY;
+    int         lastpcopx;
+    int         lastpcopy;
     int         radius;
-    int         targetX;
-    int         targetY;
+    int         targetx;
+    int         targety;
     int         dirh;
     int         dirv;
     int         raytrace;
-    int         rttargetX;
-    int         rttargetY;
+    int         rttargetx;
+    int         rttargety;
 	int			validplaces;
 	int			threshold;
     t_ping      *ping;

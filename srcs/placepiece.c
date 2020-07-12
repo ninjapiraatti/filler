@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/01 09:27:17 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:28:01 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     {
         while (pX < pc->pieceW)
         {
-            if (y + pY >= map->mapH || x + pW > map->mapW || (y + pY) < 0 || (x + pX) < 0)
+            if (y + pY >= map->h || x + pW > map->w || (y + pY) < 0 || (x + pX) < 0)
             {
                 pc->isvaliddot = 0;
                 pc->isvalidx = 0;
@@ -89,8 +89,8 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
 		pc->placeY = y;
     	pc->placeX = x;
 	}
-    map->lastpcY = y;
-    map->lastpcX = x;
+    map->lastpcy = y;
+    map->lastpcx = x;
     return (1);
 }
 
@@ -104,21 +104,21 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius, int threshold)
     {
 		if (map->validplaces > threshold)
 			return (1);
-        if (isplacevalid(map, pc, map->tempX + x, map->tempY + y))
+        if (isplacevalid(map, pc, map->tempx + x, map->tempy + y))
             map->validplaces++;
-        if (isplacevalid(map, pc, map->tempX + y, map->tempY + x))
+        if (isplacevalid(map, pc, map->tempx + y, map->tempy + x))
             map->validplaces++;
-        if (isplacevalid(map, pc, map->tempX - y, map->tempY + x))
+        if (isplacevalid(map, pc, map->tempx - y, map->tempy + x))
             map->validplaces++;
-        if (isplacevalid(map, pc, map->tempX - x, map->tempY + y))
+        if (isplacevalid(map, pc, map->tempx - x, map->tempy + y))
             map->validplaces++;
-        if (isplacevalid(map, pc, map->tempX - x, map->tempY - y))
+        if (isplacevalid(map, pc, map->tempx - x, map->tempy - y))
             map->validplaces++;
-        if (isplacevalid(map, pc, map->tempX - y, map->tempY - x))
+        if (isplacevalid(map, pc, map->tempx - y, map->tempy - x))
             map->validplaces++;
-        if (isplacevalid(map, pc, map->tempX + y, map->tempY - x))
+        if (isplacevalid(map, pc, map->tempx + y, map->tempy - x))
             map->validplaces++;
-        if (isplacevalid(map, pc, map->tempX + x, map->tempY - y))
+        if (isplacevalid(map, pc, map->tempx + x, map->tempy - y))
             map->validplaces++;
 		if (err <= 0)
 		{
@@ -134,7 +134,7 @@ int drawcircle(t_map *map, t_piece *pc, int tries, int radius, int threshold)
     }
     map->radius++;
     if (tries % TRIES_INTERVAL == 0)
-        map->tempX++;
+        map->tempx++;
     return (0);
 }
 
@@ -149,7 +149,7 @@ int crosscheck(t_map *map, t_piece *pc)
         x = -1;
         while (x < 1)
         {
-            if (isplacevalid(map, pc, map->targetX, map->targetY + y))
+            if (isplacevalid(map, pc, map->targetx, map->targety + y))
                 return (1);
             x++;
         }
@@ -161,7 +161,7 @@ int crosscheck(t_map *map, t_piece *pc)
         y = -1;
         while (y < 1)
         {
-            if (isplacevalid(map, pc, map->targetX + x, map->targetY))
+            if (isplacevalid(map, pc, map->targetx + x, map->targety))
                 return (1);
             y++;
         }
@@ -182,10 +182,10 @@ int recursion (t_map *map, t_piece *pc, int tries)
     tries++;
     if (tries > 2000)
     {
-        while (y < map->mapH)
+        while (y < map->h)
         {
             x = -80;
-            while (x < map->mapW)
+            while (x < map->w)
             {
                 if (isplacevalid(map, pc, x, y) == 1)
                     return (1);
@@ -196,7 +196,7 @@ int recursion (t_map *map, t_piece *pc, int tries)
         }
         return (0);
     }
-    if (map->mapW > 50 && map->round < 300 && map->raytrace == 1 && crosscheck(map, pc) == 1)
+    if (map->w > 50 && map->round < 300 && map->raytrace == 1 && crosscheck(map, pc) == 1)
        return (1);
     if (drawcircle(map, pc, tries, map->radius, map->threshold) == 1)
         return (1);

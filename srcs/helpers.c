@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/09 19:44:42 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:27:47 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,29 @@ Ping returns the number of occurrences of that character within the radius. */
 
 void			ping_circle(t_map *map, int x, int y, char c, int radius)
 {
-	if(!((map->ping->pingedY + y >= map->mapH - 1) || (map->ping->pingedX + x >= map->mapW - 1)))
-		if(map->map[map->ping->pingedY + y][map->ping->pingedX + x] == c)
+	if(!((map->ping->y + y >= map->h - 1) || (map->ping->x + x >= map->w - 1)))
+		if(map->map[map->ping->y + y][map->ping->x + x] == c)
 			map->ping->count++;
-	if(!((map->ping->pingedY + x >= map->mapH - 1) || (map->ping->pingedX + y >= map->mapW - 1)))
-		if(map->map[map->ping->pingedY + x][map->ping->pingedX + y] == c)
+	if(!((map->ping->y + x >= map->h - 1) || (map->ping->x + y >= map->w - 1)))
+		if(map->map[map->ping->y + x][map->ping->x + y] == c)
 			map->ping->count++;
-	if(!((map->ping->pingedY + x >= map->mapH - 1) || (map->ping->pingedX - y < 0)))
-		if(map->map[map->ping->pingedY + x][map->ping->pingedX - y] == c)
+	if(!((map->ping->y + x >= map->h - 1) || (map->ping->x - y < 0)))
+		if(map->map[map->ping->y + x][map->ping->x - y] == c)
 			map->ping->count++;
-	if(!((map->ping->pingedY + y >= map->mapH - 1) || (map->ping->pingedX - x < 0)))
-		if(map->map[map->ping->pingedY + y][map->ping->pingedX - x] == c)
+	if(!((map->ping->y + y >= map->h - 1) || (map->ping->x - x < 0)))
+		if(map->map[map->ping->y + y][map->ping->x - x] == c)
 			map->ping->count++;
-	if(!((map->ping->pingedY - y < 0) || (map->ping->pingedX - x < 0)))
-		if(map->map[map->ping->pingedY - y][map->ping->pingedX - x] == c)
+	if(!((map->ping->y - y < 0) || (map->ping->x - x < 0)))
+		if(map->map[map->ping->y - y][map->ping->x - x] == c)
 			map->ping->count++;
-	if(!((map->ping->pingedY - x < 0) || (map->ping->pingedX - y < 0)))
-		if(map->map[map->ping->pingedY - x][map->ping->pingedX - y] == c)
+	if(!((map->ping->y - x < 0) || (map->ping->x - y < 0)))
+		if(map->map[map->ping->y - x][map->ping->x - y] == c)
 			map->ping->count++;
-	if(!((map->ping->pingedY - x < 0) || (map->ping->pingedX + y >= map->mapW - 1)))
-		if(map->map[map->ping->pingedY - x][map->ping->pingedX + y] == c)
+	if(!((map->ping->y - x < 0) || (map->ping->x + y >= map->w - 1)))
+		if(map->map[map->ping->y - x][map->ping->x + y] == c)
 			map->ping->count++;
-	if(!((map->ping->pingedY - y < 0) || (map->ping->pingedX + x >= map->mapW - 1)))
-		if(map->map[map->ping->pingedY - y][map->ping->pingedX + x] == c)
+	if(!((map->ping->y - y < 0) || (map->ping->x + x >= map->w - 1)))
+		if(map->map[map->ping->y - y][map->ping->x + x] == c)
 			map->ping->count++;
 }
 
@@ -49,8 +49,8 @@ t_ping		*ping(t_map *map, int pingX, int pingY, char c, int radius)
 	int y = 0;
 	int err = 0;
 	map->ping->count = 0;
-	map->ping->pingedX = pingX;
-	map->ping->pingedY = pingY;
+	map->ping->x = pingX;
+	map->ping->y = pingY;
 
 	while (x >= y)
     {
@@ -77,26 +77,26 @@ int     direction (t_map *map, t_piece *pc, int dir)
         dir = 12;
     if (dir == 11 || dir == 12 || dir == 1)
     {
-        map->targetY = 0;
+        map->targety = 0;
         if (dir == 1)
-            map->targetX = (map->mapW / 4) * 3;
+            map->targetx = (map->w / 4) * 3;
         else  
-            map->targetX = (map->mapW / 4) * (dir - 10);    
+            map->targetx = (map->w / 4) * (dir - 10);    
     }
     else if (dir == 2 || dir == 3 || dir == 4)
     {
-        map->targetX = map->mapW - 1; 
-        map->targetY = (map->mapH / 4) * (dir - 1); 
+        map->targetx = map->w - 1; 
+        map->targety = (map->h / 4) * (dir - 1); 
     }
     else if (dir == 5 || dir == 6 || dir == 7)
     {
-        map->targetY = map->mapH - 1;   
-        map->targetX = (map->mapW / 4) * (8 - dir);  
+        map->targety = map->h - 1;   
+        map->targetx = (map->w / 4) * (8 - dir);  
     }
     else if (dir == 8 || dir == 9 || dir == 10)
     {
-        map->targetX = 0;  
-        map->targetY = (map->mapH / 4) * (11 - dir);
+        map->targetx = 0;  
+        map->targety = (map->h / 4) * (11 - dir);
     }
     return (0);
 }
@@ -115,19 +115,19 @@ int     raytrace(t_map *map, t_piece *pc)
     y = 0;
     i = 0;
     count = 0;
-    while (y < map->mapH - 1)
+    while (y < map->h - 1)
     {
         x = 0;
-        while (x < map->mapW - 1)
+        while (x < map->w - 1)
         {
             while(map->map[y][x] == '.')
                 x++;
             if (map->map[y][x] == map->psymbol)
             {
-                if (x > count && map->rttargetX != 0)
+                if (x > count && map->rttargetx != 0)
                 {
-                    map->rttargetX = 0;
-                    map->rttargetY = y;
+                    map->rttargetx = 0;
+                    map->rttargety = y;
                     count = x;
                     break ;
                 }
@@ -143,20 +143,20 @@ int     raytrace(t_map *map, t_piece *pc)
         y++;
     }
     y = 0;
-    while (y < map->mapH - 1)
+    while (y < map->h - 1)
     {
-        x = map->mapW - 1;
+        x = map->w - 1;
         while (x > 0)
         {
             while(map->map[y][x] == '.')
                 x--;
             if (map->map[y][x] == map->psymbol)
             {
-                if ((map->mapW - x) > count)
+                if ((map->w - x) > count)
                 {
-                    map->rttargetX = map->mapW - 1;
-                    map->rttargetY = y;
-                    count = map->mapW - x;
+                    map->rttargetx = map->w - 1;
+                    map->rttargety = y;
+                    count = map->w - x;
                     break ;
                 }
                 else
@@ -164,7 +164,7 @@ int     raytrace(t_map *map, t_piece *pc)
             }
             else
             {
-                x = map->mapW - 1;
+                x = map->w - 1;
                 break;
             }
         }
@@ -173,20 +173,20 @@ int     raytrace(t_map *map, t_piece *pc)
     x = 0;
     if (map->round > 140)
     {
-        while (x < map->mapW - 1)
+        while (x < map->w - 1)
         {
-            y = map->mapH - 1;
+            y = map->h - 1;
             while (y > 0)
             {
                 while(map->map[y][x] == '.' && y > 0)
                     y--;
                 if (map->map[y][x] == map->psymbol)
                 {
-                    if ((map->mapH - y) > count)
+                    if ((map->h - y) > count)
                     {
-                        map->rttargetX = x;
-                        map->rttargetY = map->mapH - 1;
-                        count = map->mapH - y;
+                        map->rttargetx = x;
+                        map->rttargety = map->h - 1;
+                        count = map->h - y;
                         break ;
                     }
                     else
@@ -194,19 +194,19 @@ int     raytrace(t_map *map, t_piece *pc)
                 }
                 else
                 {
-                    y = map->mapH - 1;
+                    y = map->h - 1;
                     break;
                 }
             }
             x++;
         }
         x = 0;
-        while (x < map->mapW - 1)
+        while (x < map->w - 1)
         {
             y = 0;
-            while (y < map->mapH)
+            while (y < map->h)
             {
-                while(map->map[y][x] == '.' && y < map->mapH - 1)
+                while(map->map[y][x] == '.' && y < map->h - 1)
                 {
                     y++;
                 }
@@ -214,8 +214,8 @@ int     raytrace(t_map *map, t_piece *pc)
                 {
                     if (y > count)
                     {
-                        map->rttargetX = x;
-                        map->rttargetY = 0;
+                        map->rttargetx = x;
+                        map->rttargety = 0;
                         count = y;
                         break ;
                     }

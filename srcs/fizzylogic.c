@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/01 09:24:24 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:27:47 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int     entercoordinates(t_map *map, t_piece *pc)
 {
     if (map->strategy == STRATEGY_INITIAL)
     {
-        map->tempX = map->osX;
-        map->tempY = map->osY;
+        map->tempx = map->osx;
+        map->tempy = map->osy;
     }
     else
     {
-        map->tempX = map->targetX;
-        map->tempY = map->targetY;
+        map->tempx = map->targetx;
+        map->tempy = map->targety;
     }
     return (1);
 }
@@ -31,9 +31,9 @@ int     entercoordinates(t_map *map, t_piece *pc)
 
 int     branchstrategy(t_map *map, t_piece *pc)
 {
-    if (map->psX <= map->osX && (map->dirh == 0 || map->dirv == 0))
+    if (map->psx <= map->osx && (map->dirh == 0 || map->dirv == 0))
     {
-        if (map->psY <= map->osY)
+        if (map->psy <= map->osy)
         {
             map->dirh = 2;
             map->dirv = 7;
@@ -48,7 +48,7 @@ int     branchstrategy(t_map *map, t_piece *pc)
     }
     else if (map->dirh == 0 || map->dirv == 0)
     {
-        if (map->psY >= map->osY)
+        if (map->psy >= map->osy)
         {
             map->dirh = 9;
             map->dirv = 1;
@@ -61,13 +61,13 @@ int     branchstrategy(t_map *map, t_piece *pc)
             map->strategy = STRATEGY_TO_SW;
         }
     }
-    if (map->mapW < 40)
+    if (map->w < 40)
         map->dirh = map->dirv;
     if (pc->horizontal == 1)
         direction(map, pc, map->dirh);
     else
         direction(map, pc, map->dirv);
-    ping(map, map->targetX, map->targetY, map->psymbol, 2);
+    ping(map, map->targetx, map->targety, map->psymbol, 2);
     if (map->ping->count > 2 && map->strategy % 10 == 0)
     {
         if (pc->horizontal == 1)
@@ -89,8 +89,8 @@ int     latestrategy(t_map *map, t_piece *pc)
 	if (map->round < 2000)
     {	
 		map->threshold = 100;
-        map->targetX = map->lastpcopX;
-        map->targetY = map->lastpcopY;
+        map->targetx = map->lastpcopx;
+        map->targety = map->lastpcopy;
 		map->strategy = STRATEGY_LATE;
 		return (0);
     }
@@ -99,15 +99,15 @@ int     latestrategy(t_map *map, t_piece *pc)
 		map->threshold = 1;
         if (map->raytrace == 0)
             raytrace(map, pc);
-        map->targetX = map->lastpcopX;
-        map->targetY = map->lastpcopY;
-        if (map->raytrace == 1 && map->mapW > 30)
+        map->targetx = map->lastpcopx;
+        map->targety = map->lastpcopy;
+        if (map->raytrace == 1 && map->w > 30)
         {
-            map->targetX = map->rttargetX;
-        	map->targetY = map->rttargetY;
+            map->targetx = map->rttargetx;
+        	map->targety = map->rttargety;
         }
     } 
-    ping(map, map->rttargetX, map->rttargetY, map->psymbol, 2);
+    ping(map, map->rttargetx, map->rttargety, map->psymbol, 2);
     if (map->ping->count > 2)
         map->raytrace = 2;
     map->strategy = STRATEGY_LATE;
@@ -122,13 +122,13 @@ int     updatestrategy(t_map *map, t_piece *pc)
     int     turns;
 
     turns = TURNS_THRESHOLD_SMALL;
-    if (map->mapW > 30)
+    if (map->w > 30)
         turns = TURNS_THRESHOLD_MEDIUM;
-    if (map->mapW > 90)
+    if (map->w > 90)
         turns = TURNS_THRESHOLD_LARGE; // Best guess so far 200
-    if (map->round < ((map->mapH * map->mapW) / (TURNS_MULTIPLIER * turns)))
+    if (map->round < ((map->h * map->w) / (TURNS_MULTIPLIER * turns)))
         map->strategy = 1;
-    else if (map->round > ((map->mapH * map->mapW) / turns))
+    else if (map->round > ((map->h * map->w) / turns))
         latestrategy(map, pc);
     else
         branchstrategy(map, pc);
