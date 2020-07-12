@@ -6,21 +6,11 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:24:12 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 14:43:18 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 18:23:19 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
-
-int		adjacent(t_map *map, int x, int y)
-{
-	if (map->map[y][x + 1] == map->osymbol ||
-	map->map[y][x - 1] == map->osymbol ||
-	map->map[y + 1][x] == map->osymbol ||
-	map->map[y - 1][x] == map->osymbol)
-		return (1);
-	return (0);
-}
 
 int		doping(t_map *map, int x, int y)
 {
@@ -34,9 +24,12 @@ int		doping(t_map *map, int x, int y)
 	return (map->radius);
 }
 
-/* Iterate_map goes through the map but doesn't go to edges to avoid segfaults. */
+/*
+** Heatmap goes through the map but doesn't
+** go to edges to avoid segfaults.
+*/
 
-int		iterate_map(t_map *map)
+void	heatmap(t_map *map)
 {
 	int	x;
 	int	y;
@@ -56,10 +49,4 @@ int		iterate_map(t_map *map)
 		y++;
 		x = 1;
 	}
-	return (0);
-}
-
-void	heatmap(t_map *map)
-{
-	iterate_map(map);
 }

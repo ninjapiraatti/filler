@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 14:27:47 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 18:30:19 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,17 @@ int     initpiece(t_piece *pc)
     int i;
 
     i = 0;
-    pc->pcmap = (char **)malloc(sizeof(char *) * (pc->pieceH + 1));
-    while (i < pc->pieceH)
+    pc->pcmap = (char **)malloc(sizeof(char *) * (pc->pieceh + 1));
+    while (i < pc->pieceh)
     {
-        pc->pcmap[i] = (char *)malloc(sizeof(char *) * (pc->pieceW + 1));
+        pc->pcmap[i] = (char *)malloc(sizeof(char *) * (pc->piecew + 1));
         i++;
     }
     pc->topleftset = 0;
     pc->isvaliddot = 0;
     pc->isvalidx = 0;
-	pc->bestvalueY = 0;
-	pc->bestvalueX = 0;
+	pc->bestvaluey = 0;
+	pc->bestvaluex = 0;
 	pc->bestvalue = 1000000;
     pc->offset_left = -1;
     pc->offset_top = -1;

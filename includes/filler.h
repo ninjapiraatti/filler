@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 17:57:31 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 18:31:11 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,16 @@ typedef struct  s_map
 
 typedef struct  s_piece
 {
-    int         pieceH;
-    int         pieceW;
+    int         pieceh;
+    int         piecew;
     char        **pcmap;
     int         status;
-    int         placeY;
-    int         placeX;
-    int         topleftY;
+    int         placey;
+    int         placex;
+    int         toplefty;
     int         topleftX;
-    int         bottomrightY;
-    int         bottomrightX;
+    int         bottomrighty;
+    int         bottomrightx;
     int         topleftset;
     int         isvaliddot;
     int         isvalidx;
@@ -103,8 +103,8 @@ typedef struct  s_piece
     int         offset_left;
 	int			bestvalue;
 	int			bestvaluetemp;
-	int			bestvalueX;
-	int			bestvalueY;
+	int			bestvaluex;
+	int			bestvaluey;
 }               t_piece;
 
 
@@ -117,7 +117,7 @@ int         definepiece(t_map *map, t_piece *pc);
 int         fizzylogic(t_map *map, t_piece *pc);
 void		strategy_to_dir(t_map *map);
 int         direction (t_map *map, t_piece *pc, int dir);
-t_ping      *ping(t_map *map, int pingX, int pingY, char c);
+t_ping      *ping(t_map *map, int pingx, int pingy, char c);
 int         drawcircle(t_map *map, t_piece *pc, int tries, int threshold);
 int         raytrace(t_map *map, t_piece *pc);
 void		heatmap(t_map *map);

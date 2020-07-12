@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 14:45:34 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 18:30:19 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
 
     pY = pc->offset_top;
     pX = pc->offset_left;
-    pW = pc->bottomrightX - pc->topleftX + 1;
-    pH = pc->bottomrightY - pc->topleftY + 1; 
+    pW = pc->bottomrightx - pc->topleftX + 1;
+    pH = pc->bottomrighty - pc->toplefty + 1; 
     i = 0;
     j = 0;
     pc->bestvaluetemp = 0;
 	pc->isvalidx = 0;
-    while (pY < pc->pieceH)
+    while (pY < pc->pieceh)
     {
-        while (pX < pc->pieceW)
+        while (pX < pc->piecew)
         {
             if (y + pY >= map->h || x + pW > map->w || (y + pY) < 0 || (x + pX) < 0)
             {
@@ -74,20 +74,20 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
 	if (pc->bestvaluetemp < pc->bestvalue && pc->bestvaluetemp > 0)
 	{
 		pc->bestvalue = pc->bestvaluetemp;
-		pc->bestvalueX = x;
-		pc->bestvalueY = y;
-		pc->placeY = pc->bestvalueY;
-    	pc->placeX = pc->bestvalueX;
+		pc->bestvaluex = x;
+		pc->bestvaluey = y;
+		pc->placey = pc->bestvaluey;
+    	pc->placex = pc->bestvaluex;
 	}
 	else if (pc->bestvalue != 1000000)
 	{
-		pc->placeY = pc->bestvalueY;
-    	pc->placeX = pc->bestvalueX;
+		pc->placey = pc->bestvaluey;
+    	pc->placex = pc->bestvaluex;
 	}
 	else 
 	{
-		pc->placeY = y;
-    	pc->placeX = x;
+		pc->placey = y;
+    	pc->placex = x;
 	}
     map->lastpcy = y;
     map->lastpcx = x;
@@ -216,7 +216,7 @@ int     placepiece(t_map *map, t_piece *pc, int strategy)
     if (recursion(map, pc, 2) == 1)
         return (1);
     ft_putstr_fd("Failed to place a piece:\n", 2);
-    while (i < pc->pieceH)
+    while (i < pc->pieceh)
     {
         ft_putstr_fd(pc->pcmap[i], 2);
         ft_putstr_fd("\n", 2);

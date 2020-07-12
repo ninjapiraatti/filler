@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 14:28:01 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 18:30:19 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ char    *writepiecemap(t_piece *pc, char *line, int y)
     int x;
 
     x = 0;
-    while (x < pc->pieceW)
+    while (x < pc->piecew)
     {
         pc->pcmap[y][x] = *line;
         x++;
         line++;
     }
-    if (y + 1 == pc->pieceH)
+    if (y + 1 == pc->pieceh)
         pc->status = 2;
     return (0);
 }
@@ -108,10 +108,10 @@ char    *writepiece(t_piece *pc, char *line)
 {
     while (ft_isdigit(*line) == 0)
         line++;
-    pc->pieceH = ft_atoi(line);
+    pc->pieceh = ft_atoi(line);
     while (ft_isdigit(*line) == 1)
         line++;
-    pc->pieceW = ft_atoi(line);
+    pc->piecew = ft_atoi(line);
     return (line);
 }
 
@@ -184,16 +184,16 @@ int     readinput(t_map *map, t_piece *pc, int fd)
 			ft_putstr_fd(" | Optimal place: ", 2);
             ft_putnbr_fd(pc->bestvalue, 2);
             ft_putstr_fd(" at: ", 2);
-            ft_putnbr_fd(pc->bestvalueX, 2);
+            ft_putnbr_fd(pc->bestvaluex, 2);
             ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(pc->bestvalueY, 2);
+            ft_putnbr_fd(pc->bestvaluey, 2);
             ft_putstr_fd(" Temp best: ", 2);
             ft_putnbr_fd(pc->bestvaluetemp, 2);
 			ft_putchar_fd('\n', 2);
 
-            ft_putnbr(pc->placeY);
+            ft_putnbr(pc->placey);
             ft_putchar(' ');
-            ft_putnbr(pc->placeX);
+            ft_putnbr(pc->placex);
             ft_putchar('\n');
 
             pc->status = 0;

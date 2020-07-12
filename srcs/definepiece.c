@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:16:21 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 16:26:42 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 18:29:55 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void		offset_left(t_piece *pc)
 	left = 0;
 	x = 0;
 	y = 0;
-	while (x < (pc->pieceW))
+	while (x < (pc->piecew))
 	{
 		y = 0;
-		while (y < (pc->pieceH))
+		while (y < (pc->pieceh))
 		{
 			if (pc->pcmap[y][x] == '*' && pc->offset_left == -1)
 			{
@@ -48,10 +48,10 @@ void		offset_top(t_piece *pc)
 	top = 0;
 	x = 0;
 	y = 0;
-	while (y < (pc->pieceH))
+	while (y < (pc->pieceh))
 	{
 		x = 0;
-		while (x < (pc->pieceW))
+		while (x < (pc->piecew))
 		{
 			if (pc->pcmap[y][x] == '*' && pc->offset_top == -1)
 			{
@@ -73,20 +73,20 @@ void		get_corners(t_map *map, t_piece *pc)
 
 	y = 0;
 	x = 0;
-	while (y < pc->pieceH)
+	while (y < pc->pieceh)
 	{
-		while (x < pc->pieceW)
+		while (x < pc->piecew)
 		{
 			if (pc->pcmap[y][x] == '*' && pc->topleftset == 0)
 			{
-				pc->topleftY = y;
+				pc->toplefty = y;
 				pc->topleftX = x;
 				pc->topleftset = 1;
 			}
 			else if (pc->pcmap[y][x] == '*')
 			{
-				pc->bottomrightY = y;
-				pc->bottomrightX = x;
+				pc->bottomrighty = y;
+				pc->bottomrightx = x;
 			}
 			x++;
 		}
@@ -101,9 +101,9 @@ int			definepiece(t_map *map, t_piece *pc)
 	pc->vertical = 0;
 	pc->diagonal = 0;
 	get_corners(map, pc);
-	if (pc->bottomrightX - pc->topleftX > pc->bottomrightY - pc->topleftY)
+	if (pc->bottomrightx - pc->topleftX > pc->bottomrighty - pc->toplefty)
 		pc->horizontal = 1;
-	else if (pc->bottomrightX - pc->topleftX < pc->bottomrightY - pc->topleftY)
+	else if (pc->bottomrightx - pc->topleftX < pc->bottomrighty - pc->toplefty)
 		pc->vertical = 1;
 	else if (map->round % 2 == 0)
 		pc->horizontal = 1;
