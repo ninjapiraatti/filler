@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 14:27:47 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:41:22 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* Ping and its buddy ping_circle takescoordinates from the map, the "needle" character and radius. 
 Ping returns the number of occurrences of that character within the radius. */
 
-void			ping_circle(t_map *map, int x, int y, char c, int radius)
+void			ping_circle(t_map *map, int x, int y, char c)
 {
 	if(!((map->ping->y + y >= map->h - 1) || (map->ping->x + x >= map->w - 1)))
 		if(map->map[map->ping->y + y][map->ping->x + x] == c)
@@ -43,9 +43,9 @@ void			ping_circle(t_map *map, int x, int y, char c, int radius)
 			map->ping->count++;
 }
 
-t_ping		*ping(t_map *map, int pingX, int pingY, char c, int radius)
+t_ping		*ping(t_map *map, int pingX, int pingY, char c)
 {
-	int x = radius;
+	int x = map->radius;
 	int y = 0;
 	int err = 0;
 	map->ping->count = 0;
@@ -54,7 +54,7 @@ t_ping		*ping(t_map *map, int pingX, int pingY, char c, int radius)
 
 	while (x >= y)
     {
-		ping_circle(map, x, y, c, radius);
+		ping_circle(map, x, y, c);
         if (err <= 0)
         {
             y += 1;

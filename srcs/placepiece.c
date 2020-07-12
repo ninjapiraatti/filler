@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 14:28:01 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:45:34 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int     isplacevalid(t_map *map, t_piece *pc, int x, int y)
     return (1);
 }
 
-int drawcircle(t_map *map, t_piece *pc, int tries, int radius, int threshold)
+int drawcircle(t_map *map, t_piece *pc, int tries, int threshold)
 {
-    int x = radius;
+    int x = map->radius;
     int y = 0;
     int err = 0;
  
@@ -198,7 +198,7 @@ int recursion (t_map *map, t_piece *pc, int tries)
     }
     if (map->w > 50 && map->round < 300 && map->raytrace == 1 && crosscheck(map, pc) == 1)
        return (1);
-    if (drawcircle(map, pc, tries, map->radius, map->threshold) == 1)
+    if (drawcircle(map, pc, tries, map->threshold) == 1)
         return (1);
     if (recursion(map, pc, tries) == 0)
     {

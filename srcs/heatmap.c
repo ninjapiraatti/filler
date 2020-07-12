@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:24:12 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 14:24:33 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/12 14:43:18 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,14 @@ int		adjacent(t_map *map, int x, int y)
 
 int		doping(t_map *map, int x, int y)
 {
-	int	radius;
-
-	radius = 0;
-	ping(map, x, y, map->osymbol, radius);
-	while (map->ping->count < 1 && radius < 40)
+	map->radius = 0;
+	ping(map, x, y, map->osymbol);
+	while (map->ping->count < 1 && map->radius < 40)
 	{
-		radius++;
-		ping(map, x, y, map->osymbol, radius);
+		map->radius++;
+		ping(map, x, y, map->osymbol);
 	}
-	return (radius);
+	return (map->radius);
 }
 
 /* Iterate_map goes through the map but doesn't go to edges to avoid segfaults. */
