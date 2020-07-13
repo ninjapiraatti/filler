@@ -6,11 +6,50 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:36:29 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 11:11:42 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:53:57 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+
+int		isitonmap(t_map *map, t_piece *pc, int px, int py)
+{
+	if (pc->y + py >= map->h
+	|| pc->x + (pc->bottomrightx - pc->topleftx + 1) > map->w
+	|| (pc->y + py) < 0 || (pc->x + px) < 0)
+	{
+		pc->isvaliddot = 0;
+		pc->isvalidx = 0;
+		return (0);
+	}
+	return (1);
+}
+
+int		placepiece(t_map *map, t_piece *pc, int px, int py)
+{
+	if (pc->pcmap[py][px] == '*')
+	{
+		if (map->map[pc->y + py][pc->x + px] == '.')
+		{
+			pc->isvaliddot = 1;
+			pc->bestvaluetemp += map->heatmap[pc->y + py][pc->x + px];
+			return (1);
+		}
+		else if (map->map[pc->y + py][pc->x + px] == map->psymbol)
+		{
+			pc->isvalidx++;
+			return (1);
+		}
+		else
+		{
+			pc->isvaliddot = 0;
+			pc->isvalidx = 0;
+			return (0);
+		}
+	}
+	else
+		return (1);
+}
 
 int		end_operations(t_map *map, t_piece *pc, int x, int y)
 {
@@ -45,51 +84,26 @@ int		isplacevalid(t_map *map, t_piece *pc, int x, int y)
 {
 	int	py;
 	int	px;
-	int	ph;
-	int	pw;
 
 	py = pc->offset_top;
 	px = pc->offset_left;
-	pw = pc->bottomrightx - pc->topleftX + 1;
-	ph = pc->bottomrighty - pc->toplefty + 1;
 	pc->bestvaluetemp = 0;
 	pc->isvalidx = 0;
+	pc->x = x;
+	pc->y = y;
 	while (py < pc->h)
 	{
 		while (px < pc->w)
 		{
-			if (y + py >= map->h || x + pw > map->w
-			|| (y + py) < 0 || (x + px) < 0)
-			{
-				pc->isvaliddot = 0;
-				pc->isvalidx = 0;
+			if (isitonmap(map, pc, px, py) == 0)
 				return (0);
-			}
-			if (pc->pcmap[py][px] == '*')
-			{
-				if (map->map[y + py][x + px] == '.')
-				{
-					pc->isvaliddot = 1;
-					pc->bestvaluetemp += map->heatmap[y + py][x + px];
-					px++;
-				}
-				else if (map->map[y + py][x + px] == map->psymbol)
-				{
-					pc->isvalidx++;
-					px++;
-				}
-				else
-				{
-					pc->isvaliddot = 0;
-					pc->isvalidx = 0;
-					return (0);
-				}
-			}
+			if (placepiece(map, pc, px, py) == 0)
+				return (0);
 			else
 				px++;
 		}
 		px = pc->offset_left;
 		py++;
 	}
-	return (end_operations(map, pc, x, y));
+	return (end_operations(map, pc, pc->x, pc->y));
 }

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:16:21 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 11:03:20 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 12:42:16 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		get_corners(t_map *map, t_piece *pc)
 			if (pc->pcmap[y][x] == '*' && pc->topleftset == 0)
 			{
 				pc->toplefty = y;
-				pc->topleftX = x;
+				pc->topleftx = x;
 				pc->topleftset = 1;
 			}
 			else if (pc->pcmap[y][x] == '*')
@@ -100,10 +100,12 @@ int			definepiece(t_map *map, t_piece *pc)
 	pc->horizontal = 0;
 	pc->vertical = 0;
 	pc->diagonal = 0;
+	pc->x = 0;
+	pc->y = 0;
 	get_corners(map, pc);
-	if (pc->bottomrightx - pc->topleftX > pc->bottomrighty - pc->toplefty)
+	if (pc->bottomrightx - pc->topleftx > pc->bottomrighty - pc->toplefty)
 		pc->horizontal = 1;
-	else if (pc->bottomrightx - pc->topleftX < pc->bottomrighty - pc->toplefty)
+	else if (pc->bottomrightx - pc->topleftx < pc->bottomrighty - pc->toplefty)
 		pc->vertical = 1;
 	else if (map->round % 2 == 0)
 		pc->horizontal = 1;

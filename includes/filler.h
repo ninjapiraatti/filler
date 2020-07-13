@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 10:58:14 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 13:59:51 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,14 @@ typedef struct  s_piece
 {
     int         h;
     int         w;
+	int			x;
+	int			y;
     char        **pcmap;
     int         status;
     int         placey;
     int         placex;
     int         toplefty;
-    int         topleftX;
+    int         topleftx;
     int         bottomrighty;
     int         bottomrightx;
     int         topleftset;
@@ -107,6 +109,11 @@ typedef struct  s_piece
 
 
 int			readinput(t_map *map, t_piece *pc, int fd);
+char		*writeplayer(t_map *map, char *line);
+char		*getmapsize(t_map *map, char *line);
+void		getplayers(t_map *map, char *line);
+char		*writepiece(t_piece *pc, char *line);
+char		*writepiecemap(t_piece *pc, char *line);
 int         initmap(t_map *map);
 int         initpiece(t_piece *pc);
 int         printdebug(t_map *map, t_piece *pc, int pieceonly);

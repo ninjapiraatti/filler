@@ -6,7 +6,7 @@
 #    By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/01 14:57:04 by tlouekar          #+#    #+#              #
-#    Updated: 2020/07/13 09:36:10 by tlouekar         ###   ########.fr        #
+#    Updated: 2020/07/13 13:07:42 by tlouekar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = resources/players/tlouekar.filler
 
 SRCS = 	srcs/main.c \
 		srcs/readinput.c \
+		srcs/writedata.c \
 		srcs/initfiller.c \
 		srcs/definepiece.c \
 		srcs/searchplace.c \
@@ -24,6 +25,7 @@ SRCS = 	srcs/main.c \
 
 OBJS = 	main.o \
 		readinput.o \
+		writedata.o \
 		initfiller.o \
 		definepiece.o \
 		searchplace.o \
