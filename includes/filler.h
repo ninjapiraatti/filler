@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 18:42:04 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 19:02:08 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct  s_piece
 }               t_piece;
 
 
-int			readinput(t_map *map, t_piece *pc, int fd);
+void		readinput(t_map *map, t_piece *pc, int fd);
 char		*writeplayer(t_map *map, char *line);
 char		*getmapsize(t_map *map, char *line);
 void		get_last_op_pos(t_map *map, char *line);

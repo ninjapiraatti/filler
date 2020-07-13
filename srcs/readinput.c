@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 18:37:28 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 19:27:21 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			writedatas(t_map *map, t_piece *pc, char *line, int i)
 	return (i);
 }
 
-int			readinput(t_map *map, t_piece *pc, int fd)
+void		readinput(t_map *map, t_piece *pc, int fd)
 {
 	char	*line;
 	int		i;
@@ -67,11 +67,11 @@ int			readinput(t_map *map, t_piece *pc, int fd)
 			ft_putnbr(pc->placex);
 			ft_putchar('\n');
 			pc->status = 0;
-			pc->pcmap = NULL;
 			i = -1;
 			map->round++;
 			map->lastpcopfound = 0;
 		}
+		free(line);
 	}
-	return (0);
+	free(pc->pcmap);
 }

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 10:57:50 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 19:32:25 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,17 @@ int		recursion(t_map *map, t_piece *pc, int tries)
 int		searchplace(t_map *map, t_piece *pc, int strategy)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	map->radius = 0;
 	map->validplaces = 0;
 	if (recursion(map, pc, 2) == 1)
-		return (1);
-	ft_putstr_fd("Failed to place a piece:\n", 2);
-	while (i < pc->h)
 	{
-		ft_putstr_fd(pc->pcmap[i], 2);
-		ft_putstr_fd("\n", 2);
-		i++;
+		while (j < pc->h)
+		free(pc->pcmap[j]);
+		return (1);
 	}
 	return (0);
 }
