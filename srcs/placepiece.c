@@ -6,11 +6,40 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:36:29 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 09:37:26 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 11:11:42 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+
+int		end_operations(t_map *map, t_piece *pc, int x, int y)
+{
+	if (pc->isvaliddot == 0 || pc->isvalidx == 0 || pc->isvalidx > 1)
+	{
+		pc->isvaliddot = 0;
+		pc->isvalidx = 0;
+		return (0);
+	}
+	if (pc->bestvaluetemp < pc->bestvalue && pc->bestvaluetemp > 0)
+	{
+		pc->bestvalue = pc->bestvaluetemp;
+		pc->bestvaluex = x;
+		pc->bestvaluey = y;
+		pc->placey = pc->bestvaluey;
+		pc->placex = pc->bestvaluex;
+	}
+	else if (pc->bestvalue != 1000000)
+	{
+		pc->placey = pc->bestvaluey;
+		pc->placex = pc->bestvaluex;
+	}
+	else
+	{
+		pc->placey = y;
+		pc->placex = x;
+	}
+	return (1);
+}
 
 int		isplacevalid(t_map *map, t_piece *pc, int x, int y)
 {
@@ -25,9 +54,9 @@ int		isplacevalid(t_map *map, t_piece *pc, int x, int y)
 	ph = pc->bottomrighty - pc->toplefty + 1;
 	pc->bestvaluetemp = 0;
 	pc->isvalidx = 0;
-	while (py < pc->pieceh)
+	while (py < pc->h)
 	{
-		while (px < pc->piecew)
+		while (px < pc->w)
 		{
 			if (y + py >= map->h || x + pw > map->w
 			|| (y + py) < 0 || (x + px) < 0)
@@ -62,31 +91,5 @@ int		isplacevalid(t_map *map, t_piece *pc, int x, int y)
 		px = pc->offset_left;
 		py++;
 	}
-	if (pc->isvaliddot == 0 || pc->isvalidx == 0 || pc->isvalidx > 1)
-	{
-		pc->isvaliddot = 0;
-		pc->isvalidx = 0;
-		return (0);
-	}
-	if (pc->bestvaluetemp < pc->bestvalue && pc->bestvaluetemp > 0)
-	{
-		pc->bestvalue = pc->bestvaluetemp;
-		pc->bestvaluex = x;
-		pc->bestvaluey = y;
-		pc->placey = pc->bestvaluey;
-		pc->placex = pc->bestvaluex;
-	}
-	else if (pc->bestvalue != 1000000)
-	{
-		pc->placey = pc->bestvaluey;
-		pc->placex = pc->bestvaluex;
-	}
-	else
-	{
-		pc->placey = y;
-		pc->placex = x;
-	}
-	map->lastpcy = y;
-	map->lastpcx = x;
-	return (1);
+	return (end_operations(map, pc, x, y));
 }

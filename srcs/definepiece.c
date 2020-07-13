@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:16:21 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 18:29:55 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 11:03:20 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void		offset_left(t_piece *pc)
 	left = 0;
 	x = 0;
 	y = 0;
-	while (x < (pc->piecew))
+	while (x < (pc->w))
 	{
 		y = 0;
-		while (y < (pc->pieceh))
+		while (y < (pc->h))
 		{
 			if (pc->pcmap[y][x] == '*' && pc->offset_left == -1)
 			{
@@ -48,10 +48,10 @@ void		offset_top(t_piece *pc)
 	top = 0;
 	x = 0;
 	y = 0;
-	while (y < (pc->pieceh))
+	while (y < (pc->h))
 	{
 		x = 0;
-		while (x < (pc->piecew))
+		while (x < (pc->w))
 		{
 			if (pc->pcmap[y][x] == '*' && pc->offset_top == -1)
 			{
@@ -73,9 +73,9 @@ void		get_corners(t_map *map, t_piece *pc)
 
 	y = 0;
 	x = 0;
-	while (y < pc->pieceh)
+	while (y < pc->h)
 	{
-		while (x < pc->piecew)
+		while (x < pc->w)
 		{
 			if (pc->pcmap[y][x] == '*' && pc->topleftset == 0)
 			{

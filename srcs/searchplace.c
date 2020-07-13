@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 10:01:56 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 10:57:50 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,10 @@ int		drawcircle(t_map *map, t_piece *pc, int tries, int threshold)
 		if (map->validplaces > threshold)
 			return (1);
 		loopcircle(map, pc, x, y);
-		if (err <= 0)
-		{
-			y += 1;
-			err += 2 * y + 1;
-		}
-		if (err > 0)
-		{
-			x -= 1;
-			err -= 2 * x + 1;
-		}
+		err <= 0 ? y += 1 : 0;
+		err <= 0 ? err += 2 * y + 1 : 0;
+		err > 0 ? x -= 1 : 0;
+		err > 0 ? err -= 2 * x + 1 : 0;
 	}
 	map->radius++;
 	if (tries % TRIES_INTERVAL == 0)
@@ -102,7 +96,7 @@ int		searchplace(t_map *map, t_piece *pc, int strategy)
 	if (recursion(map, pc, 2) == 1)
 		return (1);
 	ft_putstr_fd("Failed to place a piece:\n", 2);
-	while (i < pc->pieceh)
+	while (i < pc->h)
 	{
 		ft_putstr_fd(pc->pcmap[i], 2);
 		ft_putstr_fd("\n", 2);

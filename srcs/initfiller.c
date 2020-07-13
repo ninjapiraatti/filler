@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 09:11:27 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 10:58:00 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ int		initpiece(t_piece *pc)
 	int	i;
 
 	i = 0;
-	pc->pcmap = (char **)malloc(sizeof(char *) * (pc->pieceh + 1));
-	while (i < pc->pieceh)
+	pc->pcmap = (char **)malloc(sizeof(char *) * (pc->h + 1));
+	while (i < pc->h)
 	{
-		pc->pcmap[i] = (char *)malloc(sizeof(char *) * (pc->piecew + 1));
+		pc->pcmap[i] = (char *)malloc(sizeof(char *) * (pc->w + 1));
 		i++;
 	}
 	pc->topleftset = 0;

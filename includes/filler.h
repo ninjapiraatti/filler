@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 09:37:52 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 10:58:14 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ typedef struct  s_map
     int         tempy;
     char        psymbol;
     char        osymbol;
-    int         lastpcx;
-    int         lastpcy;
     int         lastpcopfound;
     int         lastpcopx;
     int         lastpcopy;
@@ -83,8 +81,8 @@ typedef struct  s_map
 
 typedef struct  s_piece
 {
-    int         pieceh;
-    int         piecew;
+    int         h;
+    int         w;
     char        **pcmap;
     int         status;
     int         placey;

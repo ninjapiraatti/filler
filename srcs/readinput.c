@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 09:38:57 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 10:58:00 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ char    *writepiecemap(t_piece *pc, char *line, int y)
     int x;
 
     x = 0;
-    while (x < pc->piecew)
+    while (x < pc->w)
     {
         pc->pcmap[y][x] = *line;
         x++;
         line++;
     }
-    if (y + 1 == pc->pieceh)
+    if (y + 1 == pc->h)
         pc->status = 2;
     return (0);
 }
@@ -108,10 +108,10 @@ char    *writepiece(t_piece *pc, char *line)
 {
     while (ft_isdigit(*line) == 0)
         line++;
-    pc->pieceh = ft_atoi(line);
+    pc->h = ft_atoi(line);
     while (ft_isdigit(*line) == 1)
         line++;
-    pc->piecew = ft_atoi(line);
+    pc->w = ft_atoi(line);
     return (line);
 }
 
@@ -160,10 +160,6 @@ int     readinput(t_map *map, t_piece *pc, int fd)
         {   
             ft_putstr_fd(" Round: ", 2);
             ft_putnbr_fd(map->round, 2);
-            ft_putstr_fd(" | lastPX, lastPY: ", 2);
-            ft_putnbr_fd(map->lastpcx, 2);
-            ft_putstr_fd(", ", 2);
-            ft_putnbr_fd(map->lastpcy, 2);
             ft_putstr_fd(" | lastOX, lastOY: ", 2);
             ft_putnbr_fd(map->lastpcopx, 2);
             ft_putstr_fd(", ", 2);
