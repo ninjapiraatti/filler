@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 18:31:11 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 09:37:52 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ int			readinput(t_map *map, t_piece *pc, int fd);
 int         initmap(t_map *map);
 int         initpiece(t_piece *pc);
 int         printdebug(t_map *map, t_piece *pc, int pieceonly);
-int         placepiece(t_map *map, t_piece *pc, int strategy);
+int         searchplace(t_map *map, t_piece *pc, int strategy);
+int			isplacevalid(t_map *map, t_piece *pc, int x, int y);
 int         definepiece(t_map *map, t_piece *pc);
 int         fizzylogic(t_map *map, t_piece *pc);
 void		strategy_to_dir(t_map *map);

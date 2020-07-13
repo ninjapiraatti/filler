@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 18:14:49 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 09:03:31 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int		entercoordinates(t_map *map, t_piece *pc)
 
 int		branchstrategy(t_map *map, t_piece *pc)
 {
-	strategy_to_dir(map);
+	if (map->dirh == 0 || map->dirv == 0)
+		strategy_to_dir(map);
 	if (map->w < 40)
 		map->dirh = map->dirv;
 	if (pc->horizontal == 1)

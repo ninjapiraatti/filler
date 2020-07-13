@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/12 18:30:19 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 09:38:57 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ int     readinput(t_map *map, t_piece *pc, int fd)
 
             definepiece(map, pc);
             fizzylogic(map, pc);
-            placepiece(map, pc, map->strategy);
+            searchplace(map, pc, map->strategy);
 
 			ft_putstr_fd(" | Optimal place: ", 2);
             ft_putnbr_fd(pc->bestvalue, 2);

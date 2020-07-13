@@ -6,7 +6,7 @@
 #    By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/01 14:57:04 by tlouekar          #+#    #+#              #
-#    Updated: 2020/07/01 09:28:22 by tlouekar         ###   ########.fr        #
+#    Updated: 2020/07/13 09:36:10 by tlouekar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS = 	srcs/main.c \
 		srcs/readinput.c \
 		srcs/initfiller.c \
 		srcs/definepiece.c \
+		srcs/searchplace.c \
 		srcs/placepiece.c \
 		srcs/fizzylogic.c \
 		srcs/helpers.c \
@@ -25,6 +26,7 @@ OBJS = 	main.o \
 		readinput.o \
 		initfiller.o \
 		definepiece.o \
+		searchplace.o \
 		placepiece.o \
 		fizzylogic.o \
 		helpers.o \
