@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 10:58:00 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 18:42:15 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int		init_more_map(t_map *map)
 	map->validplaces = 0;
 	map->threshold = 0;
 	if (!(map->ping = (t_ping *)malloc(sizeof(t_ping))))
-		return (0);
-	if (!(map->area = (t_area *)malloc(sizeof(t_area))))
 		return (0);
 	return (1);
 }
@@ -54,6 +52,34 @@ int		initmap(t_map *map)
 	if (init_more_map(map) == 0)
 		return (0);
 	return (1);
+}
+
+void	get_start_positions(t_map *map, char *line)
+{
+	int		x;
+	int		y;
+	int		i;
+
+	x = 0;
+	y = ft_atoi(line);
+	i = 4;
+	while (x < map->w)
+	{
+		if ((line[i] == map->psymbol) && map->foundplayer == 0)
+		{
+			map->psx = x;
+			map->psy = y;
+			map->foundplayer = 1;
+		}
+		else if ((line[i] == map->osymbol) && map->foundop == 0)
+		{
+			map->osx = x;
+			map->osy = y;
+			map->foundop = 1;
+		}
+		x++;
+		i++;
+	}
 }
 
 void	initheatmap(t_map *map)

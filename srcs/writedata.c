@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 13:06:17 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 15:21:58 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 18:38:28 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ char		*getmapsize(t_map *map, char *line)
 }
 
 /*
-** Getplayers enters the players' initial positions to the struct.
+** get_last_op_pos gets the last opponent position and writes it to the struct.
 */
 
-void		getplayers(t_map *map, char *line)
+void		get_last_op_pos(t_map *map, char *line)
 {
 	int		x;
 	int		y;
@@ -62,28 +62,18 @@ void		getplayers(t_map *map, char *line)
 	i = 4;
 	while (x < map->w)
 	{
-		if (line[i] == map->osymbol && map->map[y][x] == '.' && map->lastpcopfound == 0)
+		if (line[i] == map->osymbol &&
+		map->map[y][x] == '.' && map->lastpcopfound == 0)
 		{
 			map->lastpcopx = x;
 			map->lastpcopy = y;
 			map->lastpcopfound = 1;
 		}
 		map->map[y][x] = line[i];
-		if ((line[i] == map->psymbol) && map->foundplayer == 0)
-		{
-			map->psx = x;
-			map->psy = y;
-			map->foundplayer = 1;
-		}
-		else if ((line[i] == map->osymbol) && map->foundop == 0)
-		{
-			map->osx = x;
-			map->osy = y;
-			map->foundop = 1;
-		}
 		x++;
 		i++;
 	}
+	get_start_positions(map, line);
 }
 
 /*

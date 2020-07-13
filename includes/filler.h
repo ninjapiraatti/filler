@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 13:59:51 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 18:42:04 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@
 
 
 # include "../libft/includes/libft.h"
-
-typedef struct  s_area
-{
-    int         **empties;
-    int         rows;
-}               t_area;
 
 typedef struct  s_ping
 {
@@ -76,7 +70,6 @@ typedef struct  s_map
 	int			validplaces;
 	int			threshold;
     t_ping      *ping;
-    t_area      *area;
 }               t_map;
 
 typedef struct  s_piece
@@ -111,7 +104,8 @@ typedef struct  s_piece
 int			readinput(t_map *map, t_piece *pc, int fd);
 char		*writeplayer(t_map *map, char *line);
 char		*getmapsize(t_map *map, char *line);
-void		getplayers(t_map *map, char *line);
+void		get_last_op_pos(t_map *map, char *line);
+void		get_start_positions(t_map *map, char *line);
 char		*writepiece(t_piece *pc, char *line);
 char		*writepiecemap(t_piece *pc, char *line);
 int         initmap(t_map *map);

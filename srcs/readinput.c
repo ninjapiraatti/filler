@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 15:15:26 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/13 18:37:28 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			writedatas(t_map *map, t_piece *pc, char *line, int i)
 		i = 0;
 	if (i < map->h && i >= 0)
 	{
-		getplayers(map, line);
+		get_last_op_pos(map, line);
 		i++;
 	}
 	pc->status == 1 ? writepiecemap(pc, line) : 0;
