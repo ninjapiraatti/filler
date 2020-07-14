@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readinput.c                                        :+:      :+:    :+:   */
+/*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/14 08:31:13 by tlouekar         ###   ########.fr       */
+/*   Created: 2020/07/14 09:20:21 by tlouekar          #+#    #+#             */
+/*   Updated: 2020/07/14 11:15:43 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "../includes/filler.h"
 
 /*
-** Readinput takes in the map from standard input and turns it into nicer data.
+** handle_input takes in the map from standard input
+** and turns it into nicer data.
 */
 
 int			writedatas(t_map *map, t_piece *pc, char *line, int i)
@@ -23,11 +24,11 @@ int			writedatas(t_map *map, t_piece *pc, char *line, int i)
 	if (map->state != 1)
 	{
 		if (ft_strstr(line, "$$$") != NULL)
-			writeplayer(map, line);
+			write_player_symbols(map, line);
 		if (ft_strstr(line, "Plateau") != NULL)
 		{
-			getmapsize(map, line);
-			initheatmap(map);
+			get_map_size_and_init(map, line);
+			init_heatmap(map);
 		}
 	}
 	if (ft_strstr(line, "000") != NULL)
@@ -37,17 +38,17 @@ int			writedatas(t_map *map, t_piece *pc, char *line, int i)
 		get_last_op_pos(map, line);
 		i++;
 	}
-	pc->status == 1 ? writepiecemap(pc, line) : 0;
+	pc->status == 1 ? write_piece(pc, line) : 0;
 	if (ft_strstr(line, "Piece") != NULL)
 	{
 		pc->status = 1;
-		writepiece(pc, line);
-		initpiece(pc);
+		get_piece_size(pc, line);
+		init_piece(pc);
 	}
 	return (i);
 }
 
-void		readinput(t_map *map, t_piece *pc, int fd)
+void		handle_input(t_map *map, t_piece *pc, int fd)
 {
 	char	*line;
 	int		i;
@@ -59,9 +60,9 @@ void		readinput(t_map *map, t_piece *pc, int fd)
 		i = writedatas(map, pc, line, i);
 		if (pc->status == 2)
 		{
-			definepiece(map, pc);
+			define_piece(map, pc);
 			fizzylogic(map, pc);
-			searchplace(map, pc, map->strategy);
+			search_place(map, pc);
 			free(pc->pcmap);
 			ft_putnbr(pc->placey);
 			ft_putchar(' ');

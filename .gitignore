@@ -2,6 +2,8 @@
 
 .vscode
 filler_check
+*.trace
+*.DS_Store
 # Prerequisites
 *.d
 

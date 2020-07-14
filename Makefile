@@ -6,7 +6,7 @@
 #    By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/01 14:57:04 by tlouekar          #+#    #+#              #
-#    Updated: 2020/06/10 16:01:11 by tlouekar         ###   ########.fr        #
+#    Updated: 2020/07/13 13:07:42 by tlouekar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,21 +14,25 @@ NAME = resources/players/tlouekar.filler
 
 SRCS = 	srcs/main.c \
 		srcs/readinput.c \
+		srcs/writedata.c \
 		srcs/initfiller.c \
 		srcs/definepiece.c \
+		srcs/searchplace.c \
 		srcs/placepiece.c \
 		srcs/fizzylogic.c \
 		srcs/helpers.c \
-		srcs/closedarea.c \
+		srcs/heatmap.c
 
 OBJS = 	main.o \
 		readinput.o \
+		writedata.o \
 		initfiller.o \
 		definepiece.o \
+		searchplace.o \
 		placepiece.o \
 		fizzylogic.o \
 		helpers.o \
-		closedarea.o \
+		heatmap.o \
 
 INCS = -I ./srcs -I ./libft/includes/
 

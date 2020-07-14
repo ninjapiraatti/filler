@@ -6,263 +6,139 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/06/28 16:56:44 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/14 11:14:36 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-/* Ping takes coordinates from the map, the "needle" character and radius. 
-It returns the number of occurrences of that character within the radius. */
+/*
+** Ping and its buddy ping_circle takes coordinates
+** from the map, the "needle" character and radius.
+** Ping returns the number of occurrences of that
+** character within the radius.
+*/
 
-t_ping     *ping(t_map *map, t_piece *pc, int pingX, int pingY, char c, int radius)
+void		ping_circle(t_map *map, int x, int y, char c)
 {
-    int x = radius;
-    int y = 0;
-    int err = 0;
-    map->ping->count = 0;
-    map->ping->pingedX = pingX;
-    map->ping->pingedY = pingY;
-    
-    while (x >= y)
-    {
-        if(!((pingY + y >= map->mapH - 1) || (pingX + x >= map->mapW - 1)))
-            if(map->map[pingY + y][pingX + x] == c)
-                map->ping->count++;
-        if(!((pingY + x >= map->mapH - 1) || (pingX + y >= map->mapW - 1)))
-            if(map->map[pingY + x][pingX + y] == c)
-                map->ping->count++;
-        if(!((pingY + x >= map->mapH - 1) || (pingX - y < 0)))
-            if(map->map[pingY + x][pingX - y] == c)
-                map->ping->count++;
-        if(!((pingY + y >= map->mapH - 1) || (pingX - x < 0)))
-            if(map->map[pingY + y][pingX - x] == c)
-                map->ping->count++;
-        if(!((pingY - y < 0) ||(pingX - x < 0)))
-            if(map->map[pingY - y][pingX - x] == c)
-                map->ping->count++;
-        if(!((pingY - x < 0) || (pingX - y < 0)))
-            if(map->map[pingY - x][pingX - y] == c)
-                map->ping->count++;
-        if(!((pingY - x < 0) || (pingX + y >= map->mapW - 1)))
-            if(map->map[pingY - x][pingX + y] == c)
-                map->ping->count++;
-        if(!((pingY - y < 0) || (pingX + x >= map->mapW - 1)))
-            if(map->map[pingY - y][pingX + x] == c)
-                map->ping->count++;
-        if (err <= 0)
-        {
-            y += 1;
-            err += 2*y + 1;
-        }
-        if (err > 0)
-        {
-            x -= 1;
-            err -= 2*x + 1;
-        }
-    }
-    return (map->ping);
+	if (!((map->ping->y + y >= map->h - 1) || (map->ping->x + x >= map->w - 1)))
+		if (map->map[map->ping->y + y][map->ping->x + x] == c)
+			map->ping->count++;
+	if (!((map->ping->y + x >= map->h - 1) || (map->ping->x + y >= map->w - 1)))
+		if (map->map[map->ping->y + x][map->ping->x + y] == c)
+			map->ping->count++;
+	if (!((map->ping->y + x >= map->h - 1) || (map->ping->x - y < 0)))
+		if (map->map[map->ping->y + x][map->ping->x - y] == c)
+			map->ping->count++;
+	if (!((map->ping->y + y >= map->h - 1) || (map->ping->x - x < 0)))
+		if (map->map[map->ping->y + y][map->ping->x - x] == c)
+			map->ping->count++;
+	if (!((map->ping->y - y < 0) || (map->ping->x - x < 0)))
+		if (map->map[map->ping->y - y][map->ping->x - x] == c)
+			map->ping->count++;
+	if (!((map->ping->y - x < 0) || (map->ping->x - y < 0)))
+		if (map->map[map->ping->y - x][map->ping->x - y] == c)
+			map->ping->count++;
+	if (!((map->ping->y - x < 0) || (map->ping->x + y >= map->w - 1)))
+		if (map->map[map->ping->y - x][map->ping->x + y] == c)
+			map->ping->count++;
+	if (!((map->ping->y - y < 0) || (map->ping->x + x >= map->w - 1)))
+		if (map->map[map->ping->y - y][map->ping->x + x] == c)
+			map->ping->count++;
 }
 
-/* Direction takes an integer as a direction (like "bogey at your six") and turns it into coordinate on the map */
-
-int     direction (t_map *map, t_piece *pc, int dir)
+t_ping		*ping(t_map *map, int pingx, int pingy, char c)
 {
-    if (dir < 1)
-        dir = 12;
-    if (dir == 11 || dir == 12 || dir == 1)
-    {
-        map->targetY = 0;
-        if (dir == 1)
-            map->targetX = (map->mapW / 4) * 3;
-        else  
-            map->targetX = (map->mapW / 4) * (dir - 10);    
-    }
-    else if (dir == 2 || dir == 3 || dir == 4)
-    {
-        map->targetX = map->mapW - 1; 
-        map->targetY = (map->mapH / 4) * (dir - 1); 
-    }
-    else if (dir == 5 || dir == 6 || dir == 7)
-    {
-        map->targetY = map->mapH - 1;   
-        map->targetX = (map->mapW / 4) * (8 - dir);  
-    }
-    else if (dir == 8 || dir == 9 || dir == 10)
-    {
-        map->targetX = 0;  
-        map->targetY = (map->mapH / 4) * (11 - dir);
-    }
-    return (0);
+	int		x;
+	int		y;
+	int		err;
+
+	x = map->radius;
+	y = 0;
+	err = 0;
+	map->ping->count = 0;
+	map->ping->x = pingx;
+	map->ping->y = pingy;
+	while (x >= y)
+	{
+		ping_circle(map, x, y, c);
+		if (err <= 0)
+		{
+			y += 1;
+			err += 2 * y + 1;
+		}
+		if (err > 0)
+		{
+			x -= 1;
+			err -= 2 * x + 1;
+		}
+	}
+	return (map->ping);
 }
 
-/* Raytrace finds the biggest stretch of empty spaces between an edge of the map and first player character. 
-It tries, with variable degree of success, not to get the new result too close to the previous one. */
+/*
+** strategy_to_dir gets the player's starting position in
+** relation to the opponent and adjusts the directions of
+** the "tentacles" accordingly.
+*/
 
-int     raytrace(t_map *map, t_piece *pc)
+void		strategy_to_dir(t_map *map)
 {
-    int     x;
-    int     y;
-    int     i;
-    int     count;
-
-    x = 0;
-    y = 0;
-    i = 0;
-    count = 0;
-    while (y < map->mapH - 1)
-    {
-        x = 0;
-        while (x < map->mapW - 1)
-        {
-            while(map->map[y][x] == '.')
-                x++;
-            if (map->map[y][x] == map->psymbol)
-            {
-                if (x > count && map->rttargetX != 0)
-                {
-                    map->rttargetX = 0;
-                    map->rttargetY = y;
-                    count = x;
-                    break ;
-                }
-                else
-                    break ;
-            }
-            else
-            {
-                x = 0;
-                break;
-            }
-        }
-        y++;
-    }
-    y = 0;
-    while (y < map->mapH - 1)
-    {
-        x = map->mapW - 1;
-        while (x > 0)
-        {
-            while(map->map[y][x] == '.')
-                x--;
-            if (map->map[y][x] == map->psymbol)
-            {
-                if ((map->mapW - x) > count)
-                //if ((map->mapW - x) > count && map->rttargetX != map->mapW - 1)
-                {
-                    map->rttargetX = map->mapW - 1;
-                    map->rttargetY = y;
-                    count = map->mapW - x;
-                    break ;
-                }
-                else
-                    break ;
-            }
-            else
-            {
-                x = map->mapW - 1;
-                break;
-            }
-            //x--;
-        }
-        y++;
-    }
-    x = 0;
-    if (map->round > 140)
-    {
-        while (x < map->mapW - 1)
-        {
-            y = map->mapH - 1;
-            while (y > 0)
-            {
-                while(map->map[y][x] == '.' && y > 0)
-                    y--;
-                if (map->map[y][x] == map->psymbol)
-                {
-                    //if ((map->mapH - y) > count && map->rttargetY != map->mapH - 1)
-                    if ((map->mapH - y) > count)
-                    {
-                        /*
-                        ft_putstr_fd("Count at 3: ", 2);
-                        ft_putnbr_fd(count, 2);
-                        ft_putstr_fd("\n", 2);
-                        ft_putstr_fd("Targetx and y: \n", 2);
-                        ft_putnbr_fd(x, 2);
-                        ft_putnbr_fd(map->mapH - 1, 2);
-                        */
-                        map->rttargetX = x;
-                        map->rttargetY = map->mapH - 1;
-                        count = map->mapH - y;
-                        break ;
-                    }
-                    else
-                        break ;
-                }
-                else
-                {
-                    y = map->mapH - 1;
-                    break;
-                }
-                //y--;
-            }
-            x++;
-        }
-        x = 0;
-        while (x < map->mapW - 1)
-        {
-            y = 0;
-            while (y < map->mapH)
-            {
-                while(map->map[y][x] == '.' && y < map->mapH - 1)
-                {
-                    y++;
-                }
-                if (map->map[y][x] == map->psymbol)
-                {
-                    //if ((map->mapH - y) > count && map->rttargetY != map->mapH - 1)
-                    if (y > count)
-                    {
-                        /*
-                        ft_putstr_fd("Count at 4: ", 2);
-                        ft_putnbr_fd(count, 2);
-                        ft_putstr_fd("\n", 2);
-                        */
-                        map->rttargetX = x;
-                        map->rttargetY = 0;
-                        count = y;
-                        break ;
-                    }
-                    else
-                        break ;
-                }
-                else
-                {
-                    y = 0;
-                    x++;
-                    break;
-                }
-                //y++;
-            }
-            x++;
-        }
-    }
-    map->raytrace = 1;
-    /*
-    ft_putstr_fd("\n\n", 2);
-    ft_putstr_fd("Raytrace coords: ", 2);
-    ft_putnbr_fd(map->rttargetX, 2);
-    ft_putstr_fd(", ", 2);
-    ft_putnbr_fd(map->rttargetY, 2);
-    ft_putstr_fd("\n\n", 2);
-    */
-    /*
-    while (i < map->mapH)
-    {
-        ft_putstr_fd(map->map[i], 2);
-        ft_putstr_fd("\n", 2);
-        i++;
-    }
-    */
-    return (0);
+	if (map->psx <= map->osx && map->psy <= map->osy)
+	{
+		map->dirh = 2;
+		map->dirv = 7;
+		map->strategy = STRATEGY_TO_SE;
+	}
+	else if (map->psx <= map->osx)
+	{
+		map->dirh = 3;
+		map->dirv = 12;
+		map->strategy = STRATEGY_TO_NE;
+	}
+	else if (map->psy >= map->osy && map->psy >= map->osy)
+	{
+		map->dirh = 9;
+		map->dirv = 1;
+		map->strategy = STRATEGY_TO_NW;
+	}
+	else
+	{
+		map->dirh = 9;
+		map->dirv = 6;
+		map->strategy = STRATEGY_TO_SW;
+	}
 }
 
+/*
+** Direction takes an integer as a direction (like "bogey at your six")
+** and turns it into coordinate on the map
+*/
+
+int			direction(t_map *map, int dir)
+{
+	if (dir == 11 || dir == 12 || dir == 1)
+	{
+		map->targety = 0;
+		if (dir == 1)
+			map->targetx = (map->w / 4) * 3;
+		else
+			map->targetx = (map->w / 4) * (dir - 10);
+	}
+	else if (dir == 2 || dir == 3 || dir == 4)
+	{
+		map->targetx = map->w - 1;
+		map->targety = (map->h / 4) * (dir - 1);
+	}
+	else if (dir == 5 || dir == 6 || dir == 7)
+	{
+		map->targety = map->h - 1;
+		map->targetx = (map->w / 4) * (8 - dir);
+	}
+	else if (dir == 8 || dir == 9 || dir == 10)
+	{
+		map->targetx = 0;
+		map->targety = (map->h / 4) * (11 - dir);
+	}
+	return (0);
+}

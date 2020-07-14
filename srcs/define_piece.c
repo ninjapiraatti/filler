@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   definepiece.c                                      :+:      :+:    :+:   */
+/*   define_piece.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/04 13:16:21 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 12:42:16 by tlouekar         ###   ########.fr       */
+/*   Created: 2020/07/14 09:20:02 by tlouekar          #+#    #+#             */
+/*   Updated: 2020/07/14 11:15:57 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+
+/*
+** offset_left gets the left offset
+*/
 
 void		offset_left(t_piece *pc)
 {
@@ -39,6 +43,10 @@ void		offset_left(t_piece *pc)
 	}
 }
 
+/*
+** offset_top gets the top offset
+*/
+
 void		offset_top(t_piece *pc)
 {
 	int		top;
@@ -66,7 +74,12 @@ void		offset_top(t_piece *pc)
 	}
 }
 
-void		get_corners(t_map *map, t_piece *pc)
+/*
+** get_corners searches for the top left and bottom right
+** corners that will define the pieces shape.
+*/
+
+void		get_corners(t_piece *pc)
 {
 	int		y;
 	int		x;
@@ -95,14 +108,17 @@ void		get_corners(t_map *map, t_piece *pc)
 	}
 }
 
-int			definepiece(t_map *map, t_piece *pc)
+/*
+** define_piece gets and writes the dimensions and shape of the piece.
+*/
+
+int			define_piece(t_map *map, t_piece *pc)
 {
 	pc->horizontal = 0;
 	pc->vertical = 0;
-	pc->diagonal = 0;
 	pc->x = 0;
 	pc->y = 0;
-	get_corners(map, pc);
+	get_corners(pc);
 	if (pc->bottomrightx - pc->topleftx > pc->bottomrighty - pc->toplefty)
 		pc->horizontal = 1;
 	else if (pc->bottomrightx - pc->topleftx < pc->bottomrighty - pc->toplefty)
