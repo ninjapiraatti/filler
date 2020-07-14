@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 12:36:28 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 09:06:29 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/14 11:14:36 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ t_ping		*ping(t_map *map, int pingx, int pingy, char c)
 	return (map->ping);
 }
 
+/*
+** strategy_to_dir gets the player's starting position in
+** relation to the opponent and adjusts the directions of
+** the "tentacles" accordingly.
+*/
+
 void		strategy_to_dir(t_map *map)
 {
 	if (map->psx <= map->osx && map->psy <= map->osy)
@@ -109,7 +115,7 @@ void		strategy_to_dir(t_map *map)
 ** and turns it into coordinate on the map
 */
 
-int			direction(t_map *map, t_piece *pc, int dir)
+int			direction(t_map *map, int dir)
 {
 	if (dir == 11 || dir == 12 || dir == 1)
 	{

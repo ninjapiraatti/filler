@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:36:29 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 12:53:57 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/14 11:16:35 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		placepiece(t_map *map, t_piece *pc, int px, int py)
 		return (1);
 }
 
-int		end_operations(t_map *map, t_piece *pc, int x, int y)
+int		end_operations(t_piece *pc, int x, int y)
 {
 	if (pc->isvaliddot == 0 || pc->isvalidx == 0 || pc->isvalidx > 1)
 	{
@@ -67,7 +67,7 @@ int		end_operations(t_map *map, t_piece *pc, int x, int y)
 		pc->placey = pc->bestvaluey;
 		pc->placex = pc->bestvaluex;
 	}
-	else if (pc->bestvalue != 1000000)
+	else if (pc->bestvalue != INITIAL_BEST)
 	{
 		pc->placey = pc->bestvaluey;
 		pc->placex = pc->bestvaluex;
@@ -80,7 +80,7 @@ int		end_operations(t_map *map, t_piece *pc, int x, int y)
 	return (1);
 }
 
-int		isplacevalid(t_map *map, t_piece *pc, int x, int y)
+int		placement(t_map *map, t_piece *pc, int x, int y)
 {
 	int	py;
 	int	px;
@@ -105,5 +105,5 @@ int		isplacevalid(t_map *map, t_piece *pc, int x, int y)
 		px = pc->offset_left;
 		py++;
 	}
-	return (end_operations(map, pc, pc->x, pc->y));
+	return (end_operations(pc, pc->x, pc->y));
 }

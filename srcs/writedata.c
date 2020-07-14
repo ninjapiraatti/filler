@@ -6,17 +6,17 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 13:06:17 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 18:38:28 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/14 09:04:10 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
 /*
-** Writeplayer just tells which characters to use.
+** write_player_symbols just tells which characters to use.
 */
 
-char		*writeplayer(t_map *map, char *line)
+char		*write_player_symbols(t_map *map, char *line)
 {
 	if (ft_strstr(line, "p2"))
 	{
@@ -32,10 +32,10 @@ char		*writeplayer(t_map *map, char *line)
 }
 
 /*
-** Getmapsize gets the map size and fires initmap.
+** get_map_size_and_init gets the map size and fires init_map.
 */
 
-char		*getmapsize(t_map *map, char *line)
+char		*get_map_size_and_init(t_map *map, char *line)
 {
 	while (ft_isdigit(*line) == 0)
 		line++;
@@ -43,7 +43,7 @@ char		*getmapsize(t_map *map, char *line)
 	while (ft_isdigit(*line) == 1)
 		line++;
 	map->w = ft_atoi(line);
-	initmap(map);
+	init_map(map);
 	return (line);
 }
 
@@ -77,10 +77,10 @@ void		get_last_op_pos(t_map *map, char *line)
 }
 
 /*
-** Writepiecemap gets the piece and makes a 2D-array of it.
+** write_piece gets the piece and makes a 2D-array of it.
 */
 
-char		*writepiecemap(t_piece *pc, char *line)
+char		*write_piece(t_piece *pc, char *line)
 {
 	int		x;
 	int		y;
@@ -101,10 +101,10 @@ char		*writepiecemap(t_piece *pc, char *line)
 }
 
 /*
-** Writepiece gets the piece dimensions.
+** get_piece_size gets the piece dimensions.
 */
 
-char		*writepiece(t_piece *pc, char *line)
+char		*get_piece_size(t_piece *pc, char *line)
 {
 	while (ft_isdigit(*line) == 0)
 		line++;

@@ -6,11 +6,15 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 15:52:40 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 18:42:15 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/14 11:13:53 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+
+/*
+** init_more_map because 25 lines
+*/
 
 int		init_more_map(t_map *map)
 {
@@ -21,9 +25,6 @@ int		init_more_map(t_map *map)
 	map->strategy = 0;
 	map->dirh = 0;
 	map->dirv = 0;
-	map->raytrace = 0;
-	map->rttargetx = -1;
-	map->rttargety = -1;
 	map->validplaces = 0;
 	map->threshold = 0;
 	if (!(map->ping = (t_ping *)malloc(sizeof(t_ping))))
@@ -31,7 +32,11 @@ int		init_more_map(t_map *map)
 	return (1);
 }
 
-int		initmap(t_map *map)
+/*
+** init_map allocates memory for the map and heatmap
+*/
+
+int		init_map(t_map *map)
 {
 	int	i;
 
@@ -53,6 +58,11 @@ int		initmap(t_map *map)
 		return (0);
 	return (1);
 }
+
+/*
+** get_start_positions gets the player starting positions
+** and writes them to struct.
+*/
 
 void	get_start_positions(t_map *map, char *line)
 {
@@ -82,7 +92,11 @@ void	get_start_positions(t_map *map, char *line)
 	}
 }
 
-void	initheatmap(t_map *map)
+/*
+** init_heatmap fills he heatmap with 0s.
+*/
+
+void	init_heatmap(t_map *map)
 {
 	int	x;
 	int	y;
@@ -100,7 +114,11 @@ void	initheatmap(t_map *map)
 	}
 }
 
-int		initpiece(t_piece *pc)
+/*
+** init_piece allocates memory for the piece and sets its key values to 0.
+*/
+
+int		init_piece(t_piece *pc)
 {
 	int	i;
 
@@ -116,7 +134,7 @@ int		initpiece(t_piece *pc)
 	pc->isvalidx = 0;
 	pc->bestvaluey = 0;
 	pc->bestvaluex = 0;
-	pc->bestvalue = 1000000;
+	pc->bestvalue = INITIAL_BEST;
 	pc->offset_left = -1;
 	pc->offset_top = -1;
 	return (0);

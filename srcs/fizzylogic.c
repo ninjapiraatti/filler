@@ -6,13 +6,13 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 09:03:31 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/14 11:17:57 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-int		entercoordinates(t_map *map, t_piece *pc)
+int		entercoordinates(t_map *map)
 {
 	if (map->strategy == STRATEGY_INITIAL)
 	{
@@ -36,12 +36,12 @@ int		branchstrategy(t_map *map, t_piece *pc)
 {
 	if (map->dirh == 0 || map->dirv == 0)
 		strategy_to_dir(map);
-	if (map->w < 40)
+	if (map->w < MAP_M)
 		map->dirh = map->dirv;
 	if (pc->horizontal == 1)
-		direction(map, pc, map->dirh);
+		direction(map, map->dirh);
 	else
-		direction(map, pc, map->dirv);
+		direction(map, map->dirv);
 	map->radius = 2;
 	ping(map, map->targetx, map->targety, map->psymbol);
 	if (map->ping->count > 2 && map->strategy % 10 == 0)
@@ -50,20 +50,23 @@ int		branchstrategy(t_map *map, t_piece *pc)
 			map->dirh = map->dirv;
 		else
 			map->dirv = map->dirh;
-		ft_putstr_fd("END OF BRANCH!", 2);
 	}
 	return (0);
 }
 
 /*
-** Latestrategy switches between building close to the opponent
-** and using the raytrace function to
-** close gaps on the map thus containing the opponent into smaller sections
+** Latestrategy uses heatmap to annihilate the
+** opponent.
 */
 
-int		latestrategy(t_map *map, t_piece *pc)
+int		latestrategy(t_map *map)
 {
-	map->threshold = 100;
+	if (map->w > MAP_M)
+		map->threshold = 30;
+	else if (map->w > MAP_L)
+		map->threshold = 100;
+	else
+		map->threshold = 15;
 	map->targetx = map->lastpcopx;
 	map->targety = map->lastpcopy;
 	map->strategy = STRATEGY_LATE;
@@ -81,27 +84,28 @@ int		updatestrategy(t_map *map, t_piece *pc)
 	int		turns;
 
 	turns = TURNS_THRESHOLD_SMALL;
-	if (map->w > 30)
+	if (map->w > MAP_M)
 		turns = TURNS_THRESHOLD_MEDIUM;
-	if (map->w > 90)
+	if (map->w > MAP_L)
 		turns = TURNS_THRESHOLD_LARGE;
 	if (map->round < ((map->h * map->w) / (TURNS_MULTIPLIER * turns)))
 		map->strategy = 1;
 	else if (map->round > ((map->h * map->w) / turns))
-		latestrategy(map, pc);
+		latestrategy(map);
 	else
 		branchstrategy(map, pc);
 	return (0);
 }
 
 /*
-** Fizzylogic doesn't really do much anymore
+** Fizzylogic doesn't really do much anymore. It runs
+** the algorithm part by part.
 */
 
 int		fizzylogic(t_map *map, t_piece *pc)
 {
 	updatestrategy(map, pc);
-	entercoordinates(map, pc);
+	entercoordinates(map);
 	heatmap(map);
 	return (0);
 }
