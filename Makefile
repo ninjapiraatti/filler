@@ -6,29 +6,29 @@
 #    By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/01 14:57:04 by tlouekar          #+#    #+#              #
-#    Updated: 2020/07/13 13:07:42 by tlouekar         ###   ########.fr        #
+#    Updated: 2020/07/14 13:34:34 by tlouekar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = resources/players/tlouekar.filler
+NAME = tlouekar.filler
 
 SRCS = 	srcs/main.c \
-		srcs/readinput.c \
+		srcs/handle_input.c \
 		srcs/writedata.c \
 		srcs/initfiller.c \
-		srcs/definepiece.c \
-		srcs/searchplace.c \
+		srcs/define_piece.c \
+		srcs/search_place.c \
 		srcs/placepiece.c \
 		srcs/fizzylogic.c \
 		srcs/helpers.c \
 		srcs/heatmap.c
 
 OBJS = 	main.o \
-		readinput.o \
+		handle_input.o \
 		writedata.o \
 		initfiller.o \
-		definepiece.o \
-		searchplace.o \
+		define_piece.o \
+		search_place.o \
 		placepiece.o \
 		fizzylogic.o \
 		helpers.o \
@@ -36,7 +36,7 @@ OBJS = 	main.o \
 
 INCS = -I ./srcs -I ./libft/includes/
 
-CFLAGS = -g
+CFLAGS = -g -Wall -Wextra -Werror
 
 LIB = -L./libft -lft
 
