@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:00:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 19:27:21 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/14 08:31:13 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		readinput(t_map *map, t_piece *pc, int fd)
 			definepiece(map, pc);
 			fizzylogic(map, pc);
 			searchplace(map, pc, map->strategy);
+			free(pc->pcmap);
 			ft_putnbr(pc->placey);
 			ft_putchar(' ');
 			ft_putnbr(pc->placex);
@@ -73,5 +74,4 @@ void		readinput(t_map *map, t_piece *pc, int fd)
 		}
 		free(line);
 	}
-	free(pc->pcmap);
 }

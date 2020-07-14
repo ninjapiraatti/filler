@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:39:54 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/13 19:32:25 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/14 08:30:08 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ int		searchplace(t_map *map, t_piece *pc, int strategy)
 	if (recursion(map, pc, 2) == 1)
 	{
 		while (j < pc->h)
-		free(pc->pcmap[j]);
+		{
+			free(pc->pcmap[j]);
+			j++;
+		}
 		return (1);
 	}
 	return (0);
