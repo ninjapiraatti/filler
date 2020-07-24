@@ -6,14 +6,14 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/14 11:14:46 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/20 17:57:31 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 # define BUFF_SIZE 21
-# define TURNS_THRESHOLD_SMALL 15
+# define TURNS_THRESHOLD_SMALL 12
 # define TURNS_THRESHOLD_MEDIUM 24
 # define TURNS_THRESHOLD_LARGE 120
 # define MAP_M 30
@@ -34,8 +34,6 @@
 typedef struct	s_ping
 {
 	int			count;
-	char		ndl;
-	char		hstck;
 	int			x;
 	int			y;
 }				t_ping;

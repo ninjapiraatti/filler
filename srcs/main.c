@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 09:49:09 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/15 15:54:07 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/20 14:39:04 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,5 @@ int			main(int argc, char **argv)
 		return (0);
 	handle_input(map, pc, fd);
 	freemaps(map, pc);
-	while(1);
 	return (0);
 }
