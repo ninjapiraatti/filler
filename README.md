@@ -1,5 +1,5 @@
 # Hive Helsinki: filler
-Algorithms, C and Joyful experimenting
+C — Joyful experimenting in algorithms
 
 ## How to run it
 Clone, make and then run following from resources folder:
