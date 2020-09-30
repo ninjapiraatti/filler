@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 13:02:27 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/01 09:28:07 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/20 13:49:19 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define BUFF_SIZE 21
 # define TURNS_THRESHOLD_SMALL 15
 # define TURNS_THRESHOLD_MEDIUM 24
-# define TURNS_THRESHOLD_LARGE 120
+# define TURNS_THRESHOLD_LARGE 180
 # define TURNS_MULTIPLIER 20
 # define STRATEGY_INITIAL 1
 # define STRATEGY_LATE 2
