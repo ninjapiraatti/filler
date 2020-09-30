@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 13:42:16 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/14 11:17:57 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/20 14:32:18 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		branchstrategy(t_map *map, t_piece *pc)
 	else
 		direction(map, map->dirv);
 	map->radius = 2;
+	map->threshold = 1;
 	ping(map, map->targetx, map->targety, map->psymbol);
 	if (map->ping->count > 2 && map->strategy % 10 == 0)
 	{
@@ -56,7 +57,8 @@ int		branchstrategy(t_map *map, t_piece *pc)
 
 /*
 ** Latestrategy uses heatmap to annihilate the
-** opponent.
+** opponent. Threshold is the target number of
+** valid positions.
 */
 
 int		latestrategy(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: tlouekar <tlouekar@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:20:38 by tlouekar          #+#    #+#             */
-/*   Updated: 2020/07/14 11:13:52 by tlouekar         ###   ########.fr       */
+/*   Updated: 2020/07/15 15:38:55 by tlouekar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,17 @@ int		search_place(t_map *map, t_piece *pc)
 	map->validplaces = 0;
 	if (recursion(map, pc, 2) == 1)
 	{
-		while (j < pc->h)
+		while (i < pc->h)
 		{
-			free(pc->pcmap[j]);
-			j++;
+			free(pc->pcmap[i]);
+			i++;
 		}
 		return (1);
+	}
+	while (i < pc->h)
+	{
+		free(pc->pcmap[i]);
+		i++;
 	}
 	return (0);
 }
