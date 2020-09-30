@@ -1,4 +1,4 @@
-# Hive Helsinki: Filler
+# Hive Helsinki: filler
 Algorithms, C and Joyful experimenting
 
 ## How to run it
