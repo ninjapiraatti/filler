@@ -17,4 +17,4 @@ Each successfully placed piece yields a number of points, and has only one playe
 This particular project took waaay longer than needed. I tried many different approaches and only when I stumbled upon the concept of heatmap, I was able to create an algorithm that was strong enough. Heatmap populates a 2D-array with distances to the closest opponent cell. Based on this, I place my piece.
 
 ## In hindsight
-As it stands, the project could be far more compact and readable. However, trying different solutions on the way was educational in many ways, particularly on how the program flow. 
+As it stands, the project could be far more compact and readable. However, trying different solutions on the way was educational in many ways, particularly on how the program flows. 
